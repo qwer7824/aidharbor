@@ -23,12 +23,15 @@ public class ImgController {
     @PostMapping("/board/displayedImage")
     public ResponseEntity<DisplayedImageDTO> saveTempImg(MultipartFile img) {
         if(img == null || img.isEmpty()) {
+            System.out.println("img null");
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
         DisplayedImageDTO imgDTO = null;
         try {
+            System.out.println("saveTemporary");
             imgDTO = imgService.saveTemporaryImage(img);
         } catch (IOException e) {
+            System.out.println("IOException");
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(imgDTO, HttpStatus.OK);

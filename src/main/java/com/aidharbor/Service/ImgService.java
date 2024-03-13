@@ -26,12 +26,15 @@ public class ImgService {
     public DisplayedImageDTO saveTemporaryImage(MultipartFile ImgFile) throws IOException {
         String oriImgName = ImgFile.getOriginalFilename();
         String imgUrl = "";
+        System.out.println("oriImgName :" +oriImgName);
 
         if (StringUtils.isEmpty(oriImgName)) {
+            System.out.println("oriImgName null");
             throw new IllegalArgumentException();
         }
 
         imgUrl = s3Uploader.upload(ImgFile,"images");
+        System.out.println("imgUrl :" + imgUrl);
 
         return DisplayedImageDTO.builder()
                 .originalName(oriImgName)
