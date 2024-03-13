@@ -30,8 +30,8 @@ public class ContentController {
     // 문의 글 페이지
     @GetMapping(value = "/contact")
     public String contactView(Model model){
-        List<ProductCategoryDto> categoryDto = categoryService.findAll();
-        model.addAttribute("category",categoryDto);
+        List<ProductCategoryDto> categories = categoryService.findAll();
+        model.addAttribute("categories",categories);
         model.addAttribute("contactDTO",new ContactDTO());
         return "contact";
     }
