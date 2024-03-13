@@ -37,7 +37,7 @@ public class AdminController {
 
     // 카테고리 추가 페이지
     @GetMapping(value = "/admin/category/categoryAdd")
-    public String categoryAddView(@Valid ProductCategoryCreateRequest categoryDTO, Model model){
+    public String categoryAddView(ProductCategoryCreateRequest categoryDTO, Model model){
         List<ProductCategoryDto> categoryList = categoryService.findAll();
 
         model.addAttribute("categories",categoryList);
