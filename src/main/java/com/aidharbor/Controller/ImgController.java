@@ -18,8 +18,7 @@ public class ImgController {
     private final ImgService imgService;
 
     /**
-     * 글(Content) 등록 이전에 이미지를 추가했을 시 서버에 이미지 파일을 임시저장한다.
-     * 해당 컨트롤러는 임시저장을 위한 컨트롤러이다.
+     * 글(Content) 등록 이전에 이미지를 추가했을 시 S3에 이미지 파일을 저장한다.
      */
     @PostMapping("/board/displayedImage")
     public ResponseEntity<DisplayedImageDTO> saveTempImg(MultipartFile img) {

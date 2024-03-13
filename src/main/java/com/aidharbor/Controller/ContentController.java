@@ -42,8 +42,11 @@ public class ContentController {
         if (bindingResult.hasErrors()) {
             return "contact";
         }
-        contactService.contactAdd(contactDTO);
-        model.addAttribute("errorMessage", "에러가 발생하였습니다.");
+        try{
+            contactService.contactAdd(contactDTO);
+        }catch (Exception e){
+            model.addAttribute("errorMessage", "에러가 발생하였습니다.");
+        }
         return "contact";
     }
 

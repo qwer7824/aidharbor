@@ -77,6 +77,8 @@ public class ProductService {
         Product product = productRepository.findById(productDTO.getId()).orElseThrow(null);
 
         if (!titleImg.isEmpty()) {
+            String url = imgService.imgSubString(product.getTitleImgUrl());
+            s3Uploader.deleteFile(url);
             String storedFileName = s3Uploader.upload(titleImg, "images");
             product.updateTitleImgUrl(productDTO,storedFileName);
         } else {
@@ -88,9 +90,10 @@ public class ProductService {
 
 
     // 상품 삭제
-    public void productDelete(long productId) {
+    public void productDelete(long productId) throws IOException {
         Product product = productRepository.findById(productId).orElseThrow(null);
         productRepository.delete(product);
+        imgService.imgDelete(product);
     }
 
     public List<ProductDTO> productListToDTOList(List<Product> productList) {

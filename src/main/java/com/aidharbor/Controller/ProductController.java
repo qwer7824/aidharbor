@@ -88,7 +88,7 @@ public class ProductController {
         }catch (Exception e){
             model.addAttribute("errorMessage", "상품 삭제 중 에러가 발생하였습니다.");
         }
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     // 상품 등록 페이지 (어드민)

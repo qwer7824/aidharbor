@@ -1,5 +1,6 @@
 package com.aidharbor.Service;
 
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
@@ -39,6 +40,14 @@ public class S3Uploader {
         removeNewFile(uploadFile);
 
         return uploadImageUrl;
+    }
+
+    public void deleteFile(String fileName) throws IOException {
+        try {
+            amazonS3Client.deleteObject(bucket, "images/" +fileName);
+        } catch (SdkClientException e) {
+            throw new IOException("Error deleting file from S3", e);
+        }
     }
 
     public String uploadFile(File file, String dirName) throws IOException {
