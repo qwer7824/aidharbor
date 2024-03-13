@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 부트스트랩 CSS 추가 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">  <!-- Core theme CSS (includes Bootstrap)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+</head>
+<script th:inline="javascript">
+    var errorMessage = /*[[${errorMessage}]]*/ '';
+    if (!errorMessage) {
+    }else if(errorMessage !== '') {
+        alert(errorMessage);
+        window.location.href = '/admin';
+    }
+
+</script>
+<script>
+    $(document).ready(function() {
+        $('#product').removeClass('text-white').addClass('active');
+    });
+
+    function change(element) {
+        var categoryId = $(element).val();
+
+        $.ajax({
+            url: '/category/' + categoryId,
+            type: 'GET',
+            success: function(data) {
+                var parentCategorySelect = $('#parentProductCategory');
+                parentCategorySelect.empty();
+
+                $.each(data, function(index, parentProductCategory) {
+                    parentCategorySelect.append(new Option(parentProductCategory.name, parentProductCategory.id));
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("AJAX Error: ", textStatus);
+            }
+        });
+    }
+</script>
+<body>
+
+<div class="d-flex bg-light">
+    <th:block th:replace="~{fragments/adminSidebar :: adminSidebarFragment}"></th:block>
+    <div class="container-xxl mb-4 d-flex justify-content-center">
+    <form  role="form" method="post" enctype="multipart/form-data" th:object="${productDTO}">
+
+        <p class="h2">
+            상품 등록
+        </p>
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="form-group d-flex mb-3">
+            <select class="form-select w-50" id="Category" onchange="change(this)">
+                <option selected>카테고리 선택</option>
+                <option th:each="productCategory : ${categories}" th:value="${productCategory.id}" th:text="${productCategory.name}"></option>
+            </select>
+            <select class="form-select w-50" id="parentProductCategory" th:field="*{productCategory}">
+                <option th:field="*{productCategory}" th:value="${productDTO?.productCategory?.id}" th:text="${productDTO?.productCategory?.name}"></option>
+            </select>
+        </div>
+        <p th:unless="${#strings.isEmpty(productDTO.id)}">적용되어있는 카테고리 : <span th:field="*{productCategory}" th:value="${productDTO.productCategory.id}" th:text="${productDTO.productCategory.name}"></span></p>
+        <p th:if="${#fields.hasErrors('productCategory')}" th:errors="*{productCategory}" class="fieldError">Incorrect data</p>
+
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">상품</span>
+            <input type="text" th:field="*{title}" class="form-control" placeholder="상품명을 입력해주세요">
+        </div>
+        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect data</p>
+
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">서브 상품명</span>
+            <input type="text" th:field="*{subTitle}" class="form-control" placeholder="서브 상품명을 입력해주세요">
+        </div>
+        <p th:if="${#fields.hasErrors('subTitle')}" th:errors="*{subTitle}" class="fieldError">Incorrect data</p>
+
+
+        <div class="d-flex flex-column align-items-center mb-3">
+            <input type="hidden" th:field="*{titleImgUrl}" class="form-control" placeholder="이미지">
+            <img id="preview" th:src="*{titleImgUrl}" style="width: 20%;">
+            <input type="file" class="form-control" name="titleImg" onchange="readURL(this)">
+        </div>
+        <p th:if="${#fields.hasErrors('titleImgUrl')}" th:errors="*{titleImgUrl}" class="fieldError">Incorrect data</p>
+
+
+        <div class="input-group mb-3">
+            <textarea id="summernote" th:field="*{content}"></textarea>
+        </div>
+        <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="fieldError">Incorrect data</p>
+
+
+        <div th:if="${#strings.isEmpty(productDTO.id)}" style="text-align: center">
+            <button th:formaction="@{/admin/product/new}" type="submit" class="btn btn-primary">저장</button>
+        </div>
+
+        <div th:unless="${#strings.isEmpty(productDTO.id)}" style="text-align: center">
+            <button th:formaction="@{'/admin/product/' + ${productDTO.id} }" type="submit" class="btn btn-primary">수정</button>
+            <button th:formaction="@{'/admin/product/delete/' + ${productDTO.id} }" type="submit" class="btn btn-danger">삭제</button>
+        </div>
+    </form>
+
+</div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            height: 500,
+            focus: true,
+            lang: "ko-KR",
+            placeholder: '내용',
+            disableResizeEditor: true,
+            toolbar: [
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+                ['color', ['forecolor','color']],
+                ['table', ['table']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert',['picture','link','video']],
+                ['view', ['fullscreen', 'help']]
+            ],
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+            fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+            callbacks: {
+                // 이미지 업로드시에 호출됩니다.
+                onImageUpload: function(files, editor, welEditable) {
+                    for (var i = files.length - 1; i >= 0; i--) {
+                        sendFile(files[i], this);
+                    }
+                },
+            },
+        })
+    })
+
+    // 이미지를 임시저장합니다.
+    function sendFile(file, el) {
+        var form_data = new FormData();
+        form_data.append('img', file);
+        $.ajax({
+            data: form_data,
+            type: "POST",
+            url: '/board/displayedImage',
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function(tempImg) {
+                $('#summernote').summernote('insertImage', tempImg.savedPath, tempImg.originalName);
+            },
+        })
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('preview').src = "";
+        }
+    }
+</script>
+</body>
+</html>

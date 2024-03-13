@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<th:block th:fragment="adminSidebarFragment">
+
+<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+  <a href="/admin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+    <span class="fs-4">Aidharbor</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a id="home" href="/admin" class="nav-link text-white">
+        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+        Home
+      </a>
+    </li>
+    <li>
+      <a id="product" href="#" class="nav-link text-white">
+        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+        Products
+      </a>
+    </li>
+    <li>
+      <a id="category" href="#" class="nav-link text-white">
+        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+        Category
+      </a>
+    </li>
+  </ul>
+  <hr>
+</div>
+</th:block>
+
+</body>
+</html>
