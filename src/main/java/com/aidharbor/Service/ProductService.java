@@ -93,7 +93,7 @@ public class ProductService {
     public void productDelete(long productId) throws IOException {
         Product product = productRepository.findById(productId).orElseThrow(null);
         productRepository.delete(product);
-        imgService.imgDelete(product);
+        imgService.imgProductDelete(product);
     }
 
     public List<ProductDTO> productListToDTOList(List<Product> productList) {

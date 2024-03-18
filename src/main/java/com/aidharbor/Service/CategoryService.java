@@ -14,7 +14,9 @@ import com.aidharbor.Repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,8 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    private final S3Uploader s3Uploader;
+    private final ImgService imgService;
 
     @Transactional(readOnly = true)
     public List<ProductCategoryDto> findAll() {
@@ -58,24 +62,42 @@ public class CategoryService {
 
 
     @Transactional
-    public void create(ProductCategoryCreateRequest req) {
+    public void create(ProductCategoryCreateRequest req, MultipartFile categoryImg) throws IOException {
+        String storedFileName = s3Uploader.upload(categoryImg, "images");
+
         ProductCategory parent = Optional.ofNullable(req.getParentId())
                 .map(id -> categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new))
                 .orElse(null);
-        categoryRepository.save(new ProductCategory(req.getName(), parent));
+
+        ProductCategory productCategory = ProductCategory.builder()
+                .name(req.getName())
+                .parent(parent)
+                .categoryImg(storedFileName)
+                .build();
+
+        categoryRepository.save(productCategory);
     }
 
     @Transactional
-    public void delete(int id) {
+    public void delete(int id) throws IOException {
         ProductCategory productCategory = categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
+        imgService.imgCategoryDelete(productCategory);
         categoryRepository.delete(productCategory);
     }
 
     @Transactional
-    public void categoryUpdate(ProductCategoryCreateRequest req) {
+    public void categoryUpdate(ProductCategoryCreateRequest req,MultipartFile categoryImg) throws IOException {
     ProductCategory productCategory = categoryRepository.findById(req.getId()).orElseThrow();
 
-    productCategory.CategoryUpdate(req);
+
+        if (!categoryImg.isEmpty()) {
+            String url = imgService.imgSubString(req.getCategoryImg());
+            s3Uploader.deleteFile(url);
+            String storedFileName = s3Uploader.upload(categoryImg, "images");
+            productCategory.updateImgUrl(req,storedFileName);
+        } else {
+            productCategory.CategoryUpdate(req);
+        }
 
     categoryRepository.save(productCategory);
     }

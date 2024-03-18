@@ -3,6 +3,7 @@ package com.aidharbor.Service;
 import com.aidharbor.DTO.Image.DisplayedImageDTO;
 import com.aidharbor.DTO.Product.ProductDTO;
 import com.aidharbor.Entity.Product;
+import com.aidharbor.Entity.ProductCategory;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
@@ -39,7 +40,7 @@ public class ImgService {
                 .build();
     }
 
-    public void imgDelete(Product product) throws IOException {
+    public void imgProductDelete(Product product) throws IOException {
         String titleUrl = imgSubString(product.getTitleImgUrl());
         String content = product.getContent();
 
@@ -80,4 +81,9 @@ public class ImgService {
     }
 
 
+    public void imgCategoryDelete(ProductCategory productCategory) throws IOException {
+        String titleUrl = imgSubString(productCategory.getCategoryImg());
+
+        s3Uploader.deleteFile(titleUrl);
+    }
 }

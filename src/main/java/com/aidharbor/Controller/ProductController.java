@@ -30,6 +30,12 @@ public class ProductController {
     public String productListView(@PathVariable int categoryId, Model model) {
         List<ProductDTO> product = productService.productList(categoryId);
         List<ProductCategoryDto> categories = categoryService.findAll();
+
+        if (categoryId == 0) {
+            model.addAttribute("All", true);
+        }
+
+        model.addAttribute("categoryId",categoryId);
         model.addAttribute("categories", categories);
         model.addAttribute("product", product);
         return "product/productList";

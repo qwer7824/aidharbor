@@ -11,9 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -47,15 +49,22 @@ public class AdminController {
 
     // 카테고리 추가
     @PostMapping(value = "/admin/category/categoryAdd")
-    public String categoryAdd(@Valid ProductCategoryCreateRequest categoryDTO, Model model){
-        categoryService.create(categoryDTO);
+    public String categoryAdd(@Valid ProductCategoryCreateRequest categoryDTO, BindingResult bindingResult, @RequestPart(name = "Img") MultipartFile categoryImg, Model model) throws IOException {
+        if (bindingResult.hasErrors()) {
+            return "admin/categoryForm";
+        }
+        try {
+            categoryService.create(categoryDTO,categoryImg);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "카테고리 수정 중 에러가 발생하였습니다.");
+        }
         model.addAttribute("categoryDTO",categoryDTO);
         return "redirect:/admin";
     }
 
     // 카테고리 삭제
     @PostMapping("/admin/category/delete/{id}")
-    public String categoryDelete(@PathVariable int id) {
+    public String categoryDelete(@PathVariable int id) throws IOException {
         categoryService.delete(id);
         return "redirect:/admin";
     }
@@ -75,9 +84,12 @@ public class AdminController {
 
     // 카테고리 업데이트
     @PostMapping(value = "/admin/category/{categoryId}")
-    public String categoryUpdate(@Valid ProductCategoryCreateRequest req, Model model) {
+    public String categoryUpdate(@Valid ProductCategoryCreateRequest req,BindingResult bindingResult,@RequestPart(name = "Img") MultipartFile categoryImg, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "admin/categoryForm";
+        }
         try {
-            categoryService.categoryUpdate(req);
+            categoryService.categoryUpdate(req,categoryImg);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "카테고리 수정 중 에러가 발생하였습니다.");
         }
