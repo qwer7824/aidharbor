@@ -1,6 +1,6 @@
 package com.aidharbor.Service;
 
-import com.aidharbor.DTO.ContactDTO;
+import com.aidharbor.DTO.Contact.ContactDTO;
 import com.aidharbor.Entity.Contact;
 import com.aidharbor.Repository.ContactRepository;
 import jakarta.mail.MessagingException;
@@ -26,6 +26,6 @@ public class ContactService {
 
         contactRepository.save(contact);
 
-       return contactDTO.getUserName();
+       return contactDTO.getUserEmail();
     }
 }

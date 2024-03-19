@@ -1,4 +1,4 @@
-package com.aidharbor.DTO;
+package com.aidharbor.DTO.Contact;
 
 
 import jakarta.validation.constraints.*;
@@ -13,18 +13,14 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ContactDTO {
     @NotBlank(message = "Name Check")
-    private String userName;
+    private String firstName;
+    @NotBlank(message = "Name Check")
+    private String lastName;
 
     @Email
     @NotNull(message = "Email Check")
-    private String email;
-
-    @NotNull(message = "PhoneNumber Check")
-    private String phoneNumber;
-
-    @NotBlank(message = "Title Check")
-    private String title;
+    private String userEmail;
 
     @NotBlank(message = "content Check")
-    private String content;
+    private String message;
 }

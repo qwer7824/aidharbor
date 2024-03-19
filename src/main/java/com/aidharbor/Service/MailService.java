@@ -1,6 +1,6 @@
 package com.aidharbor.Service;
 
-import com.aidharbor.DTO.ContactDTO;
+import com.aidharbor.DTO.Contact.ContactDTO;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Random;
 
 @Slf4j
 @Service
@@ -24,7 +23,7 @@ public class MailService {
     // 메일 양식 작성
     public MimeMessage createEmailForm(ContactDTO contactDTO) throws MessagingException, UnsupportedEncodingException, MessagingException {
         String setFrom = "gma78240@gmail.com";
-        String toEmail = contactDTO.getEmail();
+        String toEmail = contactDTO.getUserEmail();
         String title = "Aidharbor 문의 요청";
 
         MimeMessage message = javaMailSender.createMimeMessage();
@@ -36,15 +35,12 @@ public class MailService {
         msgOfEmail += "<div style='margin:20px;'>";
         msgOfEmail += "<h1> Aidharbor 문의 내역입니다. </h1>";
         msgOfEmail += "<br>";
-        msgOfEmail += "<p> 이름 : "+ contactDTO.getUserName() + "<p>";
+        msgOfEmail += "<p> FirstName : "+ contactDTO.getFirstName() + "<p>";
+        msgOfEmail += "<p> LastName : "+ contactDTO.getFirstName() + "<p>";
         msgOfEmail += "<br>";
-        msgOfEmail += "<p> 이메일 : "+ contactDTO.getEmail() + "<p>";
+        msgOfEmail += "<p> Email : "+ contactDTO.getUserEmail() + "<p>";
         msgOfEmail += "<br>";
-        msgOfEmail += "<p> 휴대폰 : "+ contactDTO.getPhoneNumber() + "<p>";
-        msgOfEmail += "<br>";
-        msgOfEmail += "<p> 제목 : "+ contactDTO.getTitle() + "<p>";
-        msgOfEmail += "<br>";
-        msgOfEmail += "<p> 내용 : "+ contactDTO.getContent() + "<p>";
+        msgOfEmail += "<p> message : "+ contactDTO.getMessage() + "<p>";
         msgOfEmail += "<br>";
         msgOfEmail += "</div>";
 

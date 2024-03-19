@@ -1,6 +1,6 @@
 package com.aidharbor.Entity;
 
-import com.aidharbor.DTO.ContactDTO;
+import com.aidharbor.DTO.Contact.ContactDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,24 +15,20 @@ public class Contact {
     @Column(name = "contact_id")
     private Long id;
 
-    private String userName;
+    private String firstName;
+    private String lastName;
 
-    private String email;
-
-    private String phoneNumber;
-
-    private String title;
+    private String userEmail;
 
     @Column(columnDefinition="MEDIUMTEXT")
-    private String content;
+    private String message;
 
     public static Contact contactAdd(ContactDTO contactDTO) {
         return Contact.builder()
-                .userName(contactDTO.getUserName())
-                .email(contactDTO.getEmail())  //암호화처리
-                .phoneNumber(contactDTO.getPhoneNumber())
-                .title(contactDTO.getTitle())
-                .content(contactDTO.getContent())
+                .firstName(contactDTO.getFirstName())
+                .lastName(contactDTO.getLastName())
+                .userEmail(contactDTO.getUserEmail())
+                .message(contactDTO.getMessage())
                 .build();
     }
 }

@@ -1,8 +1,7 @@
 package com.aidharbor.Controller;
 
 import com.aidharbor.DTO.Category.ProductCategoryDto;
-import com.aidharbor.DTO.ContactDTO;
-import com.aidharbor.DTO.Product.ProductDTO;
+import com.aidharbor.DTO.Contact.ContactDTO;
 import com.aidharbor.Service.CategoryService;
 import com.aidharbor.Service.ContactService;
 import jakarta.mail.MessagingException;
@@ -12,9 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.UnsupportedEncodingException;
@@ -44,8 +41,9 @@ public class ContentController {
         }
         try{
             contactService.contactAdd(contactDTO);
+            model.addAttribute("errorMessage", "Sent successfully");
         }catch (Exception e){
-            model.addAttribute("errorMessage", "에러가 발생하였습니다.");
+            model.addAttribute("errorMessage", "An error occurred");
         }
         return "contact";
     }
