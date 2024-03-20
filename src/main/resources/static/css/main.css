@@ -17,7 +17,8 @@ body{
     justify-content: space-around;
 }
 .productImg{
-    width: 100%;
+    width: 400px;
+    height: 366px;
     border-radius: 20px;
 }
 
