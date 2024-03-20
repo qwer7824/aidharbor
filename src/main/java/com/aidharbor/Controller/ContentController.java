@@ -27,6 +27,8 @@ public class ContentController {
     // 문의 글 페이지
     @GetMapping(value = "/contact")
     public String contactView(Model model){
+
+        // TODO : 미구현 (프론트 동의)
         List<ProductCategoryDto> categories = categoryService.findAll();
         model.addAttribute("categories",categories);
         model.addAttribute("contactDTO",new ContactDTO());
