@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>상품 상세</title>
-  <!-- 부트스트랩 CSS 추가 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <!-- Core theme CSS (includes Bootstrap)-->
   <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">  <!-- Core theme CSS (includes Bootstrap)-->
+  <link rel="stylesheet" href="/css/navbar.css">
 
 </head>
 <script th:inline="javascript">
@@ -19,20 +16,106 @@
   }
 
 </script>
+<style>
+  a { text-decoration:none !important }
+  a:hover { text-decoration:none !important }
+  p { text-decoration:none !important }
+  p:hover { text-decoration:none !important }
+  h4 { text-decoration:none !important }
+  h4:hover { text-decoration:none !important }
+
+  .product-container{
+    top: 90px;
+    position: relative;
+    width: 1200px;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+  .product-Menu{
+    font-size: 55px;
+    margin: 0;
+  }
+  .category-menu{
+    display: flex;
+    gap: 10px;
+  }
+  .category-slot{
+    padding: 16px;
+    font-size: 24px;
+    color: #94A3B8;
+  }
+  .categoryActive{
+    border-bottom: 1px solid #F43F5E;
+    color: black;
+  }
+  .category-slot:hover {
+    border-bottom: 1px solid #F43F5E;
+    color: black;
+  }
+
+
+  .Product-box{
+    padding:  60px 0px 100px 0px;
+  }
+  .Product-TitleBox{
+    background-color: #F8FAFC;
+    display: flex;
+    gap: 60px;
+  }
+  .Product-sub{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+  }
+  .text-category{
+    font-size: 18px;
+    color: #F43F5E;
+  }
+  .text-title{
+    font-size: 48px;
+    color: #334155;
+  }
+  .text-sub{
+    font-size: 20px;
+  color: #64748B;
+  }
+
+  .Product-content{
+    width: 1200px;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+</style>
 <body>
 <th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
 
-<div class="container">
-  <h2 class="text-center">제품 소개</h2>
-  <div>
-    <h4 class="text-center bg-light p-2" th:text="${product.subTitle}"></h4>
+<div class="product-container">
+  <div class="category-menu" th:each="productCategory : ${categories}">
+    <h1 class="product-Menu" th:each="child : ${productCategory.children}" th:if="${product.productCategory.id == child.id}" th:text="${child.name}"></h1>
   </div>
-<hr>
+
+  <div class="Category-List">
+    <div class="category-menu" th:each="productCategory : ${categories}">
+      <a class="category-slot" href="/product/0" th:classappend="${All} ? 'categoryActive' : ''">All</a>
+      <a class="category-slot" th:href="@{'/product/' + ${child.id}}" th:classappend="${child.id == product.productCategory.id} ? 'categoryActive' : ''" th:each="child : ${productCategory.children}" th:text="${child.name}"></a>
+    </div>
+  </div>
+  <div class="Product-box">
+  <div class="Product-TitleBox">
+    <img style="width: 300px;" th:src="${product.titleImgUrl}">
+    <div class="Product-sub">
+      <span class="text-category" th:text="${product.productCategory.name}"></span>
+      <span class="text-title" th:text="${product.title}"></span>
+      <hr style="margin: 0">
+      <span class="text-sub" th:text="${product.subTitle}"></span>
+    </div>
+  </div>
+  </div>
+  <div class="Product-content">
   <div th:utext="${product.content}"></div>
+  </div>
 </div>
-
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
 </html>

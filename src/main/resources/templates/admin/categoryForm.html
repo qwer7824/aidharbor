@@ -18,7 +18,17 @@
         alert(errorMessage);
         window.location.href = '/admin';
     }
-
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('preview').src = "";
+        }
+    }
 </script>
 <script>
     $(document).ready(function() {
@@ -39,9 +49,20 @@
             <input type="hidden" th:field="*{id}">
 
             <div class="input-group mb-3">
+                <input type="hidden" th:field="*{categoryImg}" class="form-control" placeholder="이미지">
+                <img id="preview" th:src="*{categoryImg}" style="width: 20%;">
+                <input type="file" class="form-control" name="Img" onchange="readURL(this)">
+            </div>
+            <p th:if="${#fields.hasErrors('categoryImg')}" th:errors="*{categoryImg}" class="fieldError">Incorrect data</p>
+
+
+
+            <div class="input-group mb-3">
                 <span class="input-group-text">카테고리 이름</span>
                 <input type="text" th:field="*{name}" class="form-control" placeholder="카테고리명을 입력해주세요">
             </div>
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect data</p>
+
 
             <div class="input-group mb-3" th:if="${#strings.isEmpty(categoryDTO.id)}">
                 <span class="input-group-text">종류</span>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VideoList</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<link rel="stylesheet" href="/css/navbar.css">
+
+<style>
+    a { text-decoration:none !important }
+    a:hover { text-decoration:none !important }
+    p { text-decoration:none !important }
+    p:hover { text-decoration:none !important }
+    h4 { text-decoration:none !important }
+    h4:hover { text-decoration:none !important }
+
+
+    .product-container{
+        top: 90px;
+        position: relative;
+        width: 1200px;
+        box-sizing: border-box;
+        margin: 0 auto;
+    }
+    .product-Menu{
+        font-size: 55px;
+        margin: 0;
+    }
+    .category-name{
+        display: flex;
+    }
+    .category-menu{
+        display: flex;
+        gap: 10px;
+    }
+    .category-slot{
+        padding: 16px;
+        font-size: 24px;
+        color: #94A3B8;
+    }
+    .categoryActive{
+        border-bottom: 1px solid #F43F5E;
+        color: black;
+    }
+    .category-slot:hover {
+        border-bottom: 1px solid #F43F5E;
+        color: black;
+    }
+
+    .video-List{
+        padding:  60px 0px 100px 0px;
+        display: flex;
+        gap: 30px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .video-Card{
+    }
+    .videoImg{
+        width: 350px;
+        border-radius: 12px;
+    }
+    .video-TextBox{
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+    .video-category{
+        font-size: 14px;
+        color: #F43F5E;
+    }
+    .video-title{
+        font-size: 20px;
+        color: #334155;
+    }
+
+
+</style>
+<body>
+<th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
+
+<div class="product-container">
+    <div class="category-name">
+        <h1 class="product-Menu">Video</h1><span class="red-dot">.</span>
+    </div>
+    <div class="Category-List">
+        <div class="category-menu">
+            <a class="category-slot" href="/support/userGuide">User guide</a>
+            <a class="category-slot categoryActive" href="/support/videoList">Video</a>
+            <a class="category-slot" href="#">Catalog</a>
+        </div>
+    </div>
+
+    <div class="video-List">
+        <div class="video-Card" th:each="videoList : ${videoList}">
+            <div>
+                <a>
+                    <img class="videoImg" th:src="${videoList.videoUrl}">
+                </a>
+            </div>
+            <div class="video-TextBox">
+                <a class="video-category" th:text="${videoList.productCategory.name}"></a>
+                <a class="video-title" th:text="${videoList.title}"></a>
+            </div>
+        </div>
+    </div>
+
+
+<!-- 모달 창 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img class="img-fluid" id="modalImage">
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

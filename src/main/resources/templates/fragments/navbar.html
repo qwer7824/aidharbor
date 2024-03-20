@@ -1,79 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
-
 <body>
-    <th:block th:fragment="navbarFragment">
-        <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <!-- 이 부분이 메인 카테고리를 생성하는 코드입니다 -->
-                        <li class="nav-item dropdown product" th:each="productCategory : ${categories}">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${productCategory.name}">
-                                Dropdown
-                            </a>
-                            <div class="dropdown-container">
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <!-- 이 부분이 하위 카테고리를 생성하는 코드입니다 -->
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" href="/product/0">All</a>
-                                    </li>
-                                    <li th:each="child : ${productCategory.children}">
-                                        <a class="dropdown-item category-link" th:href="@{'/product/' + ${child.id}}" th:text="${child.name}" th:data-category-id="${child.id}">Child Category</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- 이 부분이 메인 카테고리를 생성하는 코드입니다 -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                About
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <!-- 이 부분이 하위 카테고리를 생성하는 코드입니다 -->
-                                <li>
-                                    <a class="dropdown-item">About</a>
-                                    <a class="dropdown-item">Calendar of Events</a>
-                                    <a class="dropdown-item">Partners</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Support
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <!-- 이 부분이 하위 카테고리를 생성하는 코드입니다 -->
-                                <li>
-                                    <a class="dropdown-item">user guide</a>
-                                    <a class="dropdown-item">video</a>
-                                    <a class="dropdown-item">Catalog</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </th:block>
+<th:block th:fragment="navbarFragment">
+  <nav class="nav-bar">
+      <a href="/"><img class="logoImg" src="/images/logo.png"></a>
+      <div class="menu-container">
+          <ul class="menu">
+              <li class="menu-item" th:each="productCategory : ${categories}">
+                  <a class="menu-link" th:text="${productCategory.name}">Product</a>
+                  <ul class="dropdown">
+                      <li><a class="dropdown-item" href="/product/0">All</a></li>
+                      <li th:each="child : ${productCategory.children}">
+                          <a class="dropdown-item category-link" th:href="@{'/product/' + ${child.id}}" th:text="${child.name}" th:data-category-id="${child.id}">Child Category</a>
+                  </ul>
+              </li>
+              <li class="menu-item">
+                  <a class="menu-link">About</a>
+                  <ul class="dropdown">
+                      <li><a class="dropdown-item" href="#">About</a></li>
+                      <li><a class="dropdown-item" href="#">Calendar of Events</a></li>
+                      <li><a class="dropdown-item" href="#">Partners</a></li>
+                  </ul>
+              </li>
 
+              <li class="menu-item">
+                  <a class="menu-link">Support</a>
+                  <ul class="dropdown">
+                      <li><a class="dropdown-item" href="/support/userGuide">User Guide</a></li>
+                      <li><a class="dropdown-item" href="/support/videoList">Video</a></li>
+                      <li><a class="dropdown-item" href="#">Catalog</a></li>
+                  </ul>
+              </li>
+              <li class="menu-item">
+                  <a class="menu-link" href="/contact">Contact</a>
+                  </ul>
+              </li>
+          </ul>
+      </div>
+  </nav>
+</th:block>
 </body>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>

@@ -31,11 +31,19 @@
         box-sizing: border-box;
         margin: 0 auto;
     }
+    .product-Menu{
+        font-size: 55px;
+        margin: 0;
+    }
+    .category-name{
+        display: flex;
+    }
 
     .contact-form{
         display: flex;
         flex-direction: column;
         gap: 30px;
+        padding: 60px 0px 100px 0px;
     }
 
     .name-flex{
@@ -76,8 +84,9 @@
 <th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
 
 <div class="product-container">
-    <h1 class="product-Menu">Contact</h1>
-
+    <div class="category-name">
+    <h1 class="product-Menu">Contact</h1><span class="red-dot">.</span>
+    </div>
     <form class="contact-form" action="/contactAdd" role="form" method="post" th:object="${contactDTO}">
 
         <div class="name-flex">
@@ -85,23 +94,31 @@
             <a class="content-text">First name</a>
         <input type="text" th:field="*{firstName}" class="input-text" placeholder="First name">
         </div>
-        <div class="contactBox w-50">
+            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="fieldError">Incorrect data</p>
+
+            <div class="contactBox w-50">
             <a class="content-text">Last name</a>
             <input type="text" th:field="*{lastName}" class="input-text" placeholder="Last name">
         </div>
+            <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="fieldError">Incorrect data</p>
+
         </div>
 
         <div class="contactBox">
             <a class="content-text">Email</a>
             <input type="email" th:field="*{userEmail}" id="userEmail" class="input-text" placeholder="you@company.com">
         </div>
+        <p th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}" class="fieldError">Incorrect data</p>
+
 
         <div class="contactBox">
             <a class="content-text">Message</a>
             <textarea class="text-message" th:field="*{message}"></textarea>
         </div>
+        <p th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="fieldError">Incorrect data</p>
 
-      <button type="submit" class="sendBtn">Send message</button>
+
+        <button type="submit" class="sendBtn">Send message</button>
     </form>
 </div>
 
