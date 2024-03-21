@@ -5,6 +5,8 @@
   <title>상품 상세</title>
   <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
   <link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/top.css">
+  <link rel="stylesheet" href="/css/productDetail.css">
 
 </head>
 <script th:inline="javascript">
@@ -16,84 +18,14 @@
   }
 
 </script>
-<style>
-  a { text-decoration:none !important }
-  a:hover { text-decoration:none !important }
-  p { text-decoration:none !important }
-  p:hover { text-decoration:none !important }
-  h4 { text-decoration:none !important }
-  h4:hover { text-decoration:none !important }
-
-  .product-container{
-    top: 90px;
-    position: relative;
-    width: 1200px;
-    box-sizing: border-box;
-    margin: 0 auto;
-  }
-  .product-Menu{
-    font-size: 55px;
-    margin: 0;
-  }
-  .category-menu{
-    display: flex;
-    gap: 10px;
-  }
-  .category-slot{
-    padding: 16px;
-    font-size: 24px;
-    color: #94A3B8;
-  }
-  .categoryActive{
-    border-bottom: 1px solid #F43F5E;
-    color: black;
-  }
-  .category-slot:hover {
-    border-bottom: 1px solid #F43F5E;
-    color: black;
-  }
-
-
-  .Product-box{
-    padding:  60px 0px 100px 0px;
-  }
-  .Product-TitleBox{
-    background-color: #F8FAFC;
-    display: flex;
-    gap: 60px;
-  }
-  .Product-sub{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    gap: 20px;
-  }
-  .text-category{
-    font-size: 18px;
-    color: #F43F5E;
-  }
-  .text-title{
-    font-size: 48px;
-    color: #334155;
-  }
-  .text-sub{
-    font-size: 20px;
-  color: #64748B;
-  }
-
-  .Product-content{
-    width: 1200px;
-    box-sizing: border-box;
-    margin: 0 auto;
-  }
-</style>
 <body>
 <th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
 
 <div class="product-container">
-  <div class="category-menu" th:each="productCategory : ${categories}">
+
+  <div class="category-name" th:each="productCategory : ${categories}">
     <h1 class="product-Menu" th:each="child : ${productCategory.children}" th:if="${product.productCategory.id == child.id}" th:text="${child.name}"></h1>
+    <span class="red-dot">.</span>
   </div>
 
   <div class="Category-List">
@@ -104,7 +36,7 @@
   </div>
   <div class="Product-box">
   <div class="Product-TitleBox">
-    <img style="width: 300px;" th:src="${product.titleImgUrl}">
+    <img style="width: 450px; height: 500px;" th:src="${product.titleImgUrl}">
     <div class="Product-sub">
       <span class="text-category" th:text="${product.productCategory.name}"></span>
       <span class="text-title" th:text="${product.title}"></span>

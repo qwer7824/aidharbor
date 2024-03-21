@@ -1,3 +1,10 @@
+a { text-decoration:none !important }
+a:hover { text-decoration:none !important }
+p { text-decoration:none !important }
+p:hover { text-decoration:none !important }
+h4 { text-decoration:none !important }
+h4:hover { text-decoration:none !important }
+
 
 body {
  font-family: SUIT;

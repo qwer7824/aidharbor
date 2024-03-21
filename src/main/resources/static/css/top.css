@@ -1,0 +1,32 @@
+.product-container{
+    top: 90px;
+    position: relative;
+    width: 1200px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+.product-Menu{
+    font-size: 55px;
+    margin: 0;
+}
+.category-name{
+    display: flex;
+    padding: 110px 0px 20px 0px;
+}
+.category-menu{
+    display: flex;
+    gap: 10px;
+}
+.category-slot{
+    padding: 16px;
+    font-size: 24px;
+    color: #94A3B8;
+}
+.categoryActive{
+    border-bottom: 1px solid #F43F5E;
+    color: black;
+}
+.category-slot:hover {
+    border-bottom: 1px solid #F43F5E;
+    color: black;
+}

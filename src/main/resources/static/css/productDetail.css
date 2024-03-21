@@ -1,0 +1,33 @@
+.Product-box{
+    padding:  60px 0px 100px 0px;
+}
+.Product-TitleBox{
+    background-color: #F8FAFC;
+    display: flex;
+    gap: 60px;
+}
+.Product-sub{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    padding: 100px 0px 0px 0px;
+}
+.text-category{
+    font-size: 18px;
+    color: #F43F5E;
+}
+.text-title{
+    font-size: 48px;
+    color: #334155;
+}
+.text-sub{
+    font-size: 20px;
+    color: #64748B;
+}
+
+.Product-content{
+    width: 1200px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}

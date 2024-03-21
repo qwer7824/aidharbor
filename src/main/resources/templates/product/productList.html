@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/productList.css">
+    <link rel="stylesheet" href="/css/top.css">
 </head>
 
 <body>
@@ -16,9 +17,9 @@
     <div class="category-name" th:if="${All}">
         <h1 class="product-Menu">ALL</h1><span class="red-dot">.</span>
     </div>
-    <div class="category-menu" th:each="productCategory : ${categories}">
+    <div class="category-name" th:each="productCategory : ${categories}" th:unless="${All != null}">
         <h1 class="product-Menu" th:each="child : ${productCategory.children}" th:if="${categoryId == child.id}" th:text="${child.name}"></h1>
-                <span class="red-dot" th:unless="${All != null}">.</span>
+                <span class="red-dot">.</span>
     </div>
 
     <div class="Category-List">
