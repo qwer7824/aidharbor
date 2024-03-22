@@ -1,25 +1,19 @@
 package com.aidharbor.Controller;
 
 import com.aidharbor.DTO.Category.ProductCategoryDto;
-import com.aidharbor.DTO.Product.ProductDTO;
-import com.aidharbor.DTO.VideoBoardDTO;
-import com.aidharbor.Entity.Product;
-import com.aidharbor.Entity.VideoBoard;
-import com.aidharbor.Repository.VideoBoardRepository;
+import com.aidharbor.DTO.UserGuideDTO;
+import com.aidharbor.DTO.Video.VideoBoardDTO;
 import com.aidharbor.Service.CategoryService;
 import com.aidharbor.Service.SupportService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -47,10 +41,12 @@ public class SupportController {
     @GetMapping(value = "/support/userGuide")
     public String userGuideList(Model model){
 
-        // TODO : 미구현 (백 , 프론트)
-
         List<ProductCategoryDto> categories = categoryService.findAll();
+        List<UserGuideDTO> userGuideDTO = supportService.guideList();
+
+
         model.addAttribute("categories",categories);
+        model.addAttribute("userGuideDTO",userGuideDTO);
         return "userGuide/userGuide";
     }
 

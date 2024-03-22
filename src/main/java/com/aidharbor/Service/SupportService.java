@@ -1,7 +1,11 @@
 package com.aidharbor.Service;
 
-import com.aidharbor.DTO.VideoBoardDTO;
+import com.aidharbor.DTO.Product.ProductDTO;
+import com.aidharbor.DTO.UserGuideDTO;
+import com.aidharbor.DTO.Video.VideoBoardDTO;
+import com.aidharbor.Entity.UserGuide;
 import com.aidharbor.Entity.VideoBoard;
+import com.aidharbor.Repository.UserGuideRepository;
 import com.aidharbor.Repository.VideoBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -17,6 +21,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SupportService {
     private final VideoBoardRepository videoBoardRepository;
+    private final UserGuideRepository userGuideRepository;
+    private final ModelMapper modelMapper;
+
 
     @Transactional(readOnly = true)
     public List<VideoBoardDTO> videoList() {
@@ -28,8 +35,9 @@ public class SupportService {
             int startIndex = videoUrl.indexOf("v=") + 2;
             String videoId = videoUrl.substring(startIndex);
             String imageUrl = "https://img.youtube.com/vi/" + videoId + "/0.jpg";
+            String video = "https://youtube.com/embed/" + videoId;
 
-            VideoBoardDTO dto = new VideoBoardDTO(board.getId(), board.getTitle(), imageUrl,board.getProductCategory());
+            VideoBoardDTO dto = new VideoBoardDTO(board.getId(), board.getTitle(), imageUrl,video, board.getProductCategory());
             videoBoardDTO.add(dto);
         }
 
@@ -46,5 +54,15 @@ public class SupportService {
 
         videoBoardRepository.save(videoBoard);
 
+    }
+
+    public List<UserGuideDTO> guideList() {
+        List<UserGuide> userGuideList = userGuideRepository.findAll();
+
+        List<UserGuideDTO> userGuideDTOList = userGuideList.stream()
+                .map(userGuide -> modelMapper.map(userGuide, UserGuideDTO.class))
+                .collect(Collectors.toList());
+
+        return userGuideDTOList;
     }
 }
