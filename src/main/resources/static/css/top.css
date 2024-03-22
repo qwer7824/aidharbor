@@ -39,3 +39,15 @@ h4:hover { text-decoration:none !important }
     border-bottom: 1px solid #F43F5E;
     color: black;
 }
+
+@media (min-width: 1920px) {
+    .product-container{
+        width: 1600px;
+    }
+    .product-Menu{
+        font-size: 55px;
+    }
+    .category-slot{
+        font-size: 24px;
+    }
+}

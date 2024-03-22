@@ -57,6 +57,19 @@
             </div>
     </div>
     </div>
+
+        <div class="bg-white mx-3 my-3 w-50" style="height: 300px;">
+            <div class="d-flex justify-content-between">
+                <span class="m-2">카테고리</span>
+                <a class="m-2 text-muted" href="/admin/category/categoryAdd">카테고리 추가</a>
+            </div>
+            <hr class="m-1">
+            <div class="mx-2" th:each="categorys : ${category}">
+                <div><a class="text-black" th:href="'/admin/category/' + ${categorys.id}" th:text="${categorys.name}"></a></div>
+                <div th:each="child : ${categorys.children}"><a th:href="'/admin/category/' + ${child.id}" class="mx-3 text-black" th:text="'ㄴ '+${child.name}"></a></divn>
+                </div>
+            </div>
+        </div>
 </div>
 </div>
 </body>

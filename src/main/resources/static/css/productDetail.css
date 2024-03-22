@@ -16,18 +16,40 @@
 .text-category{
     font-size: 18px;
     color: #F43F5E;
+    font-weight: 700;
+
 }
 .text-title{
     font-size: 48px;
     color: #334155;
+    font-weight: 700;
+
 }
 .text-sub{
     font-size: 20px;
     color: #64748B;
+    font-weight: 400;
+
 }
 
 .Product-content{
     width: 1200px;
     box-sizing: border-box;
     margin: 0 auto;
+}
+
+@media (min-width: 1920px) {
+    .text-category{
+        font-size: 24px;
+    }
+    .text-title{
+        font-size: 54px;
+    }
+    .text-sub{
+        font-size: 26px;
+    }
+
+    .Product-content{
+        width: 1600px;
+    }
 }
