@@ -35,10 +35,12 @@ h4:hover { text-decoration:none !important }
 .product-category{
     font-size: 14px;
     color: #F43F5E;
+    font-weight: 700;
 }
 .product-title{
     font-size: 20px;
     color: #334155;
+    font-weight: 700;
 }
 .product-sub{
     font-size: 14px;

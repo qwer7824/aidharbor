@@ -5,9 +5,8 @@ p:hover { text-decoration:none !important }
 h4 { text-decoration:none !important }
 h4:hover { text-decoration:none !important }
 
-
 body {
- font-family: SUIT;
+ font-family: SUITE;
 }
 
 .logoImg{
@@ -48,6 +47,7 @@ body {
     color: #333;
     text-decoration: none;
     font-size: 18px;
+    font-weight: bold;
 }
 
 .dropdown {
@@ -74,8 +74,8 @@ body {
 .dropdown-item {
     display: block;
     padding: 10px;
-    text-decoration:none;
     color: black;
+    font-weight: bold;
 }
 
 .dropdown-item:hover {

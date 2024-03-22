@@ -5,17 +5,12 @@
     <title>VideoList</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+
 <link rel="stylesheet" href="/css/navbar.css">
 <link rel="stylesheet" href="/css/top.css">
 
 <style>
-    a { text-decoration:none !important }
-    a:hover { text-decoration:none !important }
-    p { text-decoration:none !important }
-    p:hover { text-decoration:none !important }
-    h4 { text-decoration:none !important }
-    h4:hover { text-decoration:none !important }
-
     .video-List{
         padding:  60px 0px 100px 0px;
         display: flex;
@@ -37,12 +32,38 @@
     .video-category{
         font-size: 14px;
         color: #F43F5E;
+        font-weight: 500;
     }
     .video-title{
         font-size: 20px;
         color: #334155;
+        font-weight: 700;
+    }
+    /* 모달 스타일 */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
     }
 
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 0px 10px 10px 10px;
+        border: 1px solid #888;
+        width: 50%;
+    }
+    .modal-close{
+        display: flex;
+        justify-content: flex-end;
+        font-size: 40px;
+    }
 
 </style>
 <body>
@@ -61,7 +82,7 @@
     </div>
 
     <div class="video-List">
-        <div class="video-Card" th:each="videoList : ${videoList}">
+        <div class="video-Card" th:each="videoList : ${videoList}" th:attr="data-video-url=${videoList.video}" onclick="openModal(this)">
             <div>
                 <a>
                     <img class="videoImg" th:src="${videoList.videoUrl}">
@@ -76,16 +97,39 @@
 
 
 <!-- 모달 창 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <img class="img-fluid" id="modalImage">
+    <div class="modal" id="Modal" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-close" onclick="closeModal()">X</div>
+                    <iframe id="modalVideo" width="100%" height="600px" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </div>
+
+<script th:inline="javascript">
+    // 모달 열기 함수
+    function openModal(element) {
+        let modal = document.getElementById('Modal');
+        let modalVideo = element.getAttribute('data-video-url');
+        document.getElementById('modalVideo').src = modalVideo;
+        modal.style.display = 'block';
+    }
+
+    // 모달 닫기 함수
+    window.onclick = function(event) {
+        let modal = document.getElementById('Modal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+    function closeModal() {
+        let modal = document.getElementById('Modal');
+        modal.style.display = 'none';
+    }
+</script>
 </body>
 </html>

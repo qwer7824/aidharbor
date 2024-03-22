@@ -8,6 +8,7 @@
     <title>Aidharbor</title>
     <!-- Core theme CSS (includes Bootstrap)-->
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/main.css">
 </head>
@@ -15,10 +16,9 @@
 <th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
 <div><img width="100%" src="https://todaybutt.s3.ap-northeast-2.amazonaws.com/images/background.png"></div>
 <div class="productBox">
-    <p style="font-weight: 800; font-size: 48px; line-height: 68px;">Product</p>
+    <a style="font-weight: 800; font-size: 48px; line-height: 68px;">Product</a>
             <div class="productMenu">
-                <div th:each="child : ${categories.get(0).children}">
-                    <div class="product-container">
+                <div class="product-container" th:each="child : ${categories.get(0).children}">
                         <div class="image-container">
                             <img class="productImg" th:src="${child.categoryImg}">
                             <div class="textBox">
@@ -28,7 +28,6 @@
                             </div>
                         </div>
                         </div>
-                    </div>
             </div>
 </div>
 <div class="CalendarEventsBox">

@@ -6,19 +6,22 @@ body{
     background-color: #F8FAFC;
     padding: 100px;
     display: flex;
-    flex-direction: column;
     gap: 40px;
     box-sizing: border-box;
+    align-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 .productMenu{
-    width: 100%;
     gap: 20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
+
+
 .productImg{
-    width: 400px;
-    height: 366px;
+    width: 100%;
+    height: 470px;
     border-radius: 20px;
 }
 
@@ -97,17 +100,19 @@ body{
 }
 .CalendarEventsCategory{
     display: flex;
+    justify-content: center;
     gap: 20px;
 }
 .CalendarFirst{
-    width: 100%;
+    width: 330px;
+    height: 560px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 .CalenderMenu{
-    width: 100%;
-    height: 570px;
+    width: 330px;
+    height: 560px;
     background-color: white;
     border-radius: 12px;
     display: flex;
