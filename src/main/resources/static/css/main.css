@@ -28,6 +28,8 @@ body{
 
 .product-container {
     position: relative;
+    width: 100%;
+
 }
 
 .image-container {
