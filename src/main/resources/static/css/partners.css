@@ -1,0 +1,38 @@
+.partnersBox{
+    padding:  60px 0px 100px 0px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-direction: column;
+}
+.top-text{
+    font-size: 54px;
+    background: linear-gradient(to right top, #F43F5E, #9747FF);
+    color: transparent;
+    -webkit-background-clip: text;
+    text-align: center;
+    font-weight: 800;
+}
+
+.partner-logoBox{
+    background-color: #F8FAFC;
+    display: flex;
+    width: 1100px;
+    gap: 40px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 50px;
+    flex-wrap: wrap;
+    border-radius: 12px;
+}
+.partner-logos{
+    background-color: #FFE4E6;
+    width: 245px;
+    height: 100px;
+}
+
+.partner-img{
+    width: 100%;
+    object-fit: fill;
+    height: 100px;
+}

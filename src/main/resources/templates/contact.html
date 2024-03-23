@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/top.css">
+    <link rel="stylesheet" href="/css/contact.css">
     <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
 
 </head>
@@ -22,67 +23,6 @@
         console.log(errorMessage);
     }
 </script>
-<style>
-    .w-50{
-        width: 50%;
-    }
-
-    .contact-form{
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        padding: 60px 0px 100px 0px;
-    }
-
-    .name-flex{
-        display: flex;
-        gap: 32px;
-    }
-    .contactBox{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .input-text{
-        border: 1px solid #CBD5E1;
-        padding: 12px 16px 12px 16px;
-        border-radius: 8px;
-    }
-    .content-text{
-        font-size: 14px;
-        font-weight: 500;
-    }
-    .text-message{
-        height: 150px;
-        border: 1px solid #CBD5E1;
-        padding: 12px 16px 12px 16px;
-        border-radius: 8px;
-    }
-    .sendBtn{
-        width: 20%;
-        height: 40px;
-        background-color: #E11D48;
-        border-color: #E11D48;
-        border-radius: 10px;
-        box-shadow: 0px 1px 2px 0px #10182808;
-        color: white;
-        font-size: 16px;
-        place-self: center;
-    }
-
-    @media (min-width: 1920px) {
-        .sendBtn{
-            width: 30%;
-            height: 50px;
-            font-size: 22px;
-        }
-        .content-text{
-            font-size: 20px;
-            font-weight: 500;
-        }
-    }
-
-</style>
 <body>
 <th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
 
@@ -90,6 +30,7 @@
     <div class="category-name">
     <h1 class="product-Menu">Contact</h1><span class="red-dot">.</span>
     </div>
+    <a class="big-name">Contact</a>
     <form class="contact-form" action="/contactAdd" role="form" method="post" th:object="${contactDTO}">
 
         <div class="name-flex">

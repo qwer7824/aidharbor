@@ -1,0 +1,58 @@
+.w-50{
+    width: 50%;
+}
+
+.contact-form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 60px 0px 100px 0px;
+}
+
+.name-flex{
+    display: flex;
+    gap: 32px;
+}
+.contactBox{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.input-text{
+    border: 1px solid #CBD5E1;
+    padding: 12px 16px 12px 16px;
+    border-radius: 8px;
+}
+.content-text{
+    font-size: 14px;
+    font-weight: 500;
+}
+.text-message{
+    height: 150px;
+    border: 1px solid #CBD5E1;
+    padding: 12px 16px 12px 16px;
+    border-radius: 8px;
+}
+.sendBtn{
+    width: 20%;
+    height: 40px;
+    background-color: #E11D48;
+    border-color: #E11D48;
+    border-radius: 10px;
+    box-shadow: 0px 1px 2px 0px #10182808;
+    color: white;
+    font-size: 16px;
+    place-self: center;
+}
+
+@media (min-width: 1920px) {
+    .sendBtn{
+        width: 30%;
+        height: 50px;
+        font-size: 22px;
+    }
+    .content-text{
+        font-size: 20px;
+        font-weight: 500;
+    }
+}

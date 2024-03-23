@@ -6,12 +6,21 @@ h4 { text-decoration:none !important }
 h4:hover { text-decoration:none !important }
 
 
+
 .product-container{
     top: 90px;
     position: relative;
     width: 1200px;
     box-sizing: border-box;
     margin: 0 auto;
+}
+.big-name{
+    font-size: 150px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #F8FAFC;
+    font-weight: 800;
 }
 .product-Menu{
     font-size: 55px;
@@ -49,5 +58,8 @@ h4:hover { text-decoration:none !important }
     }
     .category-slot{
         font-size: 24px;
+    }
+    .big-name{
+        font-size: 200px;
     }
 }

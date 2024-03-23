@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>VideoList</title>
 </head>
@@ -9,77 +10,8 @@
 
 <link rel="stylesheet" href="/css/navbar.css">
 <link rel="stylesheet" href="/css/top.css">
+<link rel="stylesheet" href="/css/videoList.css">
 
-<style>
-    .video-List{
-        padding:  60px 0px 100px 0px;
-        display: flex;
-        gap: 30px;
-        flex-wrap: wrap;
-    }
-    .videoImg{
-        width: 350px;
-        border-radius: 12px;
-    }
-    .video-TextBox{
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-        width: 330px;
-        overflow: hidden;
-    }
-    .video-category{
-        font-size: 14px;
-        color: #F43F5E;
-        font-weight: 500;
-    }
-    .video-title{
-        font-size: 20px;
-        color: #334155;
-        font-weight: 700;
-    }
-    /* 모달 스타일 */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.4);
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 0px 10px 10px 10px;
-        border: 1px solid #888;
-        width: 50%;
-    }
-    .modal-close{
-        display: flex;
-        justify-content: flex-end;
-        font-size: 40px;
-    }
-
-    @media (min-width: 1920px) {
-        .videoImg{
-            width: 513px;
-        }
-        .video-TextBox{
-            width: 490px;
-        }
-        .video-category{
-            font-size: 20px;
-        }
-        .video-title{
-            font-size: 26px;
-        }
-    }
-
-</style>
 <body>
 <th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
 
@@ -87,6 +19,7 @@
     <div class="category-name">
         <h1 class="product-Menu">Video</h1><span class="red-dot">.</span>
     </div>
+    <a class="big-name">Support</a>
     <div class="Category-List">
         <div class="category-menu">
             <a class="category-slot" href="/support/userGuide">User guide</a>
