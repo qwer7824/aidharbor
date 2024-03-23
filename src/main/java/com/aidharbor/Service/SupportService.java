@@ -1,8 +1,10 @@
 package com.aidharbor.Service;
 
+import com.aidharbor.DTO.PartnersDTO;
 import com.aidharbor.DTO.Product.ProductDTO;
 import com.aidharbor.DTO.UserGuideDTO;
 import com.aidharbor.DTO.Video.VideoBoardDTO;
+import com.aidharbor.Entity.Partners;
 import com.aidharbor.Entity.UserGuide;
 import com.aidharbor.Entity.VideoBoard;
 import com.aidharbor.Repository.UserGuideRepository;
@@ -64,5 +66,26 @@ public class SupportService {
                 .collect(Collectors.toList());
 
         return userGuideDTOList;
+    }
+
+    public VideoBoardDTO findByVideoId(Long videoId) {
+        VideoBoard videoBoard = videoBoardRepository.findById(videoId).orElse(null);
+        VideoBoardDTO dto = modelMapper.map(videoBoard, VideoBoardDTO.class);
+        return dto;
+    }
+
+    public void videoUpdate(VideoBoardDTO videoBoardDTO) {
+        VideoBoard videoBoard = videoBoardRepository.findById(videoBoardDTO.getId()).orElse(null);
+
+        videoBoard.updateVideo(videoBoardDTO);
+
+        videoBoardRepository.save(videoBoard);
+        }
+
+    public void videoDelete(VideoBoardDTO videoBoardDTO) {
+
+        VideoBoard videoBoard = videoBoardRepository.findById(videoBoardDTO.getId()).orElse(null);
+
+        videoBoardRepository.delete(videoBoard);
     }
 }

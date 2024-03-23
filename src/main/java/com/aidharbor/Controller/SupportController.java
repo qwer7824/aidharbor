@@ -1,6 +1,7 @@
 package com.aidharbor.Controller;
 
 import com.aidharbor.DTO.Category.ProductCategoryDto;
+import com.aidharbor.DTO.PartnersDTO;
 import com.aidharbor.DTO.UserGuideDTO;
 import com.aidharbor.DTO.Video.VideoBoardDTO;
 import com.aidharbor.Service.CategoryService;
@@ -11,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -58,6 +62,19 @@ public class SupportController {
         return "video/videoForm";
     }
 
+    // 비디오 수정 페이지
+    @GetMapping("/admin/video/{videoId}")
+    public String videoUpdateView(@PathVariable Long videoId, Model model){
+
+        List<ProductCategoryDto> categories = categoryService.findAll();
+
+        VideoBoardDTO videoBoard = supportService.findByVideoId(videoId);
+
+        model.addAttribute("categories",categories);
+        model.addAttribute("videoBoardDTO",videoBoard);
+        return "video/videoForm";
+    }
+
     // 비디오 추가
     @PostMapping("/admin/videoAdd")
     public String videoAdd(@Valid VideoBoardDTO videoBoardDTO, BindingResult bindingResult,Model model){
@@ -68,6 +85,28 @@ public class SupportController {
             supportService.videoAdd(videoBoardDTO);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "비디오 등 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
+
+    // 비디오 수정 (어드민)
+    @PostMapping(value = "/admin/video/{videoId}")
+    public String videoUpdate(@PathVariable String videoId, VideoBoardDTO videoBoardDTO, Model model) {
+        try {
+            supportService.videoUpdate(videoBoardDTO);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "비디오 수정 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
+
+    // 비디오 삭제 (어드민)
+    @PostMapping(value = "/admin/video/delete/{videoId}")
+    public String videoDelete(@PathVariable String videoId, VideoBoardDTO videoBoardDTO, Model model) {
+        try {
+            supportService.videoDelete(videoBoardDTO);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "비디오 수정 중 에러가 발생하였습니다.");
         }
         return "redirect:/admin";
     }

@@ -90,8 +90,8 @@
             </div>
 
             <div th:unless="${#strings.isEmpty(videoBoardDTO.id)}" style="text-align: center">
-                <button th:formaction="@{'/admin/category/' + ${categoryDTO.id} }" type="submit" class="btn btn-primary">수정</button>
-                <button th:formaction="@{'/admin/category/delete/' + ${categoryDTO.id}}" type="submit" class="btn btn-danger" onclick="return confirm('카테고리를 삭제하면 해당 게시글,하위 카테고리가 삭제 됩니다.')">삭제</button>
+                <button th:formaction="@{'/admin/video/' + ${videoBoardDTO.id} }" type="submit" class="btn btn-primary">수정</button>
+                <button th:formaction="@{'/admin/video/delete/' + ${videoBoardDTO.id}}" type="submit" class="btn btn-danger">삭제</button>
             </div>
         </form>
 

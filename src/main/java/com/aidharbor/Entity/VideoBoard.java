@@ -1,5 +1,7 @@
 package com.aidharbor.Entity;
 
+import com.aidharbor.DTO.Product.ProductDTO;
+import com.aidharbor.DTO.Video.VideoBoardDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +11,10 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Builder
 public class VideoBoard {
 
     @Id
@@ -26,4 +28,10 @@ public class VideoBoard {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ProductCategory productCategory;
 
+
+    public void updateVideo(VideoBoardDTO videoBoardDTO) {
+        this.productCategory = videoBoardDTO.getProductCategory();
+        this.title = videoBoardDTO.getTitle();
+        this.videoUrl = videoBoardDTO.getVideoUrl();
+    }
 }
