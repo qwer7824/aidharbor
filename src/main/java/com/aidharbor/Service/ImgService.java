@@ -1,7 +1,9 @@
 package com.aidharbor.Service;
 
 import com.aidharbor.DTO.Image.DisplayedImageDTO;
+import com.aidharbor.DTO.PartnersDTO;
 import com.aidharbor.DTO.Product.ProductDTO;
+import com.aidharbor.Entity.Partners;
 import com.aidharbor.Entity.Product;
 import com.aidharbor.Entity.ProductCategory;
 import io.micrometer.common.util.StringUtils;
@@ -85,5 +87,9 @@ public class ImgService {
         String titleUrl = imgSubString(productCategory.getCategoryImg());
 
         s3Uploader.deleteFile(titleUrl);
+    }
+    public void imgLogoDelete(Partners partners) throws IOException {
+        String Url = imgSubString(partners.getPartnerImg());
+        s3Uploader.deleteFile(Url);
     }
 }
