@@ -25,9 +25,6 @@ public class SupportController {
     // Support Video List View
     @GetMapping(value = "/support/videoList")
     public String videoList(Model model){
-
-        // TODO : 미구현 (프론트 모달)
-
         List<ProductCategoryDto> categories = categoryService.findAll();
         List<VideoBoardDTO> videoListDTO = supportService.videoList();
 

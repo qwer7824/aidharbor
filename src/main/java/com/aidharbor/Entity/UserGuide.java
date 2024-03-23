@@ -9,7 +9,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Getter
 public class UserGuide {
     @Id
@@ -20,6 +19,7 @@ public class UserGuide {
     @Column(length = 30, nullable = false)
     private String title;
 
+    @Column(length = 500)
     private String guideURL;
 
     @ManyToOne(fetch = FetchType.LAZY)

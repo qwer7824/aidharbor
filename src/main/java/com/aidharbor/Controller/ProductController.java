@@ -72,7 +72,7 @@ public class ProductController {
 
     // 상품 수정 (어드민)
     @PostMapping(value = "/admin/product/{productId}")
-    public String productUpdate(@Valid ProductDTO productDTO,BindingResult bindingResult, @RequestParam(name = "titleImg") MultipartFile titleImg, Model model) {
+    public String productUpdate(@PathVariable String productId, @Valid ProductDTO productDTO, BindingResult bindingResult, @RequestParam(name = "titleImg") MultipartFile titleImg, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "product/productForm";
