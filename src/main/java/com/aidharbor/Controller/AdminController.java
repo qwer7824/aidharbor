@@ -2,7 +2,9 @@ package com.aidharbor.Controller;
 
 import com.aidharbor.DTO.Category.ProductCategoryCreateRequest;
 import com.aidharbor.DTO.Category.ProductCategoryDto;
+import com.aidharbor.DTO.MainBannerDTO;
 import com.aidharbor.DTO.Product.ProductDTO;
+import com.aidharbor.Service.BannerService;
 import com.aidharbor.Service.CategoryService;
 import com.aidharbor.Service.ProductService;
 import jakarta.validation.Valid;
@@ -26,6 +28,8 @@ public class AdminController {
 
     private final ProductService productService;
 
+    private final BannerService bannerService;
+
     @GetMapping(value = "/admin")
     public String adminDashBoard(Model model){
 
@@ -35,6 +39,63 @@ public class AdminController {
         model.addAttribute("product",productDTO);
         model.addAttribute("category",categoryDto);
         return "admin/dashboard";
+    }
+
+    // 메인 베너 추가 페이지
+    @GetMapping(value = "/admin/banner/bannerAdd")
+    public String bannerAddView(MainBannerDTO mainBannerDTO, Model model){
+
+        model.addAttribute("mainBannerDTO", mainBannerDTO);
+        return "admin/mainBannerForm";
+    }
+
+    // 배너 추가
+    @PostMapping(value = "/admin/banner/bannerAdd")
+    public String bannerAdd(@Valid MainBannerDTO mainBannerDTO, BindingResult bindingResult, @RequestPart(name = "Img") MultipartFile bannerImg, Model model) throws IOException {
+        if (bindingResult.hasErrors()) {
+            return "admin/mainBannerForm";
+        }
+        try {
+            bannerService.bannerCreate(mainBannerDTO,bannerImg);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "배너 추가 중 에러가 발생하였습니다.");
+        }
+        model.addAttribute("mainBannerDTO",mainBannerDTO);
+        return "redirect:/admin";
+    }
+
+    // 배너 수정 페이지
+    @GetMapping(value = "/admin/banner/{mainBannerId}")
+    public String bannerUpdateView(@PathVariable Long mainBannerId, Model model){
+
+        try {
+            MainBannerDTO mainBannerDTO = bannerService.findByBanner(mainBannerId);
+            model.addAttribute("mainBannerDTO",mainBannerDTO);
+        }catch (Exception e){
+            model.addAttribute("errorMessage", "배너가 없습니다.");
+        }
+        return "admin/mainBannerForm";
+    }
+
+    // 배너 수정
+    @PostMapping(value = "/admin/banner/{categoryId}")
+    public String bannerUpdate(@Valid MainBannerDTO mainBannerDTO,BindingResult bindingResult,@RequestPart(name = "Img") MultipartFile bannerImg, Model model) throws IOException {
+        if (bindingResult.hasErrors()) {
+            return "admin/mainBannerForm";
+        }
+        try {
+            bannerService.bannerUpdate(mainBannerDTO,bannerImg);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "배너 수정 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
+
+    // 배너 삭제
+    @PostMapping("/admin/banner/delete/{bannerId}")
+    public String bannerDelete(@PathVariable Long bannerId) throws IOException {
+        bannerService.delete(bannerId);
+        return "redirect:/admin";
     }
 
     // 카테고리 추가 페이지
@@ -56,7 +117,7 @@ public class AdminController {
         try {
             categoryService.create(categoryDTO,categoryImg);
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "카테고리 수정 중 에러가 발생하였습니다.");
+            model.addAttribute("errorMessage", "카테고리 추가 중 에러가 발생하였습니다.");
         }
         model.addAttribute("categoryDTO",categoryDTO);
         return "redirect:/admin";

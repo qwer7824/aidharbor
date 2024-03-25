@@ -3,6 +3,7 @@ package com.aidharbor.Service;
 import com.aidharbor.DTO.Image.DisplayedImageDTO;
 import com.aidharbor.DTO.PartnersDTO;
 import com.aidharbor.DTO.Product.ProductDTO;
+import com.aidharbor.Entity.MainBanner;
 import com.aidharbor.Entity.Partners;
 import com.aidharbor.Entity.Product;
 import com.aidharbor.Entity.ProductCategory;
@@ -82,6 +83,11 @@ public class ImgService {
       return content;
     }
 
+    public void imgBannerDelete(MainBanner mainBanner) throws IOException {
+        String titleUrl = imgSubString(mainBanner.getMainBannerImg());
+
+        s3Uploader.deleteFile(titleUrl);
+    }
 
     public void imgCategoryDelete(ProductCategory productCategory) throws IOException {
         String titleUrl = imgSubString(productCategory.getCategoryImg());

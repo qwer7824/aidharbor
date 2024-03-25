@@ -1,5 +1,7 @@
 package com.aidharbor.Entity;
 
+import com.aidharbor.DTO.MainBannerDTO;
+import com.aidharbor.DTO.Product.ProductDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,4 +23,15 @@ public class MainBanner {
     private String mainBannerImg;
     private String title;
     private String subtitle;
+
+    public void updateMainBannerImg(MainBannerDTO mainBannerDTO,String ImgUrl) {
+        this.mainBannerImg = ImgUrl;
+        this.title = mainBannerDTO.getTitle();
+        this.subtitle = mainBannerDTO.getSubtitle();
+    }
+    public void updateMainBanner(MainBannerDTO mainBannerDTO) {
+        this.mainBannerImg = mainBannerDTO.getMainBannerImg();
+        this.title = mainBannerDTO.getTitle();
+        this.subtitle = mainBannerDTO.getSubtitle();
+    }
 }

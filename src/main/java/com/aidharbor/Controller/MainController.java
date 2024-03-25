@@ -23,7 +23,7 @@ public class MainController {
 
         // TODO : 이벤트 탭 미구현 (백 , 프론트)
         List<ProductCategoryDto> categories = categoryService.findAll();
-        List<MainBannerDTO> mainBannerDTOs = bannerService.findByBanner();
+        List<MainBannerDTO> mainBannerDTOs = bannerService.findByBannerList();
 
         model.addAttribute("categories", categories);
         model.addAttribute("mainBannerDTO", mainBannerDTOs);
