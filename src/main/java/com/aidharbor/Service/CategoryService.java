@@ -3,13 +3,11 @@ package com.aidharbor.Service;
 
 import com.aidharbor.DTO.Category.ProductCategoryCreateRequest;
 import com.aidharbor.DTO.Category.ProductCategoryDto;
-import com.aidharbor.DTO.Product.ProductDTO;
 import com.aidharbor.DTO.Product.ProductResponseDTO;
 import com.aidharbor.Entity.Product;
 import com.aidharbor.Entity.ProductCategory;
 import com.aidharbor.Excption.CategoryNotFoundException;
 import com.aidharbor.Repository.CategoryRepository;
-import com.aidharbor.Repository.MemberRepository;
 import com.aidharbor.Repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -81,7 +79,7 @@ public class CategoryService {
     @Transactional
     public void delete(int id) throws IOException {
         ProductCategory productCategory = categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
-        imgService.imgCategoryDelete(productCategory);
+        imgService.imgDelete(productCategory.getCategoryImg());
         categoryRepository.delete(productCategory);
     }
 
@@ -92,7 +90,7 @@ public class CategoryService {
 
         if (!categoryImg.isEmpty()) {
             String url = imgService.imgSubString(req.getCategoryImg());
-            s3Uploader.deleteFile(url);
+            s3Uploader.deleteImgFile(url);
             String storedFileName = s3Uploader.upload(categoryImg, "images");
             productCategory.updateImgUrl(req,storedFileName);
         } else {

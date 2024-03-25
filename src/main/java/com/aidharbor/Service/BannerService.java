@@ -1,17 +1,11 @@
 package com.aidharbor.Service;
 
 import com.aidharbor.DTO.MainBannerDTO;
-import com.aidharbor.DTO.Video.VideoBoardDTO;
 import com.aidharbor.Entity.MainBanner;
-import com.aidharbor.Entity.Product;
-import com.aidharbor.Entity.ProductCategory;
-import com.aidharbor.Entity.VideoBoard;
 import com.aidharbor.Excption.CategoryNotFoundException;
 import com.aidharbor.Repository.MainBannerRepository;
-import com.sun.tools.javac.Main;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -61,7 +55,7 @@ public class BannerService {
 
         if (!bannerImg.isEmpty()) {
             String url = imgService.imgSubString(mainBannerDTO.getMainBannerImg());
-            s3Uploader.deleteFile(url);
+            s3Uploader.deleteImgFile(url);
             String storedFileName = s3Uploader.upload(bannerImg, "images");
             banner.updateMainBannerImg(mainBannerDTO,storedFileName);
         } else {
@@ -73,7 +67,7 @@ public class BannerService {
     @Transactional
     public void delete(Long bannerId) throws IOException {
         MainBanner mainBanner = mainBannerRepository.findById(bannerId).orElseThrow(CategoryNotFoundException::new);
-        imgService.imgBannerDelete(mainBanner);
+        imgService.imgDelete(mainBanner.getMainBannerImg());
         mainBannerRepository.delete(mainBanner);
     }
 }

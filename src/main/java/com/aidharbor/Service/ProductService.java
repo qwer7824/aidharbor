@@ -9,13 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -78,7 +76,7 @@ public class ProductService {
 
         if (!titleImg.isEmpty()) {
             String url = imgService.imgSubString(product.getTitleImgUrl());
-            s3Uploader.deleteFile(url);
+            s3Uploader.deleteImgFile(url);
             String storedFileName = s3Uploader.upload(titleImg, "images");
             product.updateTitleImgUrl(productDTO,storedFileName);
         } else {
@@ -89,6 +87,7 @@ public class ProductService {
     }
 
 
+    @Transactional
     // 상품 삭제
     public void productDelete(long productId) throws IOException {
         Product product = productRepository.findById(productId).orElseThrow(null);

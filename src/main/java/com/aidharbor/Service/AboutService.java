@@ -2,9 +2,7 @@ package com.aidharbor.Service;
 
 import com.aidharbor.DTO.PartnersDTO;
 import com.aidharbor.Entity.Partners;
-import com.aidharbor.Entity.Product;
 import com.aidharbor.Repository.PartnersRepository;
-import jakarta.mail.Part;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -56,7 +54,7 @@ public class AboutService {
 
         if (!img.isEmpty()) {
             String url = imgService.imgSubString(partners.getPartnerImg());
-            s3Uploader.deleteFile(url);
+            s3Uploader.deleteImgFile(url);
             String storedFileName = s3Uploader.upload(img, "images");
             partners.updatePartners(storedFileName);
         }
@@ -67,6 +65,6 @@ public class AboutService {
     public void partnersDelete(Long partnersId) throws IOException {
         Partners partners = partnersRepository.findById(partnersId).orElseThrow(null);
         partnersRepository.delete(partners);
-        imgService.imgLogoDelete(partners);
+        imgService.imgDelete(partners.getPartnerImg());
     }
 }

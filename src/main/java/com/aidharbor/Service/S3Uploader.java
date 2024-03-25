@@ -42,9 +42,17 @@ public class S3Uploader {
         return uploadImageUrl;
     }
 
-    public void deleteFile(String fileName) throws IOException {
+    public void deleteImgFile(String fileName) throws IOException {
         try {
             amazonS3Client.deleteObject(bucket, "images/" +fileName);
+        } catch (SdkClientException e) {
+            throw new IOException("Error deleting file from S3", e);
+        }
+    }
+
+    public void deletePdfFile(String fileName) throws IOException {
+        try {
+            amazonS3Client.deleteObject(bucket, "pdf/" +fileName);
         } catch (SdkClientException e) {
             throw new IOException("Error deleting file from S3", e);
         }
@@ -95,4 +103,11 @@ public class S3Uploader {
         return currentDate + "_" + fileNameWithoutExtension + extension;
     }
 
+    public void deleteFile(String fileName) throws IOException {
+        try {
+            amazonS3Client.deleteObject(bucket, "pdf/" + fileName);
+        } catch (SdkClientException e) {
+            throw new IOException("Error deleting file from S3", e);
+        }
+    }
 }
