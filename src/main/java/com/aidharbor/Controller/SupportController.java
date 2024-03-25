@@ -1,5 +1,6 @@
 package com.aidharbor.Controller;
 
+import com.aidharbor.DTO.CatalogDTO;
 import com.aidharbor.DTO.Category.ProductCategoryDto;
 import com.aidharbor.DTO.PartnersDTO;
 import com.aidharbor.DTO.UserGuideDTO;
@@ -49,6 +50,19 @@ public class SupportController {
         model.addAttribute("categories",categories);
         model.addAttribute("userGuideDTO",userGuideDTO);
         return "userGuide/userGuide";
+    }
+
+    // Catalog List view
+    @GetMapping(value = "/support/catalog")
+    public String catalogList(Model model){
+
+        List<ProductCategoryDto> categories = categoryService.findAll();
+        List<CatalogDTO> catalogDTOList = supportService.catalogList();
+
+
+        model.addAttribute("categories",categories);
+        model.addAttribute("catalogDTO",catalogDTOList);
+        return "catalog/catalog";
     }
 
 

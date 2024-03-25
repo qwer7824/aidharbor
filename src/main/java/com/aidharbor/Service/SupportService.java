@@ -1,12 +1,15 @@
 package com.aidharbor.Service;
 
+import com.aidharbor.DTO.CatalogDTO;
 import com.aidharbor.DTO.PartnersDTO;
 import com.aidharbor.DTO.Product.ProductDTO;
 import com.aidharbor.DTO.UserGuideDTO;
 import com.aidharbor.DTO.Video.VideoBoardDTO;
+import com.aidharbor.Entity.Catalog;
 import com.aidharbor.Entity.Partners;
 import com.aidharbor.Entity.UserGuide;
 import com.aidharbor.Entity.VideoBoard;
+import com.aidharbor.Repository.CatalogRepository;
 import com.aidharbor.Repository.UserGuideRepository;
 import com.aidharbor.Repository.VideoBoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +27,7 @@ import java.util.stream.Collectors;
 public class SupportService {
     private final VideoBoardRepository videoBoardRepository;
     private final UserGuideRepository userGuideRepository;
+    private final CatalogRepository catalogRepository;
     private final ModelMapper modelMapper;
 
 
@@ -66,6 +70,17 @@ public class SupportService {
                 .collect(Collectors.toList());
 
         return userGuideDTOList;
+    }
+
+
+    public List<CatalogDTO> catalogList() {
+        List<Catalog> catalogList = catalogRepository.findAll();
+
+        List<CatalogDTO> catalogDTOList = catalogList.stream()
+                .map(catalog -> modelMapper.map(catalog, CatalogDTO.class))
+                .collect(Collectors.toList());
+
+        return catalogDTOList;
     }
 
     public VideoBoardDTO findByVideoId(Long videoId) {
