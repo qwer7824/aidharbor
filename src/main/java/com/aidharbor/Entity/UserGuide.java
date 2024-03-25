@@ -1,6 +1,7 @@
 package com.aidharbor.Entity;
 
 
+import com.aidharbor.DTO.UserGuideDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Builder
 public class UserGuide {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +29,15 @@ public class UserGuide {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ProductCategory productCategory;
 
+    public void updateFile(UserGuideDTO userGuideDTO, String storedFileName) {
+        this.title = userGuideDTO.getTitle();
+        this.productCategory = userGuideDTO.getProductCategory();
+        this.guideURL = storedFileName;
+    }
+
+    public void updateUserGuide(UserGuideDTO userGuideDTO) {
+        this.title = userGuideDTO.getTitle();
+        this.productCategory = userGuideDTO.getProductCategory();
+        this.guideURL = userGuideDTO.getGuideURL();
+    }
 }

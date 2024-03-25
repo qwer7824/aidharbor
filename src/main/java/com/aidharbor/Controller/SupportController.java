@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -52,6 +53,65 @@ public class SupportController {
         return "userGuide/userGuide";
     }
 
+    // 유저 가이드 추가 페이지
+    @GetMapping("/admin/userGuideAdd")
+    public String userGuideAddView(Model model,UserGuideDTO userGuideDTO){
+        List<ProductCategoryDto> categories = categoryService.findAll();
+
+        model.addAttribute("categories",categories);
+        model.addAttribute("userGuideDTO",userGuideDTO);
+        return "userGuide/userGuideForm";
+    }
+    // 유저 가이드 추가
+    @PostMapping("/admin/userGuideAdd")
+    public String userGuideAdd(Model model,@Valid UserGuideDTO userGuideDTO, BindingResult bindingResult, @RequestParam(name = "guideFile") MultipartFile guideFile){
+        if (bindingResult.hasErrors()) {
+            return "userGuide/userGuideForm";
+        }
+        try {
+            supportService.userGuideAdd(userGuideDTO,guideFile);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "유저가이드 등록 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
+
+    // 유저 가이드 수정 페이지
+    @GetMapping("/admin/userGuide/{userGuideId}")
+    public String userGuideUpdateView(@PathVariable Long userGuideId, Model model){
+        try {
+        List<ProductCategoryDto> categories = categoryService.findAll();
+        UserGuideDTO userGuideDTO = supportService.findByUserGuideId(userGuideId);
+
+        model.addAttribute("categories",categories);
+        model.addAttribute("userGuideDTO",userGuideDTO);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "해당 유저 가이드를 찾을 수 없습니다.");
+        }
+        return "userGuide/userGuideForm";
+    }
+
+    // 유저 가이드 수정
+    @PostMapping("/admin/userGuide/{userGuideId}")
+    public String userGuideUpdate(UserGuideDTO userGuideDTO, @RequestParam(name = "guideFile") MultipartFile guideFile, Model model) throws IOException {
+        try {
+            supportService.userGuideUpdate(userGuideDTO,guideFile);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "유저가이드 수정 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
+    // 비디오 삭제 (어드민)
+    @PostMapping(value = "/admin/userGuide/delete/{userGuideId}")
+    public String videoDelete(@PathVariable Long userGuideId, UserGuideDTO userGuideDTO, Model model) {
+        try {
+            supportService.userGuideDelete(userGuideDTO);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "비디오 수정 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
+
     // Catalog List view
     @GetMapping(value = "/support/catalog")
     public String catalogList(Model model){
@@ -79,13 +139,15 @@ public class SupportController {
     // 비디오 수정 페이지
     @GetMapping("/admin/video/{videoId}")
     public String videoUpdateView(@PathVariable Long videoId, Model model){
+        try {
+            List<ProductCategoryDto> categories = categoryService.findAll();
+            VideoBoardDTO videoBoard = supportService.findByVideoId(videoId);
+            model.addAttribute("categories",categories);
+            model.addAttribute("videoBoardDTO",videoBoard);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "해당 비디오를 찾을 수 없습니다.");
+        }
 
-        List<ProductCategoryDto> categories = categoryService.findAll();
-
-        VideoBoardDTO videoBoard = supportService.findByVideoId(videoId);
-
-        model.addAttribute("categories",categories);
-        model.addAttribute("videoBoardDTO",videoBoard);
         return "video/videoForm";
     }
 

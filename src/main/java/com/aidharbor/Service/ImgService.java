@@ -1,24 +1,17 @@
 package com.aidharbor.Service;
 
 import com.aidharbor.DTO.Image.DisplayedImageDTO;
-import com.aidharbor.DTO.PartnersDTO;
 import com.aidharbor.DTO.Product.ProductDTO;
-import com.aidharbor.Entity.MainBanner;
-import com.aidharbor.Entity.Partners;
-import com.aidharbor.Entity.Product;
-import com.aidharbor.Entity.ProductCategory;
+import com.aidharbor.Entity.*;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 @Service
@@ -42,13 +35,13 @@ public class ImgService {
                 .savedPath(imgUrl)
                 .build();
     }
-
+    @Transactional
     public void imgProductDelete(Product product) throws IOException {
         String titleUrl = imgSubString(product.getTitleImgUrl());
         String content = product.getContent();
 
         DeleteConvert(content);
-        s3Uploader.deleteFile(titleUrl);
+        s3Uploader.deleteImgFile(titleUrl);
     }
 
     public String imgSubString(String url){
@@ -64,7 +57,7 @@ public class ImgService {
         for (Element img : body.select("img")) {
             String src = img.attr("src"); // 현재 src 속성 값 가져오기
             String fileName = src.substring(src.lastIndexOf('/') + 1); // '/' 뒤의 문자열(파일 이름) 추출
-            s3Uploader.deleteFile(fileName);
+            s3Uploader.deleteImgFile(fileName);
         }
     }
 
@@ -83,19 +76,17 @@ public class ImgService {
       return content;
     }
 
-    public void imgBannerDelete(MainBanner mainBanner) throws IOException {
-        String titleUrl = imgSubString(mainBanner.getMainBannerImg());
+    @Transactional
+    public void imgDelete(String imgUrl) throws IOException {
+        String titleUrl = imgSubString(imgUrl);
 
-        s3Uploader.deleteFile(titleUrl);
+        s3Uploader.deleteImgFile(titleUrl);
     }
 
-    public void imgCategoryDelete(ProductCategory productCategory) throws IOException {
-        String titleUrl = imgSubString(productCategory.getCategoryImg());
+    @Transactional
+    public void pdfDelete(String fileUrl) throws IOException {
+        String titleUrl = imgSubString(fileUrl);
 
-        s3Uploader.deleteFile(titleUrl);
-    }
-    public void imgLogoDelete(Partners partners) throws IOException {
-        String Url = imgSubString(partners.getPartnerImg());
-        s3Uploader.deleteFile(Url);
+        s3Uploader.deletePdfFile(titleUrl);
     }
 }

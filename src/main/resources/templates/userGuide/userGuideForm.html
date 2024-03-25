@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 부트스트랩 CSS 추가 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">  <!-- Core theme CSS (includes Bootstrap)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+</head>
+<script th:inline="javascript">
+    var errorMessage = /*[[${errorMessage}]]*/ '';
+    if (!errorMessage) {
+    }else if(errorMessage !== '') {
+        alert(errorMessage);
+        window.location.href = '/admin';
+    }
+
+
+</script>
+<script>
+    $(document).ready(function() {
+        $('#Video').removeClass('text-white').addClass('active');
+    });
+
+    function change(element) {
+        var categoryId = $(element).val();
+
+        $.ajax({
+            url: '/category/' + categoryId,
+            type: 'GET',
+            success: function(data) {
+                var parentCategorySelect = $('#parentProductCategory');
+                parentCategorySelect.empty();
+
+                $.each(data, function(index, parentProductCategory) {
+                    parentCategorySelect.append(new Option(parentProductCategory.name, parentProductCategory.id));
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("AJAX Error: ", textStatus);
+            }
+        });
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('preview').src = "";
+        }
+    }
+</script>
+<body>
+
+<div class="d-flex bg-light vh-100">
+    <th:block th:replace="~{fragments/adminSidebar :: adminSidebarFragment}"></th:block>
+    <div class="container-xxl mb-4 d-flex justify-content-center" style="overflow: hidden">
+        <form  role="form" method="post" enctype="multipart/form-data"th:object="${userGuideDTO}" style="overflow: hidden;">
+
+            <p class="h2">
+                유저 가이드 등록
+            </p>
+
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-group d-flex mb-3">
+                <select class="form-select w-50" id="Category" onchange="change(this)">
+                    <option selected>카테고리 선택</option>
+                    <option th:each="productCategory : ${categories}" th:value="${productCategory.id}" th:text="${productCategory.name}"></option>
+                </select>
+                <select class="form-select w-50" id="parentProductCategory" th:field="*{productCategory}">
+                    <option th:field="*{productCategory}" th:value="${userGuideDTO?.productCategory?.id}" th:text="${userGuideDTO?.productCategory?.name}"></option>
+                </select>
+            </div>
+            <p th:unless="${#strings.isEmpty(userGuideDTO.id)}">적용되어있는 카테고리 : <span th:field="*{productCategory}" th:value="${userGuideDTO.productCategory.id}" th:text="${userGuideDTO.productCategory.name}"></span></p>
+            <p th:if="${#fields.hasErrors('productCategory')}" th:errors="*{productCategory}" class="fieldError">Incorrect data</p>
+
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">제목</span>
+                <input type="text" th:field="*{title}" class="form-control" placeholder="제목을 입력해주세요.">
+            </div>
+            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect data</p>
+
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" name="guideFile" onchange="readURL(this)">
+                <input type="hidden" th:field="*{guideURL}" class="form-control" placeholder="이미지">
+            </div>
+
+
+            <p th:unless="${#strings.isEmpty(userGuideDTO.id)}">적용되어있는 파일 : <span th:field="*{guideURL}" th:text="${userGuideDTO.guideURL}"></span></p>
+            <p th:if="${#fields.hasErrors('guideURL')}" th:errors="*{guideURL}" class="fieldError">Incorrect data</p>
+
+
+            <div th:if="${#strings.isEmpty(userGuideDTO.id)}" style="text-align: center">
+                <button th:formaction="@{/admin/userGuideAdd}" type="submit" class="btn btn-primary">저장</button>
+            </div>
+
+            <div th:unless="${#strings.isEmpty(userGuideDTO.id)}" style="text-align: center">
+                <button th:formaction="@{'/admin/userGuide/' + ${userGuideDTO.id} }" type="submit" class="btn btn-primary">수정</button>
+                <button th:formaction="@{'/admin/userGuide/delete/' + ${userGuideDTO.id}}" type="submit" class="btn btn-danger">삭제</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+<script>
+</script>
+</body>
+</html>
