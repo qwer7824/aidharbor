@@ -6,11 +6,13 @@
     <title>VideoList</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="/js/nav.js"></script>
 <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/navbar.css">
 <link rel="stylesheet" href="/css/top.css">
 <link rel="stylesheet" href="/css/videoList.css">
+
 
 <body>
 <th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
@@ -24,7 +26,7 @@
         <div class="category-menu">
             <a class="category-slot" href="/support/userGuide">User guide</a>
             <a class="category-slot categoryActive" href="/support/videoList">Video</a>
-            <a class="category-slot" href="#">Catalog</a>
+            <a class="category-slot" href="/support/catalog">Catalog</a>
         </div>
     </div>
 
@@ -66,13 +68,6 @@
         modal.style.display = 'block';
     }
 
-    // 모달 닫기 함수
-    window.onclick = function(event) {
-        let modal = document.getElementById('Modal');
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    }
     function closeModal() {
         let modal = document.getElementById('Modal');
         modal.style.display = 'none';

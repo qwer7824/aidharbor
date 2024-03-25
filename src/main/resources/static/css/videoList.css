@@ -51,6 +51,31 @@
     font-size: 40px;
 }
 
+@media screen and (max-width: 1024px) {
+    .videoImg{
+        width: 343px;
+    }
+    .video-Card{
+        padding: 40px 9px 60px 9px;
+    }
+    .video-TextBox{
+        width: 290px;
+    }
+    .modal-content{
+        width: 80%;
+        margin: 100% auto;
+    }
+    iframe{
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .videoImg{
+        width: 300px;
+    }
+}
+
 @media (min-width: 1920px) {
     .videoImg{
         width: 513px;

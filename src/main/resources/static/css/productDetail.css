@@ -1,42 +1,82 @@
-.Product-box{
-    padding:  60px 0px 100px 0px;
-}
-.Product-TitleBox{
-    background-color: #F8FAFC;
-    display: flex;
-    gap: 60px;
-}
-.Product-sub{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 20px;
-    padding: 100px 0px 0px 0px;
-}
-.text-category{
-    font-size: 18px;
-    color: #F43F5E;
-    font-weight: 700;
+ .Product-box {
+        padding: 60px 0px 100px 0px;
+    }
 
-}
-.text-title{
-    font-size: 48px;
-    color: #334155;
-    font-weight: 700;
+    .Product-TitleBox {
+        background-color: #F8FAFC;
+        display: flex;
+        gap: 60px;
+    }
 
-}
-.text-sub{
-    font-size: 20px;
-    color: #64748B;
-    font-weight: 400;
+    .Product-sub {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+        padding: 100px 0px 0px 0px;
+    }
 
-}
+    .text-category {
+        font-size: 18px;
+        color: #F43F5E;
+        font-weight: 700;
 
-.Product-content{
-    width: 1200px;
-    box-sizing: border-box;
-    margin: 0 auto;
-}
+    }
+
+    .text-title {
+        font-size: 48px;
+        color: #334155;
+        font-weight: 700;
+
+    }
+
+    .text-sub {
+        font-size: 20px;
+        color: #64748B;
+        font-weight: 400;
+
+    }
+
+    .Product-content {
+        box-sizing: border-box;
+        margin: 0 auto;
+    }
+
+    .Product-Img {
+        width: 450px;
+        height: 500px;
+    }
+
+ @media screen and (max-width: 1024px) {
+     .product-Menu{
+         font-size: 48px;
+     }
+     .red-dot{
+         font-size: 48px;
+     }
+     .category-slot{
+         font-size: 18px;
+         padding: 16px 12px 16px 12px;
+     }
+     .Product-TitleBox{
+         flex-direction: column;
+     }
+     .Product-sub {
+         display: flex;
+         flex-direction: column;
+         width: auto;
+         gap: 20px;
+         padding: 20px 16px 20px 16px;
+     }
+     .Product-box {
+         padding: 60px 0px 0px 0px;
+     }
+     .Product-Img{
+         width: 100%;
+         height: auto;
+     }
+
+ }
 
 @media (min-width: 1920px) {
     .text-category{
@@ -49,7 +89,4 @@
         font-size: 26px;
     }
 
-    .Product-content{
-        width: 1600px;
-    }
 }

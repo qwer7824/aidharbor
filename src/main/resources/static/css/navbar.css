@@ -10,6 +10,10 @@ body {
     margin: 0;
 }
 
+.mobile{
+    display: none;
+}
+
 .logoImg{
     width: 175px; height: 51px;
 }
@@ -23,6 +27,7 @@ body {
     top:0px;
     box-sizing: border-box;
     padding: 10px 20px 10px 20px;
+    z-index: 1;
 }
 .menu-container {
     display: inline-block;
@@ -98,4 +103,32 @@ body {
 .red-dot{
     color:#F43F5E;
     font-size: 55px;
+}
+
+@media screen and (max-width: 1280px) {
+    .mobile{
+        display: block;
+    }
+    .mobile-menu{
+        height: 100vh;
+        width: 300px;
+        right: 0;
+        position: absolute;
+        top: 0;
+        z-index: 9999;
+        background-color: #FFFFFF;
+    }
+    .mobile-close{
+        display: flex;
+        padding: 8px 16px 8px 16px;
+        justify-content: flex-end;
+        border-bottom: 1px solid #E2E8F0;
+    }
+    .logoImg{
+        width: 124px;
+        height: 40px;
+    }
+    .menu-container{
+        display: none;
+    }
 }
