@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calendar of Events</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="/js/nav.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/top.css">
+<link rel="stylesheet" href="/css/event.css">
+
+
+<body>
+<th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
+
+<div class="product-container">
+    <div class="category-name">
+        <h1 class="product-Menu">Calendar of Events</h1><span class="red-dot">.</span>
+    </div>
+    <a class="big-name">About</a>
+    <div class="Category-List">
+        <div class="category-menu">
+            <a class="category-slot" href="/about">About</a>
+            <a class="category-slot categoryActive" href="/about/CalendarOfEvents">Calendar of Events</a>
+            <a class="category-slot" href="/about/partners">Partners</a>
+        </div>
+    </div>
+
+    <div class="event-List">
+        <div class="event-Card" th:each="event : ${eventList}">
+                <div class="event-ImgBox" th:if="${event.titleImgUrl}">
+                    <img class="event-img" th:src="${event.titleImgUrl}"/>
+                </div>
+                <div class="event-TextBox">
+                    <div class="event-titleBox">
+                        <a class="event-category" th:text="${event.eventCategory}"></a>
+                        <a class="event-title" th:text="${event.title}"></a>
+                    </div>
+                    <div>
+                        <a class="event-content" th:unless="${event.titleImgUrl}" th:utext="${event.content}"></a>
+                    </div>
+                </div>
+            <a class="event-date" th:text="${#temporals.format(event.createdAt, 'yyyy-MM-dd')}"></a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

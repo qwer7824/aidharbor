@@ -13,10 +13,9 @@
     <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/main.css">
-</head>
-<style>
+    <link rel="stylesheet" href="/css/event.css">
 
-</style>
+</head>
 <body>
 <th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
 
@@ -70,11 +69,25 @@
         <div class="CalendarFirst">
             <p class="CalendarEventsText">Calendar of</p>
             <p class="CalendarEventsText">Events</p>
-            <button class="CalendarEventsBtn">More View</button>
+            <button class="CalendarEventsBtn"><a href="/about/CalendarOfEvents">More View</a></button>
         </div>
-            <div class="CalenderMenu"></div>
-            <div class="CalenderMenu"></div>
-            <div class="CalenderMenu"></div>
+        <div class="Calendar-Event">
+        <div class="event-Card" th:each="event : ${Top3List}">
+            <div class="event-ImgBox" th:if="${event.titleImgUrl}">
+                <img class="event-img" th:src="${event.titleImgUrl}"/>
+            </div>
+            <div class="event-TextBox">
+                <div class="event-titleBox">
+                    <a class="event-category" th:text="${event.eventCategory}"></a>
+                    <a class="event-title" th:text="${event.title}"></a>
+                </div>
+                <div class="event-contentBox" th:unless="${event.titleImgUrl}">
+                    <a class="event-content" th:utext="${event.content}"></a>
+                </div>
+            </div>
+            <a class="event-date" th:text="${#temporals.format(event.createdAt, 'yyyy-MM-dd')}"></a>
+        </div>
+        </div>
     </div>
 </div>
 
