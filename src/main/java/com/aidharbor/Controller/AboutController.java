@@ -1,6 +1,7 @@
 package com.aidharbor.Controller;
 
 import com.aidharbor.DTO.Category.ProductCategoryDto;
+import com.aidharbor.DTO.EventDTO;
 import com.aidharbor.DTO.PartnersDTO;
 import com.aidharbor.Service.AboutService;
 import com.aidharbor.Service.CategoryService;
@@ -35,6 +36,35 @@ public class AboutController {
         model.addAttribute("partnerList", partnersDTOList);
         model.addAttribute("categories", categories);
         return "about/partners";
+    }
+
+    // CalendarOfEventsView
+    @GetMapping(value = "/about/CalendarOfEvents")
+    public String CalendarOfEventsView(Model model){
+        List<ProductCategoryDto> categories = categoryService.findAll();
+        List<EventDTO> EventListDTO = aboutService.CalendarOfEventList();
+
+        model.addAttribute("eventList", EventListDTO);
+        model.addAttribute("categories", categories);
+        return "about/event";
+    }
+
+    @GetMapping(value = "/admin/CalendarOfEventsAdd")
+    public String CalendarOfEventsAddView(EventDTO eventDTO,Model model){
+
+        model.addAttribute("eventDTO", eventDTO);
+        return "admin/eventForm";
+    }
+
+    @PostMapping(value = "/admin/CalendarOfEvents/new")
+    public String CalendarOfEventsAdd(EventDTO eventDTO,Model model) {
+        try {
+            aboutService.CalendarOfEventsAdd(eventDTO);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "이벤트 등록 중 에러가 발생하였습니다.");
+            return "admin/eventForm";
+        }
+        return "redirect:/admin";
     }
 
     // 파트너 로고 생성 페이지
@@ -88,5 +118,6 @@ public class AboutController {
         }
         return "redirect:/admin";
     }
+
 
 }
