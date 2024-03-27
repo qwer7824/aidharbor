@@ -266,7 +266,7 @@ body{
     .Calendar-Event{
         width: 100%;
         flex-wrap: nowrap;
-        overflow: scroll;
+        overflow-x: scroll;
     }
     .event-img{
         width: 275px !important;
