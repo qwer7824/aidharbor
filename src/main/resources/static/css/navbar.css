@@ -5,6 +5,24 @@ p:hover { text-decoration:none !important }
 h4 { text-decoration:none !important }
 h4:hover { text-decoration:none !important }
 
+html,body{
+    height: 100%;
+}
+.product-container{
+    height: auto;
+    min-height: 100%;
+}
+
+.footer{
+    background-color: #F8FAFC;
+    padding: 20px 190px 20px 190px;
+    position: relative;
+    transform: translateY(100%);
+}
+.footer a{
+font-size: 14px;
+}
+
 body {
  font-family: SUITE;
     margin: 0;
@@ -103,6 +121,12 @@ body {
 .red-dot{
     color:#F43F5E;
     font-size: 55px;
+}
+@media screen and (max-width: 1024px) {
+    .footer{
+        padding: 20px 10px 20px 50px;
+    }
+
 }
 
 @media screen and (max-width: 1280px) {
