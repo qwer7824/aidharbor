@@ -22,7 +22,7 @@
 <div class="carousel_main">
     <div class="carousel_wrapper">
         <div class="carousel_slide" th:each="mainBanner : ${mainBannerDTO}" th:attr="data-title=${mainBanner.title},data-subtitle=${mainBanner.subtitle}">
-            <img th:src="${mainBanner.mainBannerImg}" />
+            <img style="object-fit: fill" th:src="${mainBanner.mainBannerImg}" />
         </div>
     </div>
 

@@ -197,7 +197,7 @@ body{
 .carousel-Box{
     position: absolute;
     top: 100px;
-    left: 50px;
+    left: 0px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -205,10 +205,12 @@ body{
     border-radius: 15px;
     place-items: center;
     text-align: center;
+    width: 100%;
 }
 .carousel-TextBox{
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 .carousel-title{
     font-weight: 700;
@@ -296,6 +298,12 @@ body{
         justify-content: normal;
         overflow: scroll;
         width: 100%;
+    }
+    .carousel-title{
+        font-size: 35px;
+    }
+    .carousel-body{
+        font-size: 25px;
     }
 }
 
