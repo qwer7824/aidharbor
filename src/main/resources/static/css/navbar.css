@@ -155,4 +155,50 @@ body {
     .menu-container{
         display: none;
     }
+    ul li{
+        list-style: none;
+    }
+    #menu {
+        color:black;
+        margin:0 auto;
+    }
+    .menu-body {
+        color:  #64748B;
+        font-weight: 500;
+        font-size: 16px;
+    }
+    .menu-top{
+        font-size: 20px;
+        font-weight: 700;
+        color: #334155;
+    }
+    .up-btn{
+        display: none;
+    }
+    #menu > ul > li > ul {
+        display:none;
+        margin: 0;
+        padding: 0;
+    }
+    #menu > ul > li:hover > ul {
+        gap: 16px;
+        padding: 0px 32px 20px 32px;
+        display: flex;
+        flex-direction: column;
+    }
+    #menu > ul > li:hover .menu-tap a {
+        color: #F43F5E;
+    }
+    #menu > ul > li:hover .up-btn {
+        display: block;
+    }
+    #menu > ul > li:hover .down-btn {
+        display: none;
+    }
+    .menu-tap{
+        padding:   20px 24px 20px 24px;
+        display: flex;
+        justify-content: space-between;
+    }
+
 }
