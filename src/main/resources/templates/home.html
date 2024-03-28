@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="/css/event.css">
 
 </head>
+<style>
+
+</style>
 <body>
 <th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
 
@@ -69,7 +72,7 @@
         <div class="CalendarFirst">
             <p class="CalendarEventsText">Calendar of</p>
             <p class="CalendarEventsText">Events</p>
-            <button class="CalendarEventsBtn"><a href="/about/CalendarOfEvents">More View</a></button>
+            <a href="/about/CalendarOfEvents"><button class="CalendarEventsBtn">More View</button></a>
         </div>
         <div class="Calendar-Event">
         <div class="event-Card" th:each="event : ${Top3List}">
