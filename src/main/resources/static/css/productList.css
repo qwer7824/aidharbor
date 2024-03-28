@@ -56,6 +56,9 @@
     .product-subBox{
         width: 100%;
     }
+    .product-List{
+        justify-content: center;
+    }
 }
 
 @media (min-width: 1920px) {
