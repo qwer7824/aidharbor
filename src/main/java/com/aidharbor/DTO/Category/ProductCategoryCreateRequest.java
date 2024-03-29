@@ -26,6 +26,8 @@ public class ProductCategoryCreateRequest {
 
     private Integer parentId;
 
+    private String categorySubTitle;
+
     private static ModelMapper modelMapper = new ModelMapper();
 
     // Entity -> DTO

@@ -29,23 +29,28 @@ public class ProductCategory {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ProductCategory parent;
 
+    private String categorySubTitle;
+
     private String categoryImg;
 
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductCategory> children = new ArrayList<>();
 
-    public ProductCategory(String name, ProductCategory parent,String categoryImg) {
+    public ProductCategory(String name, ProductCategory parent,String categoryImg,String categorySubTitle) {
         this.name = name;
         this.parent = parent;
         this.categoryImg = categoryImg;
+        this.categorySubTitle = categorySubTitle;
     }
 
     public void CategoryUpdate(ProductCategoryCreateRequest req) {
         this.name = req.getName();
+        this.categorySubTitle = req.getCategorySubTitle();
     }
 
     public void updateImgUrl(ProductCategoryCreateRequest req, String storedFileName) {
         this.name = req.getName();
         this.categoryImg = storedFileName;
+        this.categorySubTitle = req.getCategorySubTitle();
     }
 }

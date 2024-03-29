@@ -70,6 +70,7 @@ public class CategoryService {
         ProductCategory productCategory = ProductCategory.builder()
                 .name(req.getName())
                 .parent(parent)
+                .categorySubTitle(req.getCategorySubTitle())
                 .categoryImg(storedFileName)
                 .build();
 
