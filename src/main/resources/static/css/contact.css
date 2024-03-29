@@ -52,11 +52,48 @@
     place-self: center;
 }
 
+/* input 숨겨준다 */
+input#check_btn{
+    display:none;
+}
+
+input#check_btn + label{
+    cursor:pointer;
+}
+
+input#check_btn + label > span{
+    vertical-align: middle;
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+input#check_btn + label:before{
+    content:"";
+    display:inline-block;
+    width:17px;
+    height:17px;
+    border:2px solid #F47C7C;
+    border-radius: 4px;
+    vertical-align:middle;
+}
+
+/* label:before에 체크 된 상태 CSS */
+input#check_btn:checked + label:before{
+    content:"";
+    background-color:#F47C7C;
+    border-color:#F47C7C;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
 @media screen and (max-width: 1280px) {
     .sendBtn{
         width: 150px;
         height: 48px;
         font-size: 16px;
+    }
+    .name-flex{
+        gap: 10px;
     }
 }
 
