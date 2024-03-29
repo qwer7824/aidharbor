@@ -49,6 +49,18 @@ public class AboutController {
         return "about/event";
     }
 
+    // 캘리던 및 이벤트 디테일 뷰
+    @GetMapping(value = "/about/CalendarOfEvents/{eventId}")
+    public String CalendarOfEventsDetailView(@PathVariable Long eventId, Model model){
+        List<ProductCategoryDto> categories = categoryService.findAll();
+        EventDTO EventDTO = aboutService.CalenderOfEventDetail(eventId);
+
+        model.addAttribute("event", EventDTO);
+        model.addAttribute("categories", categories);
+        return "about/eventDetail";
+    }
+
+    // 켈린더 및 이벤트 추가 페이지
     @GetMapping(value = "/admin/CalendarOfEventsAdd")
     public String CalendarOfEventsAddView(EventDTO eventDTO,Model model){
 
@@ -56,6 +68,7 @@ public class AboutController {
         return "admin/eventForm";
     }
 
+    // 캘린더 및 이벤트 추가
     @PostMapping(value = "/admin/CalendarOfEvents/new")
     public String CalendarOfEventsAdd(EventDTO eventDTO,Model model) {
         try {

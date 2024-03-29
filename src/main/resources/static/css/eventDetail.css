@@ -1,0 +1,62 @@
+.eventDetail-Box {
+    padding: 60px 0px 100px 0px;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.eventDetail-Title {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding:  0px 20px 0px 20px;
+}
+.eventDetail-btnBox{
+    align-self: center;
+}
+.eventDetail-ContentBox{
+    padding:  0px 20px 0px 20px;
+}
+.eventDetail-btn{
+    background-color: #334155;
+    color: white;
+    padding: 14px 40px 14px 40px;
+    width: 150px;
+    height: 50px;
+    font-size: 19px;
+    border-radius: 6px;
+}
+.titleText{
+    color: #1E293B;
+    font-size: 24px;
+    font-weight: 700;
+}
+.titleDate{
+    color: #94A3B8;
+    font-weight: 400;
+    font-size: 14px;
+}
+@media screen and (max-width: 1024px) {
+    .product-Menu {
+        font-size: 32px !important;
+    }
+    .red-dot {
+        font-size: 32px !important;
+    }
+    .eventDetail-Content img{
+        width: 100% !important;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .titleText{
+        font-size: 30px;
+    }
+    .titleDate{
+        font-size: 20px;
+    }
+    .eventDetail-Content{
+        font-size: 24px;
+    }
+
+}

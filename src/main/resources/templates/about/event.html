@@ -15,6 +15,19 @@
 
 
 <body>
+<script th:inline="javascript">
+    var errorMessage = /*[[${errorMessage}]]*/ '';
+    if (!errorMessage) {
+    }else if(errorMessage !== '') {
+        alert(errorMessage);
+        window.location.href = '/admin';
+    }
+
+    function redirectToEventDetail(element) {
+        var eventId = element.getAttribute('data-eventId');
+        window.location.href = '/about/CalendarOfEvents/' + eventId;
+    }
+</script>
 <th:block th:replace="~{fragments/navbar :: navbarFragment}"></th:block>
 
 <div class="product-container">
@@ -31,11 +44,11 @@
     </div>
 
     <div class="event-List">
-        <div class="event-Card" th:each="event : ${eventList}">
-                <div class="event-ImgBox" th:if="${event.titleImgUrl}">
-                    <img class="event-img" th:src="${event.titleImgUrl}"/>
+        <div class="event-Card" th:each="event : ${eventList}" th:attr="data-eventId=${event.id}" onclick="redirectToEventDetail(this)">
+            <div class="event-ImgBox" th:if="${event.titleImgUrl}">
+                    <img class="event-img"  th:src="${event.titleImgUrl}"/>
                 </div>
-                <div class="event-TextBox">
+            <div class="event-TextBox">
                     <div class="event-titleBox">
                         <a class="event-category" th:text="${event.eventCategory}"></a>
                         <a class="event-title" th:text="${event.title}"></a>

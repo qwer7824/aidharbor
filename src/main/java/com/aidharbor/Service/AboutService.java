@@ -85,6 +85,13 @@ public class AboutService {
                 .collect(Collectors.toList());
     }
 
+    public EventDTO CalenderOfEventDetail(Long eventId){
+        Event event = eventsRepository.findById(eventId).orElseThrow(null);
+
+        EventDTO eventDTO = EventDTO.of(event);
+        return eventDTO;
+    }
+
     private EventDTO convertToEventDTO(Event event) {
         EventDTO eventDTO = modelMapper.map(event, EventDTO.class);
 
