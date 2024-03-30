@@ -28,18 +28,17 @@ public class ContentController {
     @GetMapping(value = "/contact")
     public String contactView(Model model){
 
-        // TODO : 미구현 (프론트 동의)
         List<ProductCategoryDto> categories = categoryService.findAll();
         model.addAttribute("categories",categories);
         model.addAttribute("contactDTO",new ContactDTO());
-        return "contact";
+        return "contact/contact";
     }
 
     // 문의 넣기
     @PostMapping(value = "/contactAdd")
     public String contactAdd(@Valid ContactDTO contactDTO,BindingResult bindingResult, Model model) throws MethodArgumentNotValidException, MessagingException, UnsupportedEncodingException {
         if (bindingResult.hasErrors()) {
-            return "contact";
+            return "contact/contact";
         }
         try{
             contactService.contactAdd(contactDTO);
@@ -47,7 +46,7 @@ public class ContentController {
         }catch (Exception e){
             model.addAttribute("errorMessage", "An error occurred");
         }
-        return "contact";
+        return "redirect:/contact";
     }
 
 }

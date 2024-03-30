@@ -1,8 +1,11 @@
 package com.aidharbor.Entity;
 
 
+import com.aidharbor.DTO.CatalogDTO;
+import com.aidharbor.DTO.UserGuideDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
@@ -12,6 +15,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Builder
 public class Catalog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,5 +32,18 @@ public class Catalog {
     @JoinColumn(name = "category_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ProductCategory productCategory;
+
+
+    public void updateFile(CatalogDTO catalogDTO, String storedFileName) {
+        this.title = catalogDTO.getTitle();
+        this.productCategory = catalogDTO.getProductCategory();
+        this.catalogURL = storedFileName;
+    }
+
+    public void updateCatalog(CatalogDTO catalogDTO) {
+        this.title = catalogDTO.getTitle();
+        this.productCategory = catalogDTO.getProductCategory();
+        this.catalogURL = catalogDTO.getCatalogURL();
+    }
 
 }

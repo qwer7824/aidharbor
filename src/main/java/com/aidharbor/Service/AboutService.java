@@ -1,10 +1,12 @@
 package com.aidharbor.Service;
 
+import com.aidharbor.DTO.Contact.ContactDTO;
 import com.aidharbor.DTO.EventDTO;
 import com.aidharbor.DTO.PartnersDTO;
 import com.aidharbor.DTO.Product.ProductDTO;
 import com.aidharbor.Entity.Event;
 import com.aidharbor.Entity.Partners;
+import com.aidharbor.Entity.Product;
 import com.aidharbor.Repository.EventsRepository;
 import com.aidharbor.Repository.PartnersRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +16,12 @@ import org.jsoup.nodes.Element;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +34,7 @@ public class AboutService {
     private final ModelMapper modelMapper;
     private final ImgService imgService;
 
+    @Transactional
     public void partnerAdd(MultipartFile partnerImg) throws IOException {
         String storedFileName = s3Uploader.upload(partnerImg, "images");
 
@@ -58,6 +63,7 @@ public class AboutService {
         return dto;
     }
 
+    @Transactional
     public void partnerUpdate(PartnersDTO partnersDTO, MultipartFile img) throws IOException {
 
         Partners partners = partnersRepository.findById(partnersDTO.getId()).orElse(null);
@@ -72,6 +78,8 @@ public class AboutService {
         partnersRepository.save(partners);
     }
 
+
+    @Transactional
     public void partnersDelete(Long partnersId) throws IOException {
         Partners partners = partnersRepository.findById(partnersId).orElseThrow(null);
         partnersRepository.delete(partners);
@@ -82,6 +90,7 @@ public class AboutService {
         List<Event> eventList = eventsRepository.findAll();
         return eventList.stream()
                 .map(this::convertToEventDTO)
+                .sorted(Comparator.comparing(EventDTO::getCreatedAt).reversed())
                 .collect(Collectors.toList());
     }
 
@@ -110,6 +119,24 @@ public class AboutService {
 
         return eventDTO;
     }
+    @Transactional
+    public void CalendarOfEventUpdate(EventDTO eventDTO) {
+
+        Event event = eventsRepository.findById(eventDTO.getId()).orElseThrow(null);
+
+        event.updateEvent(eventDTO);
+
+        eventsRepository.save(event);
+    }
+
+    @Transactional
+    // 상품 삭제
+    public void CalendarOfEventDelete(Long eventId) throws IOException {
+        Event event = eventsRepository.findById(eventId).orElseThrow(null);
+        String content = event.getContent();
+        eventsRepository.delete(event);
+        imgService.DeleteConvert(content);
+    }
 
     public void CalendarOfEventsAdd(EventDTO eventDTO) {
 
@@ -128,4 +155,5 @@ public class AboutService {
                 .map(this::convertToEventDTO)
                 .collect(Collectors.toList());
     }
+
 }

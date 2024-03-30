@@ -1,5 +1,7 @@
 package com.aidharbor.Entity;
 
+import com.aidharbor.DTO.EventDTO;
+import com.aidharbor.DTO.Product.ProductDTO;
 import com.aidharbor.Entity.Enum.EventCategory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,4 +28,11 @@ public class Event extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EventCategory eventCategory;
+
+
+    public void updateEvent(EventDTO eventDTO) {
+        this.title = eventDTO.getTitle();
+        this.content = eventDTO.getContent();
+        this.eventCategory = eventDTO.getEventCategory();
+    }
 }

@@ -100,7 +100,7 @@ public class SupportService {
         }
 
         @Transactional
-    public void videoDelete(VideoBoardDTO videoBoardDTO) {
+        public void videoDelete(VideoBoardDTO videoBoardDTO) {
 
         VideoBoard videoBoard = videoBoardRepository.findById(videoBoardDTO.getId()).orElse(null);
 
@@ -149,5 +149,48 @@ public class SupportService {
         imgService.pdfDelete(userGuide.getGuideURL());
 
         userGuideRepository.delete(userGuide);
+    }
+
+    @Transactional
+    public void catalogAdd(CatalogDTO catalogDTO, MultipartFile catalogFile) throws IOException {
+        String storedFileName = s3Uploader.upload(catalogFile, "pdf");
+
+        Catalog catalog = Catalog.builder()
+                .productCategory(catalogDTO.getProductCategory())
+                .title(catalogDTO.getTitle())
+                .catalogURL(storedFileName)
+                .build();
+
+        catalogRepository.save(catalog);
+    }
+
+    public CatalogDTO findByCatalog(Long catalogId) {
+        Catalog catalog = catalogRepository.findById(catalogId).orElseThrow(null);
+        CatalogDTO dto = modelMapper.map(catalog, CatalogDTO.class);
+        return dto;
+    }
+
+    @Transactional
+    public void catalogUpdate(CatalogDTO catalogDTO, MultipartFile catalogFile) throws IOException {
+        Catalog catalog = catalogRepository.findById(catalogDTO.getId()).orElseThrow(null);
+
+        if (!catalogFile.isEmpty()) {
+            String url = imgService.imgSubString(catalogDTO.getCatalogURL());
+            s3Uploader.deleteFile(url);
+            String storedFileName = s3Uploader.upload(catalogFile, "pdf");
+            catalog.updateFile(catalogDTO,storedFileName);
+        } else {
+            catalog.updateCatalog(catalogDTO);
+        }
+        catalogRepository.save(catalog);
+
+    }
+
+    @Transactional
+    public void catalogDelete(CatalogDTO catalogDTO) throws IOException {
+        Catalog catalog = catalogRepository.findById(catalogDTO.getId()).orElse(null);
+        imgService.pdfDelete(catalog.getCatalogURL());
+
+        catalogRepository.delete(catalog);
     }
 }

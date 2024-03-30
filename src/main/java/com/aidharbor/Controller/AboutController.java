@@ -67,9 +67,38 @@ public class AboutController {
         model.addAttribute("eventDTO", eventDTO);
         return "admin/eventForm";
     }
+    // 켈린더 및 이벤트 어드민 리스트 페이지
+    @GetMapping(value = "/admin/CalendarOfEvent")
+    public String CalendarOfEventsListView(Model model){
+        List<EventDTO> eventDTO = aboutService.CalendarOfEventList();
+
+        model.addAttribute("eventDTO", eventDTO);
+        return "admin/eventList";
+    }
+
+    // 캘린더 및 이벤트 수정 페이지
+    @GetMapping(value = "/admin/event/{eventId}")
+    public String CalenderOfEventsUpdateAdminPage(@PathVariable Long eventId, Model model) {
+
+        EventDTO eventDTO = aboutService.CalenderOfEventDetail(eventId);
+
+        model.addAttribute("eventDTO", eventDTO);
+        return "admin/eventForm";
+    }
+
+    // 파트너 로고 수정 (어드민)
+    @PostMapping(value = "/admin/event/{eventId}")
+    public String CalenderOfEventsUpdate(@PathVariable String eventId, EventDTO eventDTO, Model model) {
+        try {
+            aboutService.CalendarOfEventUpdate(eventDTO);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "행사일정 수정 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
 
     // 캘린더 및 이벤트 추가
-    @PostMapping(value = "/admin/CalendarOfEvents/new")
+    @PostMapping(value = "/admin/CalendarOfEventsAdd")
     public String CalendarOfEventsAdd(EventDTO eventDTO,Model model) {
         try {
             aboutService.CalendarOfEventsAdd(eventDTO);
@@ -79,13 +108,31 @@ public class AboutController {
         }
         return "redirect:/admin";
     }
+    @PostMapping(value = "/admin/event/delete/{eventId}")
+    public String partnersDelete(@PathVariable Long eventId, Model model) {
+        try {
+            aboutService.CalendarOfEventDelete(eventId);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "행사일정 삭제 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
 
     // 파트너 로고 생성 페이지
-    @GetMapping(value = "/admin/partners")
+    @GetMapping(value = "/admin/partnerAdd")
     public String partnersAdminPage(PartnersDTO partnersDTO, Model model) {
 
         model.addAttribute("partnersDTO", partnersDTO);
-        return "admin/partnersForm";
+        return "partner/partnersForm";
+    }
+    // 파트너 로고 리스트
+    @GetMapping(value = "/admin/partners")
+    public String partnerListAdminPage(Model model) {
+
+        List<PartnersDTO> partnersDTO = aboutService.partnerView();
+
+        model.addAttribute("partnersDTO", partnersDTO);
+        return "partner/partnerList";
     }
 
     // 파트너 로고 생성
@@ -95,7 +142,7 @@ public class AboutController {
             aboutService.partnerAdd(partnerImg);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "로고 등록 중 에러가 발생하였습니다.");
-            return "admin/partnersForm";
+            return "partner/partnersForm";
         }
         return "redirect:/admin";
     }
@@ -107,7 +154,7 @@ public class AboutController {
         PartnersDTO partners = aboutService.findByPartnersId(partnersId);
 
         model.addAttribute("partnersDTO", partners);
-        return "admin/partnersForm";
+        return "partner/partnersForm";
     }
 
     // 파트너 로고 수정 (어드민)

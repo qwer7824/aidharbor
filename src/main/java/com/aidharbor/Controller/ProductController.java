@@ -70,6 +70,17 @@ public class ProductController {
         return "product/productForm";
     }
 
+    // 상품 리스트 (어드민)
+    @GetMapping(value = "/admin/productList/{categoryId}")
+    public String productAdminList(@PathVariable int categoryId,Model model) {
+        List<ProductDTO> product = productService.productList(categoryId);
+        List<ProductCategoryDto> categories = categoryService.findAll();
+
+        model.addAttribute("categories", categories);
+        model.addAttribute("product", product);
+        return "product/productAdminList";
+    }
+
     // 상품 수정 (어드민)
     @PostMapping(value = "/admin/product/{productId}")
     public String productUpdate(@PathVariable String productId, @Valid ProductDTO productDTO, BindingResult bindingResult, @RequestParam(name = "titleImg") MultipartFile titleImg, Model model) {

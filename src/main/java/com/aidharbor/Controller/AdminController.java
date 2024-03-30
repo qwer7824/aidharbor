@@ -2,15 +2,15 @@ package com.aidharbor.Controller;
 
 import com.aidharbor.DTO.Category.ProductCategoryCreateRequest;
 import com.aidharbor.DTO.Category.ProductCategoryDto;
+import com.aidharbor.DTO.Contact.ContactDTO;
 import com.aidharbor.DTO.MainBannerDTO;
 import com.aidharbor.DTO.Product.ProductDTO;
 import com.aidharbor.Service.BannerService;
 import com.aidharbor.Service.CategoryService;
+import com.aidharbor.Service.ContactService;
 import com.aidharbor.Service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +30,8 @@ public class AdminController {
 
     private final BannerService bannerService;
 
+    private final ContactService contactService;
+
     @GetMapping(value = "/admin")
     public String adminDashBoard(Model model){
 
@@ -41,12 +43,43 @@ public class AdminController {
         return "admin/dashboard";
     }
 
+    // 어드민 - 문의 내역 리스트
+    @GetMapping(value = "/admin/contactList")
+    public String adminContactListView(Model model){
+        List<ContactDTO> ContactDTO = contactService.findAll();
+
+        model.addAttribute("contact",ContactDTO);
+        return "contact/contactList";
+    }
+
+    // 문의 상세
+    @GetMapping(value = "/admin/contact/{contactId}")
+    public String adminContactDetailView(Model model, @PathVariable Long contactId){
+        ContactDTO ContactDTO = contactService.findById(contactId);
+
+        model.addAttribute("contact",ContactDTO);
+        return "contact/contactDetail";
+    }
+    // 문의 체크
+    @PostMapping(value = "/admin/contact/{contactId}")
+    public String adminContactCheck(@PathVariable Long contactId){
+        contactService.contactCheck(contactId);
+        return "redirect:/admin";
+    }
+
     // 메인 베너 추가 페이지
     @GetMapping(value = "/admin/banner/bannerAdd")
     public String bannerAddView(MainBannerDTO mainBannerDTO, Model model){
-
         model.addAttribute("mainBannerDTO", mainBannerDTO);
         return "admin/mainBannerForm";
+    }
+
+    // 메인 배너 리스트
+    @GetMapping(value = "/admin/banner/bannerList")
+    public String bannerListView( Model model){
+        List<MainBannerDTO> mainBannerDTO = bannerService.findByBannerList();
+        model.addAttribute("mainBanner", mainBannerDTO);
+        return "admin/mainBannerList";
     }
 
     // 배너 추가
@@ -106,6 +139,14 @@ public class AdminController {
         model.addAttribute("categories",categoryList);
         model.addAttribute("categoryDTO", categoryDTO);
         return "admin/categoryForm";
+    }
+    // 카테고리 리스트 페이지
+    @GetMapping(value = "/admin/categoryList")
+    public String categoryListView(Model model){
+        List<ProductCategoryDto> categoryList = categoryService.findAll();
+
+        model.addAttribute("categories",categoryList);
+        return "admin/categoryList";
     }
 
     // 카테고리 추가

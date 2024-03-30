@@ -52,6 +52,15 @@ public class SupportController {
         model.addAttribute("userGuideDTO",userGuideDTO);
         return "userGuide/userGuide";
     }
+    // 어드민 유저가이드 리스트
+    @GetMapping(value = "/admin/userGuides")
+    public String userGuideAdminList(Model model){
+        List<UserGuideDTO> userGuideDTO = supportService.guideList();
+
+
+        model.addAttribute("userGuideDTO",userGuideDTO);
+        return "userGuide/userGuideList";
+    }
 
     // 유저 가이드 추가 페이지
     @GetMapping("/admin/userGuideAdd")
@@ -101,16 +110,6 @@ public class SupportController {
         }
         return "redirect:/admin";
     }
-    // 비디오 삭제 (어드민)
-    @PostMapping(value = "/admin/userGuide/delete/{userGuideId}")
-    public String videoDelete(@PathVariable Long userGuideId, UserGuideDTO userGuideDTO, Model model) {
-        try {
-            supportService.userGuideDelete(userGuideDTO);
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", "비디오 수정 중 에러가 발생하였습니다.");
-        }
-        return "redirect:/admin";
-    }
 
     // Catalog List view
     @GetMapping(value = "/support/catalog")
@@ -125,6 +124,100 @@ public class SupportController {
         return "catalog/catalog";
     }
 
+    // 어드민 카탈로그 리스트
+    @GetMapping(value = "/admin/catalogList")
+    public String catalogAdminList(Model model){
+        List<CatalogDTO> catalogDTO = supportService.catalogList();
+
+
+        model.addAttribute("catalogList",catalogDTO);
+        return "catalog/catalogList";
+    }
+
+    // 카탈로그 추가 페이지
+    @GetMapping("/admin/catalogAdd")
+    public String catalogAddView(Model model,CatalogDTO catalogDTO){
+        List<ProductCategoryDto> categories = categoryService.findAll();
+
+        model.addAttribute("categories",categories);
+        model.addAttribute("catalogDTO",catalogDTO);
+        return "catalog/catalogForm";
+    }
+
+
+    // 카탈로그 추가
+    @PostMapping("/admin/catalogAdd")
+    public String userGuideAdd(Model model,@Valid CatalogDTO catalogDTO, BindingResult bindingResult, @RequestParam(name = "catalogFile") MultipartFile catalogFile){
+        if (bindingResult.hasErrors()) {
+            return "catalog/catalogForm";
+        }
+        try {
+            supportService.catalogAdd(catalogDTO,catalogFile);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "카탈로그 등록 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
+
+    // 카탈로그 수정 페이지
+    @GetMapping("/admin/catalog/{catalogId}")
+    public String catalogUpdateView(@PathVariable Long catalogId, Model model){
+        try {
+            List<ProductCategoryDto> categories = categoryService.findAll();
+            CatalogDTO catalogDTO = supportService.findByCatalog(catalogId);
+
+            model.addAttribute("categories",categories);
+            model.addAttribute("catalogDTO",catalogDTO);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "해당 카탈로그를 찾을 수 없습니다.");
+        }
+        return "catalog/catalogForm";
+    }
+
+    // 카탈로그 수정
+    @PostMapping("/admin/catalog/{catalogId}")
+    public String catalogUpdate(CatalogDTO catalogDTO, @RequestParam(name = "catalogFile") MultipartFile catalogFile, Model model) throws IOException {
+        try {
+            supportService.catalogUpdate(catalogDTO,catalogFile);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "카탈로그 수정 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
+    // 카탈로그 삭제 (어드민)
+    @PostMapping(value = "/admin/catalog/delete/{catalogId}")
+    public String catalogDelete(@PathVariable Long catalogId, CatalogDTO catalogDTO, Model model) {
+        try {
+            supportService.catalogDelete(catalogDTO);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "카탈로그 삭제 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
+
+
+
+    // 유저가이드 삭제 (어드민)
+    @PostMapping(value = "/admin/userGuide/delete/{userGuideId}")
+    public String userGuideDelete(@PathVariable Long userGuideId, UserGuideDTO userGuideDTO, Model model) {
+        try {
+            supportService.userGuideDelete(userGuideDTO);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "유저가이드 삭제 중 에러가 발생하였습니다.");
+        }
+        return "redirect:/admin";
+    }
+
+    // 어드민 비디오 리스트
+    @GetMapping(value = "/admin/videoList")
+    public String videoAdminList(Model model){
+
+        List<VideoBoardDTO> videoList = supportService.videoList();
+
+
+        model.addAttribute("videoList",videoList);
+        return "video/videoAdminList";
+    }
 
     // 비디오 추가 페이지
     @GetMapping("/admin/videoAdd")
