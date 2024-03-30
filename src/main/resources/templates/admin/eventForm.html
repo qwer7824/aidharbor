@@ -23,7 +23,7 @@
 </script>
 <script>
     $(document).ready(function() {
-        $('#product').removeClass('text-white').addClass('active');
+        $('#event').removeClass('text-white').addClass('active');
 
         $('#summernote').summernote({
             height: 500,
@@ -80,9 +80,8 @@
     <div class="container-xxl mb-4 d-flex justify-content-center">
     <form  role="form" method="post" enctype="multipart/form-data" th:object="${eventDTO}">
 
-        <p class="h2">
-            등록
-        </p>
+        <p th:unless="${eventDTO.id}" class="h2">행사일정 등록</p>
+        <p th:if="${eventDTO.id}" class="h2">행사일정 수정</p>
 
         <input type="hidden" th:field="*{id}">
 
@@ -107,12 +106,12 @@
 
 
         <div th:if="${#strings.isEmpty(eventDTO.id)}" style="text-align: center">
-            <button th:formaction="@{/admin/CalendarOfEvents/new}" type="submit" class="btn btn-primary">저장</button>
+            <button th:formaction="@{/admin/CalendarOfEventsAdd}" type="submit" class="btn btn-primary">저장</button>
         </div>
 
         <div th:unless="${#strings.isEmpty(eventDTO.id)}" style="text-align: center">
-            <button th:formaction="@{'/admin/product/' + ${productDTO.id} }" type="submit" class="btn btn-primary">수정</button>
-            <button th:formaction="@{'/admin/product/delete/' + ${productDTO.id} }" type="submit" class="btn btn-danger">삭제</button>
+            <button th:formaction="@{'/admin/event/' + ${eventDTO.id} }" type="submit" class="btn btn-primary">수정</button>
+            <button th:formaction="@{'/admin/event/delete/' + ${eventDTO.id} }" type="submit" class="btn btn-danger">삭제</button>
         </div>
     </form>
 

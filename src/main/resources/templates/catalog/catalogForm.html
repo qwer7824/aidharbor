@@ -23,7 +23,7 @@
 </script>
 <script>
     $(document).ready(function() {
-        $('#video').removeClass('text-white').addClass('active');
+        $('#catalog').removeClass('text-white').addClass('active');
     });
 
     function change(element) {
@@ -45,17 +45,29 @@
             }
         });
     }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('preview').src = "";
+        }
+    }
 </script>
 <body>
 
 <div class="d-flex bg-light vh-100">
     <th:block th:replace="~{fragments/adminSidebar :: adminSidebarFragment}"></th:block>
-    <div class="container-xxl mb-4 d-flex justify-content-center">
-        <form  role="form" method="post" enctype="multipart/form-data" th:object="${videoBoardDTO}">
+    <div class="container-xxl mb-4 d-flex justify-content-center" style="overflow: hidden">
+        <form  role="form" method="post" enctype="multipart/form-data"th:object="${catalogDTO}" style="overflow: hidden;">
 
-            <p class="h2">
-                비디오 등록
-            </p>
+            <p th:unless="${catalogDTO.id}" class="h2">카탈로그 등록</p>
+            <p th:if="${catalogDTO.id}" class="h2">카탈로그 수정</p>
+
 
             <input type="hidden" th:field="*{id}">
 
@@ -65,10 +77,10 @@
                     <option th:each="productCategory : ${categories}" th:value="${productCategory.id}" th:text="${productCategory.name}"></option>
                 </select>
                 <select class="form-select w-50" id="parentProductCategory" th:field="*{productCategory}">
-                    <option th:field="*{productCategory}" th:value="${videoBoardDTO?.productCategory?.id}" th:text="${videoBoardDTO?.productCategory?.name}"></option>
+                    <option th:field="*{productCategory}" th:value="${catalogDTO?.productCategory?.id}" th:text="${catalogDTO?.productCategory?.name}"></option>
                 </select>
             </div>
-            <p th:unless="${#strings.isEmpty(videoBoardDTO.id)}">적용되어있는 카테고리 : <span th:field="*{productCategory}" th:value="${videoBoardDTO.productCategory.id}" th:text="${videoBoardDTO.productCategory.name}"></span></p>
+            <p th:unless="${#strings.isEmpty(catalogDTO.id)}">적용되어있는 카테고리 : <span th:field="*{productCategory}" th:value="${catalogDTO.productCategory.id}" th:text="${catalogDTO.productCategory.name}"></span></p>
             <p th:if="${#fields.hasErrors('productCategory')}" th:errors="*{productCategory}" class="fieldError">Incorrect data</p>
 
 
@@ -79,19 +91,22 @@
             <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect data</p>
 
             <div class="input-group mb-3">
-                <span class="input-group-text">youtubeURL</span>
-                <input type="text" th:field="*{videoUrl}" class="form-control" placeholder="유튜브 링크를 입력해주세요.">
-            </div>
-            <p th:if="${#fields.hasErrors('videoUrl')}" th:errors="*{videoUrl}" class="fieldError">Incorrect data</p>
-
-
-            <div th:if="${#strings.isEmpty(videoBoardDTO.id)}" style="text-align: center">
-                <button th:formaction="@{/admin/videoAdd}" type="submit" class="btn btn-primary">저장</button>
+                <input type="file" class="form-control" name="catalogFile" onchange="readURL(this)">
+                <input type="hidden" th:field="*{catalogURL}" class="form-control" placeholder="이미지">
             </div>
 
-            <div th:unless="${#strings.isEmpty(videoBoardDTO.id)}" style="text-align: center">
-                <button th:formaction="@{'/admin/video/' + ${videoBoardDTO.id} }" type="submit" class="btn btn-primary">수정</button>
-                <button th:formaction="@{'/admin/video/delete/' + ${videoBoardDTO.id}}" type="submit" class="btn btn-danger">삭제</button>
+
+            <p th:unless="${#strings.isEmpty(catalogDTO.id)}">적용되어있는 파일 : <span th:field="*{catalogURL}" th:text="${catalogDTO.catalogURL}"></span></p>
+            <p th:if="${#fields.hasErrors('catalogURL')}" th:errors="*{catalogURL}" class="fieldError">Incorrect data</p>
+
+
+            <div th:if="${#strings.isEmpty(catalogDTO.id)}" style="text-align: center">
+                <button th:formaction="@{/admin/catalogAdd}" type="submit" class="btn btn-primary">저장</button>
+            </div>
+
+            <div th:unless="${#strings.isEmpty(catalogDTO.id)}" style="text-align: center">
+                <button th:formaction="@{'/admin/catalog/' + ${catalogDTO.id} }" type="submit" class="btn btn-primary">수정</button>
+                <button th:formaction="@{'/admin/catalog/delete/' + ${catalogDTO.id}}" type="submit" class="btn btn-danger">삭제</button>
             </div>
         </form>
 

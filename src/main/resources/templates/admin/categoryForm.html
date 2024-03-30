@@ -42,9 +42,8 @@
     <div class="container-xxl mb-4 d-flex justify-content-center">
         <form  role="form" method="post" enctype="multipart/form-data" th:object="${categoryDTO}">
 
-            <p class="h2">
-                카테고리 등록
-            </p>
+            <p th:unless="${categoryDTO.id}" class="h2">카테고리 등록</p>
+            <p th:if="${categoryDTO.id}" class="h2">카테고리 수정</p>
 
             <input type="hidden" th:field="*{id}">
 

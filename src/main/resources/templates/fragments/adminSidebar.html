@@ -7,48 +7,96 @@
 </head>
 <body>
 <th:block th:fragment="adminSidebarFragment">
-
-<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
-  <a href="/admin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-    <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-    <span class="fs-4">Aidharbor</span>
-  </a>
-  <hr>
-  <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item">
-      <a id="home" href="/admin" class="nav-link text-white">
-        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-        Home
-      </a>
-    </li>
-    <li>
-      <a id="product" href="#" class="nav-link text-white">
-        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-        Products
-      </a>
-    </li>
-    <li>
-      <a id="category" href="#" class="nav-link text-white">
-        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-        Category
-      </a>
-    </li>
-    <li>
-      <a id="Video" href="/admin/videoAdd" class="nav-link text-white">
-        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-        Video
-      </a>
-    </li>
-    <li>
-      <a id="Partners" href="/admin/partners" class="nav-link text-white">
-        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-        Partners
-      </a>
-    </li>
-  </ul>
-  <hr>
-</div>
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark vh-100" style="width: 280px; position: relative;">
+    <a href="/admin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      <span class="fs-4">Aidharbor</span>
+    </a>
+    <hr>
+    <ul class="nav flex-column">
+      <li class="nav-item dropdown">
+        <a id="main" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Main
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/admin/banner/bannerAdd">메인 배너 등록</a></li>
+          <li><a class="dropdown-item" href="/admin/banner/bannerList">메인 배너 목록</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a id="product" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Products
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/admin/product/new">상품 등록</a></li>
+          <li><a class="dropdown-item" href="/admin/productList/0">상품 목록</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a id="category" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Category
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/admin/category/categoryAdd">카테고리 등록</a></li>
+          <li><a class="dropdown-item" href="/admin/categoryList">카테고리 목록</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a id="userGuide" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          User Guide
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/admin/userGuideAdd">유저가이드 등록</a></li>
+          <li><a class="dropdown-item" href="/admin/userGuides">유저가이드 목록</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a id="catalog" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Catalog
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/admin/catalogAdd">카탈로그 등록</a></li>
+          <li><a class="dropdown-item" href="/admin/catalogList">카탈로그 목록</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a id="video" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Video
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/admin/videoAdd">비디오 등록</a></li>
+          <li><a class="dropdown-item" href="/admin/videoList">비디오 목록</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a id="event" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Calendar of Events
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/admin/CalendarOfEventsAdd">행사일정 등록</a></li>
+          <li><a class="dropdown-item" href="/admin/CalendarOfEvent">행사일정 목록</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a id="partner" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Partner
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/admin/partnerAdd">파트너 등록</a></li>
+          <li><a class="dropdown-item" href="/admin/partners">파트너 목록</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a id="Contact" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Contact
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/admin/contactList">문의 목록</a></li>
+        </ul>
+      </li>
+    </ul>
+    <hr>
+  </div>
 </th:block>
-
 </body>
 </html>

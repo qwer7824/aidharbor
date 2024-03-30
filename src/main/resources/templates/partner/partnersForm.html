@@ -30,7 +30,7 @@
 </script>
 <script>
   $(document).ready(function() {
-    $('#Partners').removeClass('text-white').addClass('active');
+    $('#partner').removeClass('text-white').addClass('active');
   });
 </script>
 
@@ -46,9 +46,8 @@
   <div class="container-xxl mb-4 d-flex justify-content-center">
     <form  role="form" method="post" enctype="multipart/form-data" th:object="${partnersDTO}">
 
-      <p class="h2">
-        파트너 등록
-      </p>
+      <p th:unless="${partnersDTO.id}" class="h2">파트너 등록</p>
+      <p th:if="${partnersDTO.id}" class="h2">파트너 수정</p>
 
       <input type="hidden" th:field="*{id}">
 

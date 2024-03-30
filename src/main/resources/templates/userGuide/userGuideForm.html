@@ -23,7 +23,7 @@
 </script>
 <script>
     $(document).ready(function() {
-        $('#Video').removeClass('text-white').addClass('active');
+        $('#userGuide').removeClass('text-white').addClass('active');
     });
 
     function change(element) {
@@ -65,9 +65,9 @@
     <div class="container-xxl mb-4 d-flex justify-content-center" style="overflow: hidden">
         <form  role="form" method="post" enctype="multipart/form-data"th:object="${userGuideDTO}" style="overflow: hidden;">
 
-            <p class="h2">
-                유저 가이드 등록
-            </p>
+            <p th:unless="${userGuideDTO.id}" class="h2">유저가이드 등록</p>
+            <p th:if="${userGuideDTO.id}" class="h2">유저가이드 수정</p>
+
 
             <input type="hidden" th:field="*{id}">
 

@@ -112,9 +112,8 @@
     <div class="container-xxl mb-4 d-flex justify-content-center">
     <form  role="form" method="post" enctype="multipart/form-data" th:object="${productDTO}">
 
-        <p class="h2">
-            상품 등록
-        </p>
+        <p th:unless="${productDTO.id}" class="h2">상품 등록</p>
+        <p th:if="${productDTO.id}" class="h2">상품 수정</p>
 
         <input type="hidden" th:field="*{id}">
 
