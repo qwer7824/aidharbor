@@ -19,4 +19,5 @@ public class MainBannerDTO {
     private String mainBannerImg;
     private String title;
     private String subtitle;
+    private String bannerURL;
 }

@@ -70,6 +70,12 @@
             </div>
             <p th:if="${#fields.hasErrors('subtitle')}" th:errors="*{subtitle}" class="fieldError">Incorrect data</p>
 
+            <div class="input-group mb-3">
+                <span class="input-group-text">URl</span>
+                <input type="text" th:field="*{bannerURL}" class="form-control" placeholder="배너 URL을 입력해주세요">
+            </div>
+            <p th:if="${#fields.hasErrors('bannerURL')}" th:errors="*{bannerURL}" class="fieldError">Incorrect data</p>
+
 
             <div th:if="${#strings.isEmpty(mainBannerDTO.id)}" style="text-align: center">
                 <button th:formaction="@{/admin/banner/bannerAdd}" type="submit" class="btn btn-primary">저장</button>

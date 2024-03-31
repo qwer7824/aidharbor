@@ -23,15 +23,18 @@ public class MainBanner {
     private String mainBannerImg;
     private String title;
     private String subtitle;
+    private String bannerURL;
 
     public void updateMainBannerImg(MainBannerDTO mainBannerDTO,String ImgUrl) {
         this.mainBannerImg = ImgUrl;
         this.title = mainBannerDTO.getTitle();
         this.subtitle = mainBannerDTO.getSubtitle();
+        this.bannerURL = mainBannerDTO.getBannerURL();
     }
     public void updateMainBanner(MainBannerDTO mainBannerDTO) {
         this.mainBannerImg = mainBannerDTO.getMainBannerImg();
         this.title = mainBannerDTO.getTitle();
         this.subtitle = mainBannerDTO.getSubtitle();
+        this.bannerURL = mainBannerDTO.getBannerURL();
     }
 }

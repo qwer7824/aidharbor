@@ -24,7 +24,7 @@
 
 <div class="carousel_main">
     <div class="carousel_wrapper">
-        <div class="carousel_slide" th:each="mainBanner : ${mainBannerDTO}" th:attr="data-title=${mainBanner.title},data-subtitle=${mainBanner.subtitle}">
+        <div class="carousel_slide" th:each="mainBanner : ${mainBannerDTO}" th:attr="data-title=${mainBanner.title},data-subtitle=${mainBanner.subtitle},data-bannerUrl=${mainBanner.bannerURL}">
             <img style="object-fit: fill" th:src="${mainBanner.mainBannerImg}" />
         </div>
     </div>
@@ -38,7 +38,7 @@
                 <a id="subtitle"></a>
             </div>
         </div>
-        <button class="carousel-btn">View Details</button>
+        <a id="bannerUrl"><button class="carousel-btn">View Details</button></a>
 
         <div class="carousel_pagination">
             <button type="button" class="carousel_prev">
@@ -115,8 +115,10 @@
     function autoTextChange(slideIndex) {
         let title = slides[slideIndex].getAttribute('data-title');
         let subtitle = slides[slideIndex].getAttribute('data-subtitle');
+        let bannerUrl = slides[slideIndex].getAttribute('data-bannerUrl');
         document.getElementById('title').innerText = title;
         document.getElementById('subtitle').innerText = subtitle;
+        document.getElementById('bannerUrl').href = bannerUrl;
     }
 
     function showSlide(slideIndex) {

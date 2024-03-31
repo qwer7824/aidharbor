@@ -44,6 +44,7 @@ public class BannerService {
                 .title(mainBannerDTO.getTitle())
                 .subtitle(mainBannerDTO.getSubtitle())
                 .mainBannerImg(storedFileName)
+                .bannerURL(mainBannerDTO.getBannerURL())
                 .build();
 
         mainBannerRepository.save(mainBanner);

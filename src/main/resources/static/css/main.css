@@ -58,6 +58,7 @@ body{
 .content {
     font-size: 18px;
     display: block;
+    word-break: break-all;
 }
 
 .cbtn {
