@@ -156,4 +156,17 @@ public class AboutService {
                 .collect(Collectors.toList());
     }
 
+    public List<EventDTO> findEventsByPage(int page, int size) {
+        List<Event> eventList = eventsRepository.findAll();
+        int start = page * size;
+        int end = Math.min(start + size, eventList.size());
+        List<EventDTO> eventListDTO = eventList.subList(start, end).stream()
+                .map(this::convertToEventDTO)
+                .collect(Collectors.toList());
+        return eventListDTO;
+    }
+
+    public long getTotalEventsCount() {
+        return eventsRepository.count(); // 이벤트의 총 개수를 반환하는 메서드 호출
+    }
 }

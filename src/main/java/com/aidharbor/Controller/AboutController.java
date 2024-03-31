@@ -40,11 +40,20 @@ public class AboutController {
 
     // CalendarOfEventsView
     @GetMapping(value = "/about/CalendarOfEvents")
-    public String CalendarOfEventsView(Model model){
+    public String CalendarOfEventsView(Model model, @RequestParam(defaultValue = "0") int page){
+        int size = 4; // 한 페이지에 표시할 아이템 수
         List<ProductCategoryDto> categories = categoryService.findAll();
-        List<EventDTO> EventListDTO = aboutService.CalendarOfEventList();
+        List<EventDTO> eventListDTO = aboutService.findEventsByPage(page, size);
 
-        model.addAttribute("eventList", EventListDTO);
+        // 전체 이벤트 개수
+        long totalEvents = aboutService.getTotalEventsCount();
+        // 전체 페이지 수
+        int totalPages = (int) Math.ceil((double) totalEvents / size);
+
+
+        model.addAttribute("eventList", eventListDTO);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("categories", categories);
         return "about/event";
     }
