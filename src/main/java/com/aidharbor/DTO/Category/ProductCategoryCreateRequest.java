@@ -19,7 +19,7 @@ public class ProductCategoryCreateRequest {
     private Integer id;
 
     @NotBlank(message = "카테고리 명을 입력하세요.")
-    @Size(min = 2, max = 15, message = "길이 제한은 2~15자 이내입니다.")
+    @Size(min = 2, max = 20, message = "길이 제한은 2~20자 이내입니다.")
     private String name;
 
     private String categoryImg;
