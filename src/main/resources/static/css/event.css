@@ -2,7 +2,7 @@
     padding: 60px 0px 100px 0px;
     display: flex;
     gap: 20px;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 .event-Card {
     border-radius: 12px;
@@ -12,6 +12,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
+    cursor: pointer;
 }
 .event-img{
     width: 100%;

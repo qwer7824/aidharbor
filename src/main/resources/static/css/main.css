@@ -16,6 +16,7 @@ body{
     gap: 20px;
     display: flex;
     justify-content: center;
+    width: 1400px;
 }
 
 
@@ -23,13 +24,16 @@ body{
     width: 100%;
     height: 470px;
     border-radius: 20px;
+    object-fit: cover;
 }
 
 
 .product-container {
     position: relative;
     width: 100%;
-
+    border-radius: 20px;
+    overflow: hidden;
+    height: 470px;
 }
 
 .image-container {
@@ -42,10 +46,9 @@ body{
     bottom: 0;
     transform: translate(-50%);
     background: linear-gradient(to top, rgb(0 0 0 / 60%), rgba(0, 0, 0, 0));
-    padding: 10px;
+    padding: 20px;
     color: white;
     width: 100%;
-    border-radius: 20px;
     box-sizing: border-box;
 }
 
@@ -74,7 +77,9 @@ body{
 }
 
 .product-container:hover .textBox .cbtn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .CalendarEventsBox{
@@ -83,7 +88,7 @@ body{
     background-size: cover;
     width: 100%;
     height: 920px;
-    padding: 100px;
+    padding: 150px;
     box-sizing: border-box;
 }
 
@@ -96,6 +101,9 @@ body{
     background-color: #f8fafc00;
     width: 80%;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .CalendarEventsBtn a{
     color: white;
@@ -109,8 +117,8 @@ body{
 }
 .CalendarEventsCategory{
     display: flex;
-    justify-content: center;
     gap: 20px;
+    margin: 0 auto;
 }
 .CalendarFirst{
     width: 330px;
@@ -232,7 +240,25 @@ body{
     font-size: 16px;
     color: white;
     border-color: #f5deb300;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
 }
+
+.Calendar-Event{
+    display: flex;
+    gap: 30px;
+}
+.event-contentBox{
+    height: 300px;
+    width: 210px;
+}
+
+.footer{
+    transform: none;
+}
+
 
 @media screen and (max-width: 425px) {
 
@@ -249,18 +275,6 @@ body{
     }
 }
 
-.Calendar-Event{
-    display: flex;
-    gap: 30px;
-}
-.event-contentBox{
-    height: 300px;
-    width: 210px;
-}
-.CalendarEventsBox{
-    padding: 50px;
-}
-
 @media screen and (max-width: 768px) {
     .productImg{
         height: 200px;
@@ -273,6 +287,9 @@ body{
     .event-img{
         width: 275px !important;
         border-radius: 12px;
+    }
+    CalendarEventsBox{
+        padding: 50px;
     }
 }
 @media screen and (max-width: 1024px) {
@@ -287,6 +304,7 @@ body{
     .CalendarEventsCategory{
         justify-content: center;
         flex-direction: column;
+
     }
     .CalendarEventsText{
         font-size: 40px;
@@ -308,8 +326,6 @@ body{
         font-size: 25px;
     }
 }
-
-
 @media screen and (min-width: 1200px) {
     .carousel_slide img {
         height: 680px;
@@ -378,6 +394,11 @@ body{
     .pagination-button{
         width: 50px;
         height: 50px;
+    }
+
+    .CalendarEventsCategory{
+        width: 1400px;
+
     }
 
 }
