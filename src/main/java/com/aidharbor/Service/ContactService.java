@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,6 +46,12 @@ public class ContactService {
                 .collect(Collectors.toList());
     }
 
+    public Map<ContactState, Integer> getContactCounts() {
+        Map<ContactState, Integer> contactCounts = new HashMap<>();
+        contactCounts.put(ContactState.NEW, contactRepository.countByContactState(ContactState.NEW));
+        contactCounts.put(ContactState.HOLD, contactRepository.countByContactState(ContactState.HOLD));
+        return contactCounts;
+    }
     public ContactDTO findById(Long contactId){
         Contact contact = contactRepository.findById(contactId).orElseThrow(null);
 

@@ -5,6 +5,7 @@ import com.aidharbor.DTO.Category.ProductCategoryDto;
 import com.aidharbor.DTO.Contact.ContactDTO;
 import com.aidharbor.DTO.MainBannerDTO;
 import com.aidharbor.DTO.Product.ProductDTO;
+import com.aidharbor.Entity.Enum.ContactState;
 import com.aidharbor.Service.BannerService;
 import com.aidharbor.Service.CategoryService;
 import com.aidharbor.Service.ContactService;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,9 +39,13 @@ public class AdminController {
 
         List<ProductCategoryDto> categoryDto = categoryService.findAll();
         List<ProductDTO> productDTO = productService.productList(0);
+        Map<ContactState, Integer> contactCounts = contactService.getContactCounts();
+        List<ContactDTO> contactList = contactService.findAll();
 
         model.addAttribute("product",productDTO);
         model.addAttribute("category",categoryDto);
+        model.addAttribute("contactCounts",contactCounts);
+        model.addAttribute("contactList",contactList);
         return "admin/dashboard";
     }
 
