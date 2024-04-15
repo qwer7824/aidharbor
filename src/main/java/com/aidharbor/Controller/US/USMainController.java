@@ -31,6 +31,6 @@ public class USMainController {
         model.addAttribute("categories", categories);
         model.addAttribute("Top3List", Top3ListDTO);
         model.addAttribute("mainBannerDTO", mainBannerDTOs);
-        return "/US/home";
+        return "US/home";
     }
 }
