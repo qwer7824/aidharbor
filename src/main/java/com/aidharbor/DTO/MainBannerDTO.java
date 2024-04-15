@@ -18,6 +18,8 @@ public class MainBannerDTO {
     private Long id;
     private String mainBannerImg;
     private String title;
+    private String UsTitle;
     private String subtitle;
+    private String UsSubtitle;
     private String bannerURL;
 }

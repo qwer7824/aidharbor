@@ -42,7 +42,7 @@ public class SupportService {
             String imageUrl = "https://img.youtube.com/vi/" + videoId + "/0.jpg";
             String video = "https://youtube.com/embed/" + videoId;
 
-            VideoBoardDTO dto = new VideoBoardDTO(board.getId(), board.getTitle(), imageUrl,video, board.getProductCategory());
+            VideoBoardDTO dto = new VideoBoardDTO(board.getId(), board.getTitle(),board.getUsTitle(), imageUrl,video, board.getProductCategory());
             videoBoardDTO.add(dto);
         }
 
@@ -55,6 +55,7 @@ public class SupportService {
        VideoBoard videoBoard = VideoBoard.builder()
                         .title(videoBoardDTO.getTitle())
                         .videoUrl(videoBoardDTO.getVideoUrl())
+                        .UsTitle(videoBoardDTO.getUsTitle())
                         .productCategory(videoBoardDTO.getProductCategory())
                         .build();
 
@@ -114,6 +115,7 @@ public class SupportService {
         UserGuide userGuide = UserGuide.builder()
                 .productCategory(userGuideDTO.getProductCategory())
                 .title(userGuideDTO.getTitle())
+                .UsTitle(userGuideDTO.getUsTitle())
                 .guideURL(storedFileName)
                 .build();
 
@@ -158,6 +160,7 @@ public class SupportService {
         Catalog catalog = Catalog.builder()
                 .productCategory(catalogDTO.getProductCategory())
                 .title(catalogDTO.getTitle())
+                .UsTitle(catalogDTO.getUsTitle())
                 .catalogURL(storedFileName)
                 .build();
 

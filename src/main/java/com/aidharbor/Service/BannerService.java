@@ -43,6 +43,7 @@ public class BannerService {
         MainBanner mainBanner = MainBanner.builder()
                 .title(mainBannerDTO.getTitle())
                 .subtitle(mainBannerDTO.getSubtitle())
+                .UsSubtitle(mainBannerDTO.getUsSubtitle())
                 .mainBannerImg(storedFileName)
                 .bannerURL(mainBannerDTO.getBannerURL())
                 .build();

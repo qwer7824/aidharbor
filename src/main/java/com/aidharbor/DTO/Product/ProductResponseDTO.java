@@ -12,6 +12,7 @@ public class ProductResponseDTO {
     private Long id;
 
     private String title;
+    private String UsTitle;
 
     private String titleImgUrl;
 

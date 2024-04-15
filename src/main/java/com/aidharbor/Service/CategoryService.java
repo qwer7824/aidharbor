@@ -53,7 +53,7 @@ public class CategoryService {
         }
 
         return productList.stream()
-                .map(p -> new ProductResponseDTO(p.getId(), p.getTitle(), p.getTitleImgUrl()))
+                .map(p -> new ProductResponseDTO(p.getId(), p.getTitle(),p.getUsTitle(), p.getTitleImgUrl()))
                 .collect(Collectors.toList());
     }
 
@@ -71,6 +71,7 @@ public class CategoryService {
                 .name(req.getName())
                 .parent(parent)
                 .categorySubTitle(req.getCategorySubTitle())
+                .categoryUsSubTitle(req.getCategoryUsSubTitle())
                 .categoryImg(storedFileName)
                 .build();
 

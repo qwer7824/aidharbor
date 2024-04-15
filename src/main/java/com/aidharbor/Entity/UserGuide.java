@@ -21,6 +21,9 @@ public class UserGuide {
     @Column(length = 30, nullable = false)
     private String title;
 
+    @Column(length = 30, nullable = false)
+    private String UsTitle;
+
     @Column(length = 500)
     private String guideURL;
 

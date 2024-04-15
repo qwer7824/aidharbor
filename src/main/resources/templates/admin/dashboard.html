@@ -129,7 +129,7 @@
                             <tr th:each="contact, iterStat : ${contactList}" th:if="${contact.contactState == T(com.aidharbor.Entity.Enum.ContactState).NEW}" th:onclick="'window.location=\'' + @{/admin/contact/} + ${contact.id} + '\''">
                                 <td class="align-content-center" th:text="${contact.firstName}"></td>
                                 <td class="align-content-center" th:text="${contact.userEmail}"></td>
-                                <td class="align-content-center" th:text="${contact.createdAt}"></td>
+                                <td class="align-content-center" th:text="${#temporals.format(contact.createdAt, 'yy/MM/dd HH:mm')}"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -153,7 +153,7 @@
                             <tr th:each="contact, iterStat : ${contactList}" th:if="${contact.contactState == T(com.aidharbor.Entity.Enum.ContactState).HOLD}" th:onclick="'window.location=\'' + @{/admin/contact/} + ${contact.id} + '\''">
                                 <td class="align-content-center" th:text="${contact.firstName}"></td>
                                 <td class="align-content-center" th:text="${contact.userEmail}"></td>
-                                <td class="align-content-center" th:text="${#temporals.format(contact.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td class="align-content-center" th:text="${#temporals.format(contact.createdAt, 'yy/MM/dd HH:mm')}"></td>
                             </tr>
                             </tbody>
                         </table>

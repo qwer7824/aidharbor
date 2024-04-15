@@ -131,10 +131,16 @@
 
 
         <div class="input-group mb-3">
-            <span class="input-group-text">상품</span>
+            <span class="input-group-text">상품명</span>
             <input type="text" th:field="*{title}" class="form-control" placeholder="상품명을 입력해주세요">
         </div>
         <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect data</p>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">US 상품명</span>
+            <input type="text" th:field="*{usTitle}" class="form-control" placeholder="상품명을 입력해주세요">
+        </div>
+        <p th:if="${#fields.hasErrors('usTitle')}" th:errors="*{usTitle}" class="fieldError">Incorrect data</p>
 
 
         <div class="input-group mb-3">
@@ -142,6 +148,12 @@
             <input type="text" th:field="*{subTitle}" class="form-control" placeholder="서브 상품명을 입력해주세요">
         </div>
         <p th:if="${#fields.hasErrors('subTitle')}" th:errors="*{subTitle}" class="fieldError">Incorrect data</p>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">US 서브 상품명</span>
+            <input type="text" th:field="*{usSubTitle}" class="form-control" placeholder="서브 상품명을 입력해주세요">
+        </div>
+        <p th:if="${#fields.hasErrors('usSubTitle')}" th:errors="*{usSubTitle}" class="fieldError">Incorrect data</p>
 
 
         <div class="d-flex flex-column align-items-center mb-3">

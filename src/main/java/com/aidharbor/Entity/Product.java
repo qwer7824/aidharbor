@@ -25,6 +25,10 @@ public class Product {
 
     private String subTitle;
 
+    private String UsTitle;
+
+    private String UsSubTitle;
+
     private String titleImgUrl;
 
     @Lob
@@ -34,7 +38,9 @@ public class Product {
     public void updateProduct(ProductDTO productDTO) {
         this.productCategory = productDTO.getProductCategory();
         this.title = productDTO.getTitle();
+        this.UsTitle = productDTO.getUsTitle();
         this.subTitle = productDTO.getSubTitle();
+        this.UsSubTitle = productDTO.getUsSubTitle();
         this.titleImgUrl = productDTO.getTitleImgUrl();
         this.content = productDTO.getContent();
     }
@@ -42,7 +48,9 @@ public class Product {
         this.titleImgUrl = titleImgUrl;
         this.productCategory = productDTO.getProductCategory();
         this.title = productDTO.getTitle();
+        this.UsTitle = productDTO.getUsTitle();
         this.subTitle = productDTO.getSubTitle();
+        this.UsSubTitle = productDTO.getUsSubTitle();
         this.content = productDTO.getContent();
     }
 }

@@ -88,10 +88,12 @@ public class AboutService {
 
     public List<EventDTO> CalendarOfEventList() {
         List<Event> eventList = eventsRepository.findAll();
-        return eventList.stream()
+        List<EventDTO> eventDTOList = eventList.stream()
                 .map(this::convertToEventDTO)
                 .sorted(Comparator.comparing(EventDTO::getCreatedAt).reversed())
                 .collect(Collectors.toList());
+
+        return eventDTOList;
     }
 
     public EventDTO CalenderOfEventDetail(Long eventId){
@@ -106,6 +108,7 @@ public class AboutService {
 
         String content = event.getContent();
         Document doc = Jsoup.parse(content);
+
         String textOnly = doc.text();
         eventDTO.setContent(textOnly);
 
@@ -143,6 +146,8 @@ public class AboutService {
         Event event = Event.builder()
                 .eventCategory(eventDTO.getEventCategory())
                 .title(eventDTO.getTitle())
+                .UsTitle(eventDTO.getUsTitle())
+                .UsContent(eventDTO.getUsContent())
                 .content(eventDTO.getContent())
                 .build();
 
@@ -158,11 +163,13 @@ public class AboutService {
 
     public List<EventDTO> findEventsByPage(int page, int size) {
         List<Event> eventList = eventsRepository.findAll();
-        int start = page * size;
-        int end = Math.min(start + size, eventList.size());
-        List<EventDTO> eventListDTO = eventList.subList(start, end).stream()
+        List<EventDTO> eventListDTO = eventList.stream()
                 .map(this::convertToEventDTO)
+                .sorted(Comparator.comparing(EventDTO::getCreatedAt).reversed())
+                .skip(page * size)
+                .limit(size)
                 .collect(Collectors.toList());
+
         return eventListDTO;
     }
 

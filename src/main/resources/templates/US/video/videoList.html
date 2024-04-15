@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VideoList</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/Lng.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/top.css">
+<link rel="stylesheet" href="/css/videoList.css">
+
+
+<body>
+<th:block th:replace="~{US/fragments/USnavbar :: USnavbarFragment}"></th:block>
+
+<div class="product-container">
+    <div class="category-name">
+        <h1 class="product-Menu">Video</h1><span class="red-dot">.</span>
+    </div>
+    <a class="big-name">Support</a>
+    <div class="Category-List">
+        <div class="category-menu">
+            <a class="category-slot" href="/US/support/userGuide">User guide</a>
+            <a class="category-slot categoryActive" href="/US/support/videoList">Video</a>
+            <a class="category-slot" href="/US/support/catalog">Catalog</a>
+        </div>
+    </div>
+
+    <div class="video-List">
+        <div class="video-Card" th:each="videoList : ${videoList}" th:attr="data-video-url=${videoList.video}" onclick="openModal(this)">
+            <div>
+                <a>
+                    <img class="videoImg" th:src="${videoList.videoUrl}">
+                </a>
+            </div>
+            <div class="video-TextBox">
+                <a class="video-category" th:text="${videoList.productCategory.name}"></a>
+                <a class="video-title" th:text="${videoList.usTitle}"></a>
+            </div>
+        </div>
+    </div>
+
+
+<!-- 모달 창 -->
+    <div class="modal" id="Modal" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-close" onclick="closeModal()">X</div>
+                    <iframe id="modalVideo" width="100%" height="600px" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+<script th:inline="javascript">
+    // 모달 열기 함수
+    function openModal(element) {
+        let modal = document.getElementById('Modal');
+        let modalVideo = element.getAttribute('data-video-url');
+        document.getElementById('modalVideo').src = modalVideo;
+        modal.style.display = 'block';
+    }
+
+    function closeModal() {
+        let modal = document.getElementById('Modal');
+        modal.style.display = 'none';
+    }
+</script>
+</body>
+</html>

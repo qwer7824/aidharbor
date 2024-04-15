@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <title>Product Detail</title>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <script src="/js/nav.js"></script>
+  <script src="/js/Lng.js"></script>
+
+  <link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/top.css">
+  <link rel="stylesheet" href="/css/productDetail.css">
+  <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+
+
+</head>
+<script th:inline="javascript">
+  var errorMessage = /*[[${errorMessage}]]*/ '';
+  if (!errorMessage) {
+  }else if(errorMessage !== '') {
+    alert(errorMessage);
+    window.location.href = '/';
+  }
+
+</script>
+<body>
+<th:block th:replace="~{US/fragments/USnavbar :: USnavbarFragment}"></th:block>
+
+<div class="product-container">
+
+  <div class="category-name" th:each="productCategory : ${categories}">
+    <h1 class="product-Menu" th:each="child : ${productCategory.children}" th:if="${product.productCategory.id == child.id}" th:text="${child.name}"></h1>
+    <span class="red-dot">.</span>
+  </div>
+  <a class="big-name">Products</a>
+  <div class="Category-List">
+    <div class="category-menu" th:each="productCategory : ${categories}">
+      <a class="category-slot" href="/US/product/0" th:classappend="${All} ? 'categoryActive' : ''">All</a>
+      <a class="category-slot" th:href="@{'/US/product/' + ${child.id}}" th:classappend="${child.id == product.productCategory.id} ? 'categoryActive' : ''" th:each="child : ${productCategory.children}" th:text="${child.name}"></a>
+    </div>
+  </div>
+  <div class="Product-box">
+  <div class="Product-TitleBox">
+    <img class="Product-Img" th:src="${product.titleImgUrl}">
+    <div class="Product-sub">
+      <span class="text-category" th:text="${product.productCategory.name}"></span>
+      <span class="text-title" th:text="${product.title}"></span>
+      <hr style="margin: 0">
+      <span class="text-sub" th:text="${product.subTitle}"></span>
+    </div>
+  </div>
+  </div>
+  <div class="Product-content">
+  <div th:utext="${product.content}"></div>
+  </div>
+</div>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+</body>
+</html>

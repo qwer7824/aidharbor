@@ -1,4 +1,4 @@
-package com.aidharbor.Controller;
+package com.aidharbor.Controller.US;
 
 import com.aidharbor.DTO.Category.ProductCategoryDto;
 import com.aidharbor.DTO.Contact.ContactDTO;
@@ -19,35 +19,19 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class ContentController {
+public class USContentController {
 
     private final ContactService contactService;
     private final CategoryService categoryService;
 
     // 문의 글 페이지
-    @GetMapping(value = "/contact")
-    public String contactView(Model model){
+    @GetMapping(value = "/US/contact")
+    public String UsContactView(Model model){
 
         List<ProductCategoryDto> categories = categoryService.findAll();
         model.addAttribute("categories",categories);
         model.addAttribute("contactDTO",new ContactDTO());
-        return "contact/contact";
-    }
-
-    // 문의 넣기
-    @PostMapping(value = "/contactAdd")
-    public String contactAdd(@Valid ContactDTO contactDTO,BindingResult bindingResult, Model model) throws MethodArgumentNotValidException, MessagingException, UnsupportedEncodingException {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("errorMessage", "An error occurred");
-            return "contact/contact";
-        }
-        try{
-            contactService.contactAdd(contactDTO);
-            model.addAttribute("errorMessage", "Sent successfully");
-        }catch (Exception e){
-            model.addAttribute("errorMessage", "An error occurred");
-        }
-        return "redirect:/contact";
+        return "US/contact/contact";
     }
 
 }

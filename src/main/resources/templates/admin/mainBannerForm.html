@@ -65,10 +65,24 @@
             <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect data</p>
 
             <div class="input-group mb-3">
+                <span class="input-group-text">US 타이틀</span>
+                <input type="text" th:field="*{usTitle}" class="form-control" placeholder="타이틀을 입력해주세요">
+            </div>
+            <p th:if="${#fields.hasErrors('usTitle')}" th:errors="*{usTitle}" class="fieldError">Incorrect data</p>
+
+
+            <div class="input-group mb-3">
                 <span class="input-group-text">서브타이틀</span>
                 <input type="text" th:field="*{subtitle}" class="form-control" placeholder="서브타이틀을 입력해주세요">
             </div>
             <p th:if="${#fields.hasErrors('subtitle')}" th:errors="*{subtitle}" class="fieldError">Incorrect data</p>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">US 서브타이틀</span>
+                <input type="text" th:field="*{usSubtitle}" class="form-control" placeholder="서브타이틀을 입력해주세요">
+            </div>
+            <p th:if="${#fields.hasErrors('usSubtitle')}" th:errors="*{usSubtitle}" class="fieldError">Incorrect data</p>
+
 
             <div class="input-group mb-3">
                 <span class="input-group-text">URl</span>

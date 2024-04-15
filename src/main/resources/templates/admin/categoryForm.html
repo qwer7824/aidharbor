@@ -69,6 +69,13 @@
             <p th:if="${#fields.hasErrors('categorySubTitle')}" th:errors="*{categorySubTitle}" class="fieldError">Incorrect data</p>
 
 
+            <div class="input-group mb-3">
+                <span class="input-group-text">US 카테고리 소개</span>
+                <input type="text" th:field="*{categoryUsSubTitle}" class="form-control" placeholder="소개명을 입력해주세요">
+            </div>
+            <p th:if="${#fields.hasErrors('categoryUsSubTitle')}" th:errors="*{categoryUsSubTitle}" class="fieldError">Incorrect data</p>
+
+
             <div class="input-group mb-3" th:if="${#strings.isEmpty(categoryDTO.id)}">
                 <span class="input-group-text">종류</span>
                 <select th:field="*{parentId}" class="form-select">

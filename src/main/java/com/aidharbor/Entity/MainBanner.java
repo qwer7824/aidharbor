@@ -22,19 +22,25 @@ public class MainBanner {
     @Column(length = 500)
     private String mainBannerImg;
     private String title;
+    private String UsTitle;
     private String subtitle;
+    private String UsSubtitle;
     private String bannerURL;
 
     public void updateMainBannerImg(MainBannerDTO mainBannerDTO,String ImgUrl) {
         this.mainBannerImg = ImgUrl;
         this.title = mainBannerDTO.getTitle();
+        this.UsTitle = mainBannerDTO.getUsTitle();
         this.subtitle = mainBannerDTO.getSubtitle();
+        this.UsSubtitle = mainBannerDTO.getUsSubtitle();
         this.bannerURL = mainBannerDTO.getBannerURL();
     }
     public void updateMainBanner(MainBannerDTO mainBannerDTO) {
         this.mainBannerImg = mainBannerDTO.getMainBannerImg();
         this.title = mainBannerDTO.getTitle();
+        this.UsTitle = mainBannerDTO.getUsTitle();
         this.subtitle = mainBannerDTO.getSubtitle();
+        this.UsSubtitle = mainBannerDTO.getUsSubtitle();
         this.bannerURL = mainBannerDTO.getBannerURL();
     }
 }

@@ -8,52 +8,52 @@
 </head>
 
 <body>
-<th:block th:fragment="navbarFragment">
+<th:block th:fragment="USnavbarFragment">
   <nav class="nav-bar">
-      <a href="/"><img class="logoImg" src="https://todaybutt.s3.ap-northeast-2.amazonaws.com/images/logo.png"></a>
+      <a href="/US"><img class="logoImg" src="https://todaybutt.s3.ap-northeast-2.amazonaws.com/images/logo.png"></a>
       <div class="menu-container">
           <ul class="menu">
               <li class="menu-item" th:each="productCategory : ${categories}">
                   <a class="menu-link" th:text="${productCategory.name}">Product</a>
                   <ul class="dropdown">
-                      <li><a class="dropdown-item" href="/product/0">All</a></li>
+                      <li><a class="dropdown-item" href="/US/product/0">All</a></li>
                       <li th:each="child : ${productCategory.children}">
-                          <a class="dropdown-item category-link" th:href="@{'/product/' + ${child.id}}" th:text="${child.name}" th:data-category-id="${child.id}">Child Category</a>
+                          <a class="dropdown-item category-link" th:href="@{'/US/product/' + ${child.id}}" th:text="${child.name}" th:data-category-id="${child.id}">Child Category</a>
                   </ul>
               </li>
               <li class="menu-item">
                   <a class="menu-link">About</a>
                   <ul class="dropdown">
-                      <li><a class="dropdown-item" href="/about">About</a></li>
-                      <li><a class="dropdown-item" href="/about/CalendarOfEvents">Calendar of Events</a></li>
-                      <li><a class="dropdown-item" href="/about/partners">Partners</a></li>
+                      <li><a class="dropdown-item" href="/US/about">About</a></li>
+                      <li><a class="dropdown-item" href="/US/about/CalendarOfEvents">Calendar of Events</a></li>
+                      <li><a class="dropdown-item" href="/US/about/partners">Partners</a></li>
                   </ul>
               </li>
 
               <li class="menu-item">
                   <a class="menu-link">Support</a>
                   <ul class="dropdown">
-                      <li><a class="dropdown-item" href="/support/userGuide">User Guide</a></li>
-                      <li><a class="dropdown-item" href="/support/videoList">Video</a></li>
-                      <li><a class="dropdown-item" href="/support/catalog">Catalog</a></li>
+                      <li><a class="dropdown-item" href="/US/support/userGuide">User Guide</a></li>
+                      <li><a class="dropdown-item" href="/US/support/videoList">Video</a></li>
+                      <li><a class="dropdown-item" href="/US/support/catalog">Catalog</a></li>
                   </ul>
               </li>
               <li class="menu-item">
-                  <a class="menu-link" href="/contact">Contact</a>
+                  <a class="menu-link" href="/US/contact">Contact</a>
               </li>
                 <li class="menu-item" style="align-self: center;">
-                    <select class="LNG" name="LNG" onchange="window.location =this.value;">
-                        <option value="/">KR</option>
-                        <option value="/US">US</option>
+                    <select class="LNG" name="LNG" onchange="window.location = '/' + this.value;">
+                        <option value="">KR</option>
+                        <option value="US">US</option>
                     </select>
                 </li>
           </ul>
       </div>
       <div class="mobile">
           <div class="lng-box">
-              <select class="LNG" name="LNG" onchange="window.location =this.value;">
-                  <option value="/">KR</option>
-                  <option value="/US">US</option>
+              <select class="LNG" name="LNG">
+                  <option value="KR">KR</option>
+                  <option value="US">US</option>
               </select>
           <div class="mobile-Open" onclick="openMenu()">
           <svg xmlns='http://www.w3.org/2000/svg' width='30px' height='30px' viewBox="0 0 24 24"><title>menu_line</title><g id="menu_line" fill='none' fill-rule='nonzero'><path d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01-.184-.092Z'/><path fill='#09244BFF' d='M20 18a1 1 0 0 1 .117 1.993L20 20H4a1 1 0 0 1-.117-1.993L4 18h16Zm0-7a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2h16Zm0-7a1 1 0 1 1 0 2H4a1 1 0 0 1 0-2h16Z'/></g></svg>
@@ -74,9 +74,9 @@
                           </div>
                       </div>
                           <ul>
-                              <li><a class="menu-body" href="/product/0">ALL</a></li>
+                              <li><a class="menu-body" href="/US/product/0">ALL</a></li>
                               <li th:each="child : ${productCategory.children}">
-                                  <a class="menu-body" th:href="@{'/product/' + ${child.id}}" th:text="${child.name}" th:data-category-id="${child.id}">Child Category</a>
+                                  <a class="menu-body" th:href="@{'/US/product/' + ${child.id}}" th:text="${child.name}" th:data-category-id="${child.id}">Child Category</a>
                               </li>
                           </ul>
                       </li>
@@ -89,9 +89,9 @@
                           </div>
                       </div>
                           <ul>
-                              <li><a class="menu-body" href="/about">About</a></li>
-                              <li><a class="menu-body" href="/about/CalendarOfEvents">Calendar of Events</a></li>
-                              <li><a class="menu-body" href="/about/partners">Partners</a></li>
+                              <li><a class="menu-body" href="/US/about">About</a></li>
+                              <li><a class="menu-body" href="/US/about/CalendarOfEvents">Calendar of Events</a></li>
+                              <li><a class="menu-body" href="/US/about/partners">Partners</a></li>
                           </ul>
                       </li>
                       <li><div class="menu-tap"><a class="menu-top" href="#">Support</a>
@@ -103,12 +103,12 @@
                           </div>
                       </div>
                           <ul>
-                              <li><a class="menu-body" href="/support/userGuide">User Guide</a></li>
-                              <li><a class="menu-body" href="/support/videoList">Video</a></li>
-                              <li><a class="menu-body" href="/support/catalog">Catalog</a></li>
+                              <li><a class="menu-body" href="/US/support/userGuide">User Guide</a></li>
+                              <li><a class="menu-body" href="/US/support/videoList">Video</a></li>
+                              <li><a class="menu-body" href="/US/support/catalog">Catalog</a></li>
                           </ul>
                       </li>
-                      <li><div class="menu-tap"><a class="menu-top" href="/contact">Contact</a></div>
+                      <li><div class="menu-tap"><a class="menu-top" href="/US/contact">Contact</a></div>
                       </li>
                   </ul>
               </div>

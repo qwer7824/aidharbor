@@ -14,6 +14,8 @@ public class CatalogDTO {
 
     @NotEmpty
     private String title;
+    @NotEmpty
+    private String UsTitle;
 
     private String catalogURL;
 

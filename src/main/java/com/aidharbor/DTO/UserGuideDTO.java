@@ -16,6 +16,9 @@ public class UserGuideDTO {
     @NotEmpty
     private String title;
 
+    @NotEmpty
+    private String UsTitle;
+
     private String guideURL;
 
     @NotNull(message = "ProductCategory Check")

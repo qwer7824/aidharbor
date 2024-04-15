@@ -74,6 +74,17 @@ body {
     font-weight: bold;
 }
 
+.LNG{
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 50px;
+    padding: 4px 12px 4px 20px;
+}
+.lng-box{
+    display: flex;
+    gap: 10px;
+}
+
 .dropdown {
     position: absolute;
     top: 100%;
@@ -135,6 +146,9 @@ body {
 @media screen and (max-width: 1280px) {
     .mobile{
         display: block;
+    }
+    .LNG{
+        font-size: 15px;
     }
     .mobile-menu{
         height: 100vh;

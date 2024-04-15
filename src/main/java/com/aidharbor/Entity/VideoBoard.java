@@ -21,6 +21,7 @@ public class VideoBoard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    private String UsTitle;
     private String videoUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Product Detail</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/Lng.js"></script>
+
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/top.css">
+    <link rel="stylesheet" href="/css/eventDetail.css">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+
+
+</head>
+<script th:inline="javascript">
+    var errorMessage = /*[[${errorMessage}]]*/ '';
+    if (!errorMessage) {
+    } else if (errorMessage !== '') {
+        alert(errorMessage);
+        window.location.href = '/';
+    }
+</script>
+<body>
+<th:block th:replace="~{US/fragments/USnavbar :: USnavbarFragment}"></th:block>
+
+<div class="product-container">
+    <div class="category-name">
+        <h1 class="product-Menu">Calendar of Events</h1><span class="red-dot">.</span>
+    </div>
+    <a class="big-name">About</a>
+    <div class="Category-List">
+        <div class="category-menu">
+            <a class="category-slot" href="/US/about">About</a>
+            <a class="category-slot categoryActive" href="/US/about/CalendarOfEvents">Calendar of Events</a>
+            <a class="category-slot" href="/US/about/partners">Partners</a>
+        </div>
+    </div>
+    <div class="eventDetail-Box">
+        <hr style="margin: 0; border: solid 1px black;">
+
+        <div class="eventDetail-Title">
+            <span class="titleText" th:text="${event.usTitle}"></span>
+            <span class="titleDate" th:text="${#temporals.format(event.createdAt, 'yyyy-MM-dd')}"></span>
+        </div>
+
+        <hr style="margin: 0;">
+
+        <div class="eventDetail-ContentBox">
+            <div class="eventDetail-Content" th:utext="${event.usContent}"></div>
+        </div>
+
+        <hr style="margin: 0;">
+
+        <div class="eventDetail-btnBox">
+            <a href="/US/about/CalendarOfEvents">
+                <button class="eventDetail-btn">List</button>
+            </a>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+</body>
+</html>

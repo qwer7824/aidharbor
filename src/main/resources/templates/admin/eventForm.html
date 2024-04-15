@@ -53,6 +53,34 @@
                 }
             }
         });
+        $('#summernote2').summernote({
+            height: 500,
+            focus: true,
+            lang: "ko-KR",
+            placeholder: '내용',
+            disableResizeEditor: true,
+            toolbar: [
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+                ['color', ['forecolor','color']],
+                ['table', ['table']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert',['picture','link','video']],
+                ['view', ['fullscreen', 'help']]
+            ],
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+            fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+            callbacks: {
+                // 이미지 업로드시에 호출됩니다.
+                onImageUpload: function(files, editor, welEditable) {
+                    for (var i = files.length - 1; i >= 0; i--) {
+                        sendFile2(files[i], this);
+                    }
+                }
+            }
+        });
     });
 
     // 이미지를 임시저장합니다.
@@ -69,6 +97,24 @@
             processData: false,
             success: function(tempImg) {
                 $('#summernote').summernote('insertImage', tempImg.savedPath, tempImg.originalName);
+            }
+        });
+    }
+
+    // 이미지를 임시저장합니다.
+    function sendFile2(file, el) {
+        var form_data = new FormData();
+        form_data.append('img', file);
+        $.ajax({
+            data: form_data,
+            type: "POST",
+            url: '/board/displayedImage',
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function(tempImg) {
+                $('#summernote2').summernote('insertImage', tempImg.savedPath, tempImg.originalName);
             }
         });
     }
@@ -92,17 +138,33 @@
         </select>
         </div>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text">제목</span>
-            <input type="text" th:field="*{title}" class="form-control" placeholder="제목을 입력해주세요">
-        </div>
-        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect data</p>
 
+        <div class="d-flex justify-content-end">
+            <div class="m-2">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">제목</span>
+                    <input type="text" th:field="*{title}" class="form-control" placeholder="제목을 입력해주세요">
+                </div>
+                <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect data</p>
+                <div class="input-group mb-3">
+                    <textarea id="summernote" th:field="*{content}"></textarea>
+                </div>
+                <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="fieldError">Incorrect data</p>
+            </div>
 
-        <div class="input-group mb-3">
-            <textarea id="summernote" th:field="*{content}"></textarea>
+            <div class="m-2">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">US 제목</span>
+                    <input type="text" th:field="*{usTitle}" class="form-control" placeholder="제목을 입력해주세요">
+                </div>
+                <p th:if="${#fields.hasErrors('usTitle')}" th:errors="*{usTitle}" class="fieldError">Incorrect data</p>
+                <div class="input-group mb-3">
+                    <textarea id="summernote2" th:field="*{usContent}"></textarea>
+                </div>
+                <p th:if="${#fields.hasErrors('usContent')}" th:errors="*{usContent}" class="fieldError">Incorrect data</p>
+
+            </div>
         </div>
-        <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="fieldError">Incorrect data</p>
 
 
         <div th:if="${#strings.isEmpty(eventDTO.id)}" style="text-align: center">

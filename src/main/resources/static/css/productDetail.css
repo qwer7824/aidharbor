@@ -40,6 +40,7 @@
     .Product-content {
         box-sizing: border-box;
         margin: 0 auto;
+        margin-bottom: 100px;
     }
 
     .Product-Img {

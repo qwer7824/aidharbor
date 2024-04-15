@@ -91,8 +91,14 @@
             <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect data</p>
 
             <div class="input-group mb-3">
+                <span class="input-group-text">US 제목</span>
+                <input type="text" th:field="*{usTitle}" class="form-control" placeholder="제목을 입력해주세요.">
+            </div>
+            <p th:if="${#fields.hasErrors('usTitle')}" th:errors="*{usTitle}" class="fieldError">Incorrect data</p>
+
+            <div class="input-group mb-3">
                 <input type="file" class="form-control" name="guideFile" onchange="readURL(this)">
-                <input type="hidden" th:field="*{guideURL}" class="form-control" placeholder="이미지">
+                <input type="hidden" th:field="*{guideURL}" class="form-control" placeholder="파일">
             </div>
 
 

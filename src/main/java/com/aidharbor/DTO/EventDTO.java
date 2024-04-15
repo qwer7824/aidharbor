@@ -16,8 +16,10 @@ public class EventDTO extends BaseEntity {
 
     private Long id;
     private String title;
+    private String UsTitle;
     private String titleImgUrl;
     private String content;
+    private String UsContent;
     private EventCategory eventCategory;
 
     private static ModelMapper modelMapper = new ModelMapper();

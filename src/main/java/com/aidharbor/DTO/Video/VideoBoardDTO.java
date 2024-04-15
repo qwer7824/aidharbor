@@ -20,6 +20,9 @@ public class VideoBoardDTO {
     @NotEmpty
     private String title;
 
+    @NotEmpty
+    private String UsTitle;
+
     @Pattern(regexp = "https://www.youtube.com/watch\\?v=.+",message = "양식에 맞지 않습니다.")
     private String videoUrl;
 

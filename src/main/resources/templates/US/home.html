@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Aidharbor</title>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/Lng.js"></script>
+
+
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/event.css">
+
+</head>
+<style>
+
+</style>
+<body>
+<th:block th:replace="~{US/fragments/USnavbar :: USnavbarFragment}"></th:block>
+
+<div class="carousel_main">
+    <div class="carousel_wrapper">
+        <div class="carousel_slide" th:each="mainBanner : ${mainBannerDTO}" th:attr="data-title=${mainBanner.usTitle},data-subtitle=${mainBanner.usSubtitle},data-bannerUrl=${mainBanner.bannerURL}">
+            <img style="object-fit: fill" th:src="${mainBanner.mainBannerImg}" />
+        </div>
+    </div>
+
+    <div class="carousel-Box">
+        <div class="carousel-TextBox">
+            <div class="carousel-title">
+                <a id="title"></a>
+            </div>
+            <div class="carousel-body">
+                <a id="subtitle"></a>
+            </div>
+        </div>
+        <a id="bannerUrl"><button class="carousel-btn">View Details<svg xmlns='http://www.w3.org/2000/svg' width='27px' height='27px' viewBox="0 0 24 24"><title>arrow_right_line</title><g id="arrow_right_line" fill='none' fill-rule='nonzero'><path d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01-.184-.092Z'/><path fill='#FFFFFFFF' d='m14.707 5.636 5.657 5.657a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 0 1-1.414-1.414l3.95-3.95H4a1 1 0 1 1 0-2h13.243l-3.95-3.95a1 1 0 1 1 1.414-1.414Z'/></g></svg></button></a>
+
+        <div class="carousel_pagination">
+            <button type="button" class="carousel_prev">
+            <svg class="pagination-button" xmlns='http://www.w3.org/2000/svg' width='22px' height='22px' viewBox="0 0 24 24"><title>arrow_left_line</title><g id="arrow_left_line" fill='none' fill-rule='nonzero'><path d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01-.184-.092Z'/><path fill='#000000FF' d='M3.636 11.293a1 1 0 0 0 0 1.414l5.657 5.657a1 1 0 0 0 1.414-1.414L6.757 13H20a1 1 0 1 0 0-2H6.757l3.95-3.95a1 1 0 0 0-1.414-1.414l-5.657 5.657Z'/></g></svg>
+            </button>
+            <div class="carousel_circle" th:each="mainConut : ${mainBannerDTO}"></div>
+            <button type="button" class="carousel_next">
+            <svg class="pagination-button" xmlns='http://www.w3.org/2000/svg' width='30px' height='30px' viewBox="0 0 24 24"><title>arrow_right_line</title><g id="arrow_right_line" fill='none' fill-rule='nonzero'><path d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01-.184-.092Z'/><path fill='#000000FF' d='m14.707 5.636 5.657 5.657a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 0 1-1.414-1.414l3.95-3.95H4a1 1 0 1 1 0-2h13.243l-3.95-3.95a1 1 0 1 1 1.414-1.414Z'/></g></svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="productBox">
+    <a style="font-weight: 800; font-size: 48px; line-height: 68px;">Product</a>
+            <div class="productMenu">
+                <div class="product-container" th:each="child : ${categories.get(0).children}">
+                        <div class="image-container">
+                            <img class="productImg" th:src="${child.categoryImg}">
+                            <div class="textBox">
+                            <span class="title" th:text="${child.name}">카테고리 제목</span>
+                            <span class="content" th:text="${child.categoryUsSubTitle}">카테고리 내용</span>
+                                <a th:href="@{'/US/product/' + ${child.id}}"><button class="cbtn">View Details<svg xmlns='http://www.w3.org/2000/svg' width='23px' height='23px' viewBox="0 0 24 24"><title>arrow_right_line</title><g id="arrow_right_line" fill='none' fill-rule='nonzero'><path d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01-.184-.092Z'/><path fill='#FFFFFFFF' d='m14.707 5.636 5.657 5.657a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 0 1-1.414-1.414l3.95-3.95H4a1 1 0 1 1 0-2h13.243l-3.95-3.95a1 1 0 1 1 1.414-1.414Z'/></g></svg></button></a>
+                            </div>
+                        </div>
+                        </div>
+            </div>
+</div>
+<div class="CalendarEventsBox">
+    <div class="CalendarEventsCategory">
+        <div class="CalendarFirst">
+            <p class="CalendarEventsText">Calendar of</p>
+            <p class="CalendarEventsText">Events</p>
+            <a href="/US/about/CalendarOfEvents"><button class="CalendarEventsBtn">More View<svg xmlns='http://www.w3.org/2000/svg' width='23px' height='23px' viewBox="0 0 24 24"><title>arrow_right_line</title><g id="arrow_right_line" fill='none' fill-rule='nonzero'><path d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01-.184-.092Z'/><path fill='#FFFFFFFF' d='m14.707 5.636 5.657 5.657a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 0 1-1.414-1.414l3.95-3.95H4a1 1 0 1 1 0-2h13.243l-3.95-3.95a1 1 0 1 1 1.414-1.414Z'/></g></svg></button></a>
+        </div>
+        <div class="Calendar-Event">
+        <div class="event-Card" th:each="event : ${Top3List}" th:attr="data-eventId=${event.id}" onclick="redirectToEventDetail(this)">
+            <div class="event-ImgBox" th:if="${event.titleImgUrl}">
+                <img class="event-img" th:src="${event.titleImgUrl}"/>
+            </div>
+            <div class="event-TextBox">
+                <div class="event-titleBox">
+                    <a class="event-category" th:text="${event.eventCategory}"></a>
+                    <a class="event-title" th:text="${event.usTitle}"></a>
+                </div>
+                <div class="event-contentBox" th:unless="${event.titleImgUrl}">
+                    <a class="event-content" th:utext="${event.usContent}"></a>
+                </div>
+            </div>
+            <a class="event-date" th:text="${#temporals.format(event.createdAt, 'yyyy-MM-dd')}"></a>
+        </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script>
+
+    const swiper = document.querySelector('.carousel_wrapper');
+    const prevButtons = document.querySelectorAll('.carousel_prev');
+    const nextButtons = document.querySelectorAll('.carousel_next');
+    const bullets = document.querySelectorAll('.carousel_circle');
+    const slides = document.querySelectorAll('.carousel_slide');
+
+    let currentSlide = 0;
+
+    function redirectToEventDetail(element) {
+        var eventId = element.getAttribute('data-eventId');
+        window.location.href = '/US/about/CalendarOfEvents/' + eventId;
+    }
+
+    function autoTextChange(slideIndex) {
+        let title = slides[slideIndex].getAttribute('data-title');
+        let subtitle = slides[slideIndex].getAttribute('data-subtitle');
+        let bannerUrl = slides[slideIndex].getAttribute('data-bannerUrl');
+        document.getElementById('title').innerText = title;
+        document.getElementById('subtitle').innerText = subtitle;
+        document.getElementById('bannerUrl').href = bannerUrl;
+    }
+
+    function showSlide(slideIndex) {
+        swiper.style.transform = `translateX(-${slideIndex * 100}%)`;
+        currentSlide = slideIndex;
+
+        slides.forEach((slide, index) => {
+            if (index === currentSlide) {
+                slide.classList.add('active');
+                bullets[index].classList.add('active');
+            } else {
+                slide.classList.remove('active');
+                bullets[index].classList.remove('active');
+            }
+        });
+
+        autoTextChange(slideIndex);
+    }
+
+    prevButtons.forEach((prevButton) => {
+        prevButton.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            } else {
+                showSlide(bullets.length - 1);
+            }
+        });
+    });
+
+    nextButtons.forEach((nextButton) => {
+        nextButton.addEventListener('click', () => {
+            if (currentSlide < bullets.length - 1) {
+                showSlide(currentSlide + 1);
+            } else {
+                showSlide(0);
+            }
+        });
+    });
+
+    bullets.forEach((bullet, index) => {
+        bullet.addEventListener('click', () => {
+            showSlide(index);
+        });
+    });
+
+    showSlide(0);
+</script>
+</body>
+</html>

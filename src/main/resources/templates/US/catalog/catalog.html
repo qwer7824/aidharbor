@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catalog</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/top.css">
+<link rel="stylesheet" href="/css/support.css">
+<script src="/js/nav.js"></script>
+<script src="/js/Lng.js"></script>
+
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+
+<body>
+<th:block th:replace="~{US/fragments/USnavbar :: USnavbarFragment}"></th:block>
+
+<div class="product-container">
+    <div class="category-name">
+        <h1 class="product-Menu">Catalog</h1><span class="red-dot">.</span>
+    </div>
+    <a class="big-name">Support</a>
+    <div class="Category-List">
+        <div class="category-menu">
+            <a class="category-slot" href="/US/support/userGuide">User guide</a>
+            <a class="category-slot" href="/US/support/videoList">Video</a>
+            <a class="category-slot categoryActive" href="/US/support/catalog">Catalog</a>
+        </div>
+    </div>
+
+    <div class="guide-List">
+        <div class="guide-Card" th:each="catalog : ${catalogDTO}">
+        <div class="guide-TextBox">
+            <a class="guide-category" th:text="${catalog.productCategory.name}"></a>
+            <a class="guide-title" th:text="${catalog.usTitle}"></a>
+        </div>
+            <a class="guide-icon" th:href="${catalog.catalogURL}" target = "_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="55" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+            </svg>
+            </a>
+        </div>
+    </div>
+
+</div>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+</body>
+</html>

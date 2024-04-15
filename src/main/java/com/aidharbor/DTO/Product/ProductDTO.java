@@ -24,8 +24,14 @@ public class ProductDTO {
     @NotEmpty(message = "Title Check")
     private String title;
 
+    @NotEmpty(message = "UsTitle Check")
+    private String UsTitle;
+
     @NotEmpty(message = "subTitle Check")
     private String subTitle;
+
+    @NotEmpty(message = "UsSubTitle Check")
+    private String UsSubTitle;
 
     private String titleImgUrl;
 

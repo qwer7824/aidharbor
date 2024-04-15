@@ -79,6 +79,13 @@
             <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect data</p>
 
             <div class="input-group mb-3">
+                <span class="input-group-text">US 제목</span>
+                <input type="text" th:field="*{usTitle}" class="form-control" placeholder="제목을 입력해주세요.">
+            </div>
+            <p th:if="${#fields.hasErrors('usTitle')}" th:errors="*{usTitle}" class="fieldError">Incorrect data</p>
+
+
+            <div class="input-group mb-3">
                 <span class="input-group-text">youtubeURL</span>
                 <input type="text" th:field="*{videoUrl}" class="form-control" placeholder="유튜브 링크를 입력해주세요.">
             </div>

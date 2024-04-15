@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/top.css">
+<link rel="stylesheet" href="/css/about.css">
+<script src="/js/nav.js"></script>
+<script src="/js/Lng.js"></script>
+
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+
+<body>
+<th:block th:replace="~{US/fragments/USnavbar :: USnavbarFragment}"></th:block>
+
+<div class="product-container">
+  <div class="category-name">
+    <h1 class="product-Menu">About</h1><span class="red-dot">.</span>
+  </div>
+  <a class="big-name">About</a>
+  <div class="Category-List">
+    <div class="category-menu">
+      <a class="category-slot  categoryActive" href="/US/about">About</a>
+      <a class="category-slot" href="/US/about/CalendarOfEvents">Calendar of Events</a>
+      <a class="category-slot" href="/US/about/partners">Partners</a>
+    </div>
+  </div>
+
+  <div class="aboutBox">
+    <div class="top-text">
+    <a>We make better</a>
+    <a>medical education.</a>
+    </div>
+    <img class="aboutImg" src="https://todaybutt.s3.ap-northeast-2.amazonaws.com/images/about.jpeg">
+
+
+    <div class="middle-text">
+      <a>We provide an integrated solution for various medical education products</a>
+      <a>in Korea at the fastest and most reasonable price.</a>
+    </div>
+    <hr style="border: 1px solid #E2E8F0;width: 100%;">
+    <div class="bottom-text">
+      <a>A company that provides integrated solutions in the medical education and healthcare industries.</a>
+        <a>We use VR simulators to simulate realistic situations and provide various medical education programs to help experts improve their capabilities.</a>
+          <a>Additionally, Aid Harbor is leading the development and innovation of the healthcare industry by utilizing the latest technology.</a>
+            <a>Through customer-oriented service and continuous technological development,</a>
+              <a>Aid Harbor is contributing to the development of the medical education and healthcare industry.</a>
+    </div>
+  </div>
+
+
+</div>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+</body>
+</html>

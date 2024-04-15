@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>Contact</title>
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/Lng.js"></script>
+
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/top.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+
+</head>
+<script th:inline="javascript">
+    var errorMessage = /*[[${errorMessage}]]*/ '';
+    if (!errorMessage) {
+    }else if(errorMessage !== '') {
+        alert(errorMessage);
+        console.log(errorMessage);
+    }
+</script>
+<body>
+<th:block th:replace="~{US/fragments/USnavbar :: USnavbarFragment}"></th:block>
+
+<div class="product-container">
+    <div class="category-name">
+    <h1 class="product-Menu">Contact</h1><span class="red-dot">.</span>
+    </div>
+    <a class="big-name">Contact</a>
+    <form class="contact-form" action="/contactAdd" role="form" method="post" th:object="${contactDTO}">
+
+        <div class="name-flex">
+        <div class="contactBox w-50">
+            <a class="content-text">First name</a>
+        <input type="text" th:field="*{firstName}" class="input-text" placeholder="First name">
+            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="fieldError">Incorrect data</p>
+
+        </div>
+
+            <div class="contactBox w-50">
+            <a class="content-text">Last name</a>
+            <input type="text" th:field="*{lastName}" class="input-text" placeholder="Last name">
+                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="fieldError">Incorrect data</p>
+
+            </div>
+        </div>
+
+        <div class="contactBox">
+            <a class="content-text">Email</a>
+            <input type="email" th:field="*{userEmail}" id="userEmail" class="input-text" placeholder="you@company.com">
+        </div>
+        <p th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}" class="fieldError">Incorrect data</p>
+
+
+        <div class="contactBox">
+            <a class="content-text">Message</a>
+            <textarea class="text-message" th:field="*{message}"></textarea>
+        </div>
+        <p th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="fieldError">Incorrect data</p>
+
+        <div class="check_wrap">
+            <input type="checkbox" id="check_btn"/>
+            <label for="check_btn"><span>I agree with the contents of the personal information processing policy guide.</span></label>
+        </div>
+        <div class="check-Box">
+            <textarea class="text-message" readonly>Purpose of collecting and using personal information
+The purpose of collecting personal information is to collect only the minimum amount of information needed to provide ad-habber information and customized services.
+
+The personal information of all members and visitors registered with Aid Harbor may not be used for purposes other than basic collection purposes or provided to third parties without their consent, and Aid Harbor is responsible for all damages in the event of damage to members related to membership information.
+
+If consent to collect or use personal information is withdrawn, Ad hoc will not collect personal information, and if withdrawn, personal information will be deleted.</textarea>
+        </div>
+
+        <button type="submit" id="sendBtn" class="sendBtn" disabled='disabled'>Send message</button>
+    </form>
+</div>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+<script>
+    document.getElementById('check_btn').addEventListener('change', function() {
+        var sendBtn = document.getElementById('sendBtn');
+        if (this.checked) {
+            sendBtn.disabled = false; // 'check_btn'가 체크된 경우 'sendBtn' 버튼을 활성화
+        } else {
+            sendBtn.disabled = true; // 'check_btn'가 체크 해제된 경우 'sendBtn' 버튼을 비활성화
+        }
+    });
+</script>
+</body>
+</html>

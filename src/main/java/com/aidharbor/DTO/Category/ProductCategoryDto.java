@@ -19,13 +19,14 @@ public class ProductCategoryDto {
     private String name;
     private String categoryImg;
     private String categorySubTitle;
+    private String categoryUsSubTitle;
     private List<ProductCategoryDto> children;
 
 
     public static List<ProductCategoryDto> toDtoList(List<ProductCategory> categories) {
         ProductCategoryHelper helper = ProductCategoryHelper.newInstance(
                 categories,
-                c -> new ProductCategoryDto(c.getId(), c.getName(),c.getCategoryImg(),c.getCategorySubTitle(), new ArrayList<>()),
+                c -> new ProductCategoryDto(c.getId(), c.getName(),c.getCategoryImg(),c.getCategorySubTitle(),c.getCategoryUsSubTitle(), new ArrayList<>()),
                 ProductCategory::getParent,
                 ProductCategory::getId,
                 ProductCategoryDto::getChildren);

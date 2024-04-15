@@ -22,8 +22,8 @@ public class MailService {
 
     // 메일 양식 작성
     public MimeMessage createEmailForm(ContactDTO contactDTO) throws MessagingException, UnsupportedEncodingException, MessagingException {
-        String setFrom = "gma78240@gmail.com";
-        String toEmail = contactDTO.getUserEmail();
+        String setFrom = "aiden@aidharbor.com";
+        String toEmail = "aiden@aidharbor.com";
         String title = "Aidharbor 문의 요청";
 
         MimeMessage message = javaMailSender.createMimeMessage();

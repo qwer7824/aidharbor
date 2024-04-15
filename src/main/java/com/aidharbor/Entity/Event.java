@@ -22,9 +22,16 @@ public class Event extends BaseEntity {
     private Long id;
 
     private String title;
+    private String UsTitle;
+
     @Lob
     @Column(columnDefinition="MEDIUMTEXT")
     private String content;
+
+    @Lob
+    @Column(columnDefinition="MEDIUMTEXT")
+    private String UsContent;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EventCategory eventCategory;
@@ -32,7 +39,9 @@ public class Event extends BaseEntity {
 
     public void updateEvent(EventDTO eventDTO) {
         this.title = eventDTO.getTitle();
+        this.UsTitle = eventDTO.getUsTitle();
         this.content = eventDTO.getContent();
+        this.UsContent = eventDTO.getUsContent();
         this.eventCategory = eventDTO.getEventCategory();
     }
 }

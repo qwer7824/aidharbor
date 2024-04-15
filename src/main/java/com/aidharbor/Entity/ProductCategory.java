@@ -31,26 +31,31 @@ public class ProductCategory {
 
     private String categorySubTitle;
 
+    private String categoryUsSubTitle;
+
     private String categoryImg;
 
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductCategory> children = new ArrayList<>();
 
-    public ProductCategory(String name, ProductCategory parent,String categoryImg,String categorySubTitle) {
+    public ProductCategory(String name, ProductCategory parent,String categoryImg,String categorySubTitle,String categoryUsSubTitle) {
         this.name = name;
         this.parent = parent;
+        this.categoryUsSubTitle = categoryUsSubTitle;
         this.categoryImg = categoryImg;
         this.categorySubTitle = categorySubTitle;
     }
 
     public void CategoryUpdate(ProductCategoryCreateRequest req) {
         this.name = req.getName();
+        this.categoryUsSubTitle = req.getCategoryUsSubTitle();
         this.categorySubTitle = req.getCategorySubTitle();
     }
 
     public void updateImgUrl(ProductCategoryCreateRequest req, String storedFileName) {
         this.name = req.getName();
         this.categoryImg = storedFileName;
+        this.categoryUsSubTitle = req.getCategoryUsSubTitle();
         this.categorySubTitle = req.getCategorySubTitle();
     }
 }
