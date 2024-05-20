@@ -54,6 +54,7 @@
 
 <div class="productBox">
     <a style="font-weight: 800; font-size: 48px; line-height: 68px;">Product</a>
+    <div class="scroll">
             <div class="productMenu">
                 <div class="product-container" th:each="child : ${categories.get(0).children}">
                         <div class="image-container">
@@ -66,6 +67,7 @@
                         </div>
                         </div>
             </div>
+    </div>
 </div>
 <div class="CalendarEventsBox">
     <div class="CalendarEventsCategory">

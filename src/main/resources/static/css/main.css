@@ -17,13 +17,12 @@ body{
     gap: 20px;
     display: flex;
     justify-content: center;
-    width: 1400px;
 }
 
 
 .productImg{
     width: 100%;
-    height: 470px;
+    height: 400px;
     border-radius: 20px;
     object-fit: contain;
 }
@@ -44,13 +43,14 @@ body{
 .textBox {
     position: absolute;
     left: 50%;
-    bottom: 0;
+    bottom: 2px;
     transform: translate(-50%);
     background: linear-gradient(to top, rgb(0 0 0 / 60%), rgba(0, 0, 0, 0));
     padding: 20px;
     color: white;
     width: 100%;
     box-sizing: border-box;
+    border-radius: 12px;
 }
 
 .title {
@@ -277,9 +277,6 @@ body{
 }
 
 @media screen and (max-width: 768px) {
-    .productImg{
-        height: 200px;
-    }
     .Calendar-Event{
         width: 100%;
         flex-wrap: nowrap;
@@ -294,9 +291,6 @@ body{
     }
 }
 @media screen and (max-width: 1024px) {
-    .productImg {
-        height: 300px;
-    }
     .CalendarFirst{
         height: 300px;
         width: 280px;
@@ -317,6 +311,7 @@ body{
         display: flex;
         justify-content: normal;
         overflow: scroll;
+        width: 1400px;
     }
     .carousel-title{
         font-size: 35px;
@@ -350,6 +345,10 @@ body{
 
 
 @media screen and (min-width: 1920px) {
+
+    .productMenu{
+        width: 1800px;
+    }
 
     .title{
         font-size: 40px;
