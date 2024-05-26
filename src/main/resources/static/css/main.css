@@ -260,8 +260,27 @@ body{
     transform: none;
 }
 
+.productNameBox{
+    background-color: #F8FAFC;
+    padding-top: 50px;
+    padding-left: 100px;
+}
+
+.productBox::-webkit-scrollbar{
+    display:none;
+}
+
+.Calendar-Event::-webkit-scrollbar{
+    display:none;
+}
+
+
 
 @media screen and (max-width: 425px) {
+
+    .productNameBox{
+        padding-left: 20px;
+    }
 
     .productBox {
         padding: 20px;
