@@ -80,6 +80,12 @@ body {
     border-radius: 50px;
     padding: 4px 12px 4px 20px;
 }
+.LNG2{
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 50px;
+    padding: 4px 12px 4px 20px;
+}
 .lng-box{
     display: flex;
     gap: 10px;
@@ -211,12 +217,19 @@ body {
     }
 }
 
-
 @media screen and (max-width: 1280px) {
+    .menu-body-product{
+        color: black;
+        font-weight: 500;
+        font-size: 16px;
+    }
     .mobile{
         display: block;
     }
     .LNG{
+        font-size: 15px;
+    }
+    .LNG2{
         font-size: 15px;
     }
     .LngBar{
@@ -252,7 +265,7 @@ body {
         margin:0 auto;
     }
     .menu-body {
-        color:  #64748B;
+        color: #64748B;
         font-weight: 500;
         font-size: 16px;
     }
