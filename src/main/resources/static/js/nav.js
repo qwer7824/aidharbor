@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
     menuTriggers.forEach(trigger => {
         trigger.addEventListener('click', function(event) {
             event.preventDefault(); // 링크 클릭 방지
+            event.stopPropagation(); // 이벤트 전파 중단
+
 
             // 클릭한 메뉴의 부모 요소를 찾아 서브메뉴 선택
             const submenu = trigger.closest('.menu-tap').nextElementSibling;
@@ -42,34 +44,35 @@ document.addEventListener('DOMContentLoaded', function() {
             const upBtn = trigger.closest('.menu-tap').querySelector('.up-btn');
 
             // 모든 서브메뉴 숨기기
-            const allSubmenus = document.querySelectorAll('.submenu'); // 서브메뉴 클래스에 맞게 변경
+            const allSubmenus = document.querySelectorAll('.submenu');
             allSubmenus.forEach(item => {
-                if (item !== submenu) { // 클릭한 서브메뉴가 아닐 경우
-                    item.style.display = 'none'; // 모든 서브메뉴 숨기기
+                if (item !== submenu) {
+                    item.style.display = 'none';
                     const itemParent = item.previousElementSibling;
                     const itemDownBtn = itemParent.querySelector('.down-btn');
                     const itemUpBtn = itemParent.querySelector('.up-btn');
-                    itemDownBtn.style.display = 'block'; // down-btn 보이기
-                    itemUpBtn.style.display = 'none'; // up-btn 숨기기
+                    itemDownBtn.style.display = 'block';
+                    itemUpBtn.style.display = 'none';
                 }
             });
 
             // 클릭한 메뉴가 menu-top일 경우 서브메뉴 토글
             if (trigger.classList.contains('menu-top')) {
-                if (submenu.style.display === 'none' || submenu.style.display === '') {
-                    submenu.style.display = 'block'; // 클릭한 서브메뉴 보이기
-                    downBtn.style.display = 'none'; // down-btn 숨기기
-                    upBtn.style.display = 'block'; // up-btn 보이기
+                const computedStyle = window.getComputedStyle(submenu);
+                if (computedStyle.display === 'none') {
+                    submenu.style.display = 'block';
+                    downBtn.style.display = 'none';
+                    upBtn.style.display = 'block';
                 } else {
-                    submenu.style.display = 'none'; // 클릭한 서브메뉴 숨기기
-                    downBtn.style.display = 'block'; // down-btn 보이기
-                    upBtn.style.display = 'none'; // up-btn 숨기기
+                    submenu.style.display = 'none';
+                    downBtn.style.display = 'block';
+                    upBtn.style.display = 'none';
                 }
             } else {
                 // down-btn 또는 up-btn 클릭 시 서브메뉴 열기
-                submenu.style.display = 'block'; // 클릭한 서브메뉴 보이기
-                downBtn.style.display = 'none'; // down-btn 숨기기
-                upBtn.style.display = 'block'; // up-btn 보이기
+                submenu.style.display = 'block';
+                downBtn.style.display = 'none';
+                upBtn.style.display = 'block';
             }
         });
     });
