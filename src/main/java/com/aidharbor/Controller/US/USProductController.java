@@ -29,12 +29,15 @@ public class USProductController {
     public String UsProductListView(@PathVariable int categoryId, Model model) {
         List<ProductDTO> product = productService.productList(categoryId);
         List<ProductCategoryDto> categories = categoryService.findAll();
+        List<ProductDTO> productAllList = productService.productAllList();
+
 
         if (categoryId == 0) {
             model.addAttribute("All", true);
         }
 
         model.addAttribute("categoryId",categoryId);
+        model.addAttribute("productList", productAllList);
         model.addAttribute("categories", categories);
         model.addAttribute("product", product);
         return "US/product/productList";
@@ -46,6 +49,9 @@ public class USProductController {
         try {
             ProductDTO product = productService.getProductDetail(productId);
             List<ProductCategoryDto> categories = categoryService.findAll();
+            List<ProductDTO> productAllList = productService.productAllList();
+
+            model.addAttribute("productList", productAllList);
             model.addAttribute("categories", categories);
             model.addAttribute("product", product);
 

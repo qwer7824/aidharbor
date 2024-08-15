@@ -1,4 +1,4 @@
-a { text-decoration:none !important }
+a { text-decoration:none !important}
 a:hover { text-decoration:none !important }
 p { text-decoration:none !important }
 p:hover { text-decoration:none !important }
@@ -84,6 +84,27 @@ body {
     display: flex;
     gap: 10px;
 }
+.product-text{
+    display: block; /* 블록 요소로 변경하여 줄 바꿈을 적용합니다. */
+    white-space: pre-wrap; /* 공백과 줄 바꿈을 유지합니다. */
+    color: #64748B;
+}
+
+.dropdown-product {
+    position: fixed;
+    right: 0;
+    display: none;
+    justify-content: center;
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 2px;
+    border-top: solid 1px #E2E8F0;
+    background-color: #fff;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    overflow: hidden;
+}
 
 .dropdown {
     position: absolute;
@@ -95,9 +116,7 @@ body {
     margin: 0;
     background-color: #fff;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-    text-align: center;
     z-index: 9999; /* 다른 요소보다 위에 표시되도록 설정 */
-
     border-radius: 12px;
     overflow: hidden;
 }
@@ -105,8 +124,28 @@ body {
     width: 200px;
 }
 
+.dropdown-product-area{
+    width: 100%;
+    height: 240px;
+    border-right: solid 1px #E2E8F0;
+    padding: 20px;
+
+}
+
+.menu-item:hover .dropdown-product {
+    display: flex;
+    justify-content: center;
+}
+
 .menu-item:hover .dropdown {
     display: block;
+}
+.product-item{
+    list-style: none;
+    color: #64748B;
+    padding: 10px;
+    font-size: 24px;
+
 }
 
 .dropdown-item {
@@ -116,9 +155,28 @@ body {
     font-weight: bold;
     font-size: 20px;
 }
+.dropdown-product-item {
+    display: block;
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+    font-size: 28px;
+}
+.dropdown-product-item:hover {
+    color: #F43F5E;
+    transition: background-color 0.3s ease;
+}
+.product-ul{
+    padding: 0;
+    margin-top: 10px;
+}
 
 .dropdown-item:hover {
     background-color: #FFF1F2;
+    color: #F43F5E;
+    transition: background-color 0.3s ease;
+}
+.product-text:hover{
     color: #F43F5E;
     transition: background-color 0.3s ease;
 
@@ -126,7 +184,6 @@ body {
 .menu-link:hover {
     color: #F43F5E;
     transition: background-color 0.3s ease;
-
 }
 .nav-bar:hover {
     background-color: #FFF;
@@ -143,12 +200,27 @@ body {
 
 }
 
+@media screen and (max-width: 1440px) {
+
+    .dropdown-product-item {
+        font-size: 20px;
+    }
+
+    .product-item {
+        font-size: 18px;
+    }
+}
+
+
 @media screen and (max-width: 1280px) {
     .mobile{
         display: block;
     }
     .LNG{
         font-size: 15px;
+    }
+    .LngBar{
+        display: none;
     }
     .mobile-menu{
         height: 100vh;

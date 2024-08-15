@@ -1,6 +1,7 @@
 package com.aidharbor.Service;
 
 import com.aidharbor.DTO.Product.ProductDTO;
+import com.aidharbor.DTO.Product.ProductResponseDTO;
 import com.aidharbor.Entity.ProductCategory;
 import com.aidharbor.Entity.Product;
 import com.aidharbor.Repository.CategoryRepository;
@@ -99,5 +100,10 @@ public class ProductService {
         return productList.stream()
                 .map(product -> modelMapper.map(product, ProductDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    public List<ProductDTO> productAllList() {
+        List<Product> productList = productRepository.findAll();
+        return productListToDTOList(productList);
     }
 }

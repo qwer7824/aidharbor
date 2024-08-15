@@ -3,8 +3,10 @@ package com.aidharbor.Controller.US;
 import com.aidharbor.DTO.Category.ProductCategoryDto;
 import com.aidharbor.DTO.EventDTO;
 import com.aidharbor.DTO.PartnersDTO;
+import com.aidharbor.DTO.Product.ProductDTO;
 import com.aidharbor.Service.AboutService;
 import com.aidharbor.Service.CategoryService;
+import com.aidharbor.Service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +21,14 @@ public class USAboutController {
 
     private final CategoryService categoryService;
     private final AboutService aboutService;
+    private final ProductService productService;
 
     @GetMapping(value = "/US/about")
     public String UsAboutPage(Model model) {
         List<ProductCategoryDto> categories = categoryService.findAll();
+        List<ProductDTO> productAllList = productService.productAllList();
 
+        model.addAttribute("productList", productAllList);
         model.addAttribute("categories", categories);
         return "US/about/about";
     }
@@ -32,7 +37,9 @@ public class USAboutController {
     public String UsPartnersPage(Model model) {
         List<ProductCategoryDto> categories = categoryService.findAll();
         List<PartnersDTO> partnersDTOList = aboutService.partnerView();
+        List<ProductDTO> productAllList = productService.productAllList();
 
+        model.addAttribute("productList", productAllList);
         model.addAttribute("partnerList", partnersDTOList);
         model.addAttribute("categories", categories);
         return "US/about/partners";
@@ -43,6 +50,9 @@ public class USAboutController {
     public String UsCalendarOfEventsView(Model model, @RequestParam(defaultValue = "0") int page){
         int size = 4; // 한 페이지에 표시할 아이템 수
         List<ProductCategoryDto> categories = categoryService.findAll();
+        List<ProductDTO> productAllList = productService.productAllList();
+
+
         List<EventDTO> eventListDTO = aboutService.findEventsByPage(page, size);
 
         // 전체 이벤트 개수
@@ -52,6 +62,7 @@ public class USAboutController {
 
 
         model.addAttribute("eventList", eventListDTO);
+        model.addAttribute("productList", productAllList);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("categories", categories);
@@ -63,7 +74,9 @@ public class USAboutController {
     public String UsCalendarOfEventsDetailView(@PathVariable Long eventId, Model model){
         List<ProductCategoryDto> categories = categoryService.findAll();
         EventDTO EventDTO = aboutService.CalenderOfEventDetail(eventId);
+        List<ProductDTO> productAllList = productService.productAllList();
 
+        model.addAttribute("productList", productAllList);
         model.addAttribute("event", EventDTO);
         model.addAttribute("categories", categories);
         return "US/about/eventDetail";

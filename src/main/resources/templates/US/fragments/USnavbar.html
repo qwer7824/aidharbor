@@ -15,10 +15,16 @@
           <ul class="menu">
               <li class="menu-item" th:each="productCategory : ${categories}">
                   <a class="menu-link" th:text="${productCategory.name}">Product</a>
-                  <ul class="dropdown">
-                      <li><a class="dropdown-item" href="/US/product/0">All</a></li>
-                      <li th:each="child : ${productCategory.children}">
-                          <a class="dropdown-item category-link" th:href="@{'/US/product/' + ${child.id}}" th:text="${child.name}" th:data-category-id="${child.id}">Child Category</a>
+                  <ul class="dropdown-product">
+                      <div class="gap"> </div>
+                      <li class="dropdown-product-area" th:each="child : ${productCategory.children}">
+                          <a class="dropdown-product-item category-link" th:href="@{'/US/product/' + ${child.id}}" th:text="${child.name}" th:data-category-id="${child.id}">Child Category</a>
+                          <ul class="product-ul">
+                              <li th:each="product : ${productList}" th:if="${product.productCategory.id == child.id}" class="product-item">
+                                  <a class="product-text" th:text="${product.title}" th:href="@{'/US/product/detail/' + ${product.id}}">Product Name</a>
+                              </li>
+                          </ul>
+                      </li>
                   </ul>
               </li>
               <li class="menu-item">
@@ -41,14 +47,14 @@
               <li class="menu-item">
                   <a class="menu-link" href="/US/contact">Contact</a>
               </li>
-                <li class="menu-item" style="align-self: center;">
-                    <select class="LNG" name="LNG" onchange="window.location = '/' + this.value;">
-                        <option value="">KR</option>
-                        <option value="US">US</option>
-                    </select>
-                </li>
           </ul>
       </div>
+      <li class="menu-item LngBar" style="align-self: center;">
+          <select class="LNG" name="LNG" onchange="window.location = this.value;">
+              <option value="/">KR</option>
+              <option value="/US">US</option>
+          </select>
+      </li>
       <div class="mobile">
           <div class="lng-box">
               <select class="LNG" name="LNG">

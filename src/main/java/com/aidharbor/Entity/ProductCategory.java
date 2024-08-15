@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
+@Setter
 @Builder
 @AllArgsConstructor
 public class ProductCategory {

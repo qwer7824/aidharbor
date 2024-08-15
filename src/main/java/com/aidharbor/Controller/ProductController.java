@@ -2,6 +2,7 @@ package com.aidharbor.Controller;
 
 import com.aidharbor.DTO.Category.ProductCategoryDto;
 import com.aidharbor.DTO.Product.ProductDTO;
+import com.aidharbor.DTO.Product.ProductResponseDTO;
 import com.aidharbor.Repository.ProductRepository;
 import com.aidharbor.Service.CategoryService;
 import com.aidharbor.Service.ProductService;
@@ -29,6 +30,7 @@ public class ProductController {
     @GetMapping(value = "/product/{categoryId}")
     public String productListView(@PathVariable int categoryId, Model model) {
         List<ProductDTO> product = productService.productList(categoryId);
+        List<ProductDTO> productAllList = productService.productAllList();
         List<ProductCategoryDto> categories = categoryService.findAll();
 
         if (categoryId == 0) {
@@ -38,6 +40,7 @@ public class ProductController {
         model.addAttribute("categoryId",categoryId);
         model.addAttribute("categories", categories);
         model.addAttribute("product", product);
+        model.addAttribute("productList", productAllList);
         return "product/productList";
     }
 
@@ -47,9 +50,11 @@ public class ProductController {
         try {
             ProductDTO product = productService.getProductDetail(productId);
             List<ProductCategoryDto> categories = categoryService.findAll();
+            List<ProductDTO> productAllList = productService.productAllList();
+
+            model.addAttribute("productList", productAllList);
             model.addAttribute("categories", categories);
             model.addAttribute("product", product);
-
         } catch (Exception e) {
             model.addAttribute("errorMessage", "No product");
         }

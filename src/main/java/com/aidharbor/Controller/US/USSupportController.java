@@ -2,12 +2,15 @@ package com.aidharbor.Controller.US;
 
 import com.aidharbor.DTO.CatalogDTO;
 import com.aidharbor.DTO.Category.ProductCategoryDto;
+import com.aidharbor.DTO.Product.ProductDTO;
 import com.aidharbor.DTO.UserGuideDTO;
 import com.aidharbor.DTO.Video.VideoBoardDTO;
 import com.aidharbor.Service.CategoryService;
+import com.aidharbor.Service.ProductService;
 import com.aidharbor.Service.SupportService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.support.SpringFactoriesLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,13 +29,16 @@ public class USSupportController {
 
     private final SupportService supportService;
     private final CategoryService categoryService;
+    private final ProductService productService;
 
     // Support Video List View
     @GetMapping(value = "/US/support/videoList")
     public String videoList(Model model){
         List<ProductCategoryDto> categories = categoryService.findAll();
         List<VideoBoardDTO> videoListDTO = supportService.videoList();
+        List<ProductDTO> productAllList = productService.productAllList();
 
+        model.addAttribute("productList", productAllList);
         model.addAttribute("categories",categories);
        model.addAttribute("videoList",videoListDTO);
         return "US/video/videoList";
@@ -45,8 +51,9 @@ public class USSupportController {
 
         List<ProductCategoryDto> categories = categoryService.findAll();
         List<UserGuideDTO> userGuideDTO = supportService.guideList();
+        List<ProductDTO> productAllList = productService.productAllList();
 
-
+        model.addAttribute("productList", productAllList);
         model.addAttribute("categories",categories);
         model.addAttribute("userGuideDTO",userGuideDTO);
         return "US/userGuide/userGuide";
@@ -58,8 +65,9 @@ public class USSupportController {
 
         List<ProductCategoryDto> categories = categoryService.findAll();
         List<CatalogDTO> catalogDTOList = supportService.catalogList();
+        List<ProductDTO> productAllList = productService.productAllList();
 
-
+        model.addAttribute("productList", productAllList);
         model.addAttribute("categories",categories);
         model.addAttribute("catalogDTO",catalogDTOList);
         return "US/catalog/catalog";

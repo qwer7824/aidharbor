@@ -3,9 +3,11 @@ package com.aidharbor.Controller;
 import com.aidharbor.DTO.CatalogDTO;
 import com.aidharbor.DTO.Category.ProductCategoryDto;
 import com.aidharbor.DTO.PartnersDTO;
+import com.aidharbor.DTO.Product.ProductDTO;
 import com.aidharbor.DTO.UserGuideDTO;
 import com.aidharbor.DTO.Video.VideoBoardDTO;
 import com.aidharbor.Service.CategoryService;
+import com.aidharbor.Service.ProductService;
 import com.aidharbor.Service.SupportService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,13 +29,16 @@ public class SupportController {
 
     private final SupportService supportService;
     private final CategoryService categoryService;
+    private final ProductService productService;
 
     // Support Video List View
     @GetMapping(value = "/support/videoList")
     public String videoList(Model model){
         List<ProductCategoryDto> categories = categoryService.findAll();
         List<VideoBoardDTO> videoListDTO = supportService.videoList();
+        List<ProductDTO> productAllList = productService.productAllList();
 
+        model.addAttribute("productList", productAllList);
         model.addAttribute("categories",categories);
        model.addAttribute("videoList",videoListDTO);
         return "video/videoList";
@@ -46,8 +51,9 @@ public class SupportController {
 
         List<ProductCategoryDto> categories = categoryService.findAll();
         List<UserGuideDTO> userGuideDTO = supportService.guideList();
+        List<ProductDTO> productAllList = productService.productAllList();
 
-
+        model.addAttribute("productList", productAllList);
         model.addAttribute("categories",categories);
         model.addAttribute("userGuideDTO",userGuideDTO);
         return "userGuide/userGuide";
@@ -117,8 +123,9 @@ public class SupportController {
 
         List<ProductCategoryDto> categories = categoryService.findAll();
         List<CatalogDTO> catalogDTOList = supportService.catalogList();
+        List<ProductDTO> productAllList = productService.productAllList();
 
-
+        model.addAttribute("productList", productAllList);
         model.addAttribute("categories",categories);
         model.addAttribute("catalogDTO",catalogDTOList);
         return "catalog/catalog";
