@@ -75,13 +75,17 @@ h4:hover { text-decoration:none !important }
     .product-container{
         width: 1600px;
     }
+
     .product-Menu{
         font-size: 55px;
     }
+
     .category-slot{
         font-size: 24px;
     }
+
     .big-name{
-        font-size: 200px;
+        font-size: 180px;
     }
+
 }

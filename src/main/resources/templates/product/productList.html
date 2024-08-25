@@ -29,25 +29,45 @@
                 <span class="red-dot">.</span>
     </div>
 
-    <div class="Category-List">
-        <div class="category-menu" th:each="productCategory : ${categories}">
-            <a class="category-slot" href="/product/0" th:classappend="${All} ? 'categoryActive' : ''">All</a>
-            <a class="category-slot" th:href="@{'/product/' + ${child.id}}" th:classappend="${child.id == categoryId} ? 'categoryActive' : ''" th:each="child : ${productCategory.children}" th:text="${child.name}"></a>
-        </div>
-    </div>
 
+    <div class="lb-wrap">
+        <div class="lb-text">
+            <a>Aid Harbor has been dedicated a variety of CPR products to help you
+                perform accurate and quick  CPR in emergency situations.</a>
+        </div>
+
+        <div class="lb-image">
+            <img style="width: 100%" src="https://s3-alpha-sig.figma.com/img/4b78/03db/1fe48d9007bfa89ffb818ec0d45820b3?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JGt7NE1M8Kp0BSROen~IxJfBCW0nK4OwC3IrbwAq47ovsdn6UXHAkOOnS5EUxxUTOW7m7k5gOe0tUtsWReAqpJQqxfLSRTsB3S1NvrHt-4c1g-FrCCjzx8~Ay0sk5fv4QfhJgc4~FnALfY5KKjXn2Gg~UYZwz17Y2QO-dJwuLePKoJXqTGx9WBRoOgfm7RxwtwO7BzgMRHLlqYVxDfqjNivG77dXOzvgR6YywPK~8Dq~Atci5jtkuMv3umBoA1CiiGwKFHSNgDZt-BxrQ-PhUaIK4rpq7rTXAnhYZLCp3QHPhjO-dLntoI-xV4w3dlU7gSkMX9ISlZ7Zmmm9VZKI3g__"/>
+        </div>
+        <div class="lb-overlay"></div> <!-- 오버레이 추가 -->
+
+
+    </div>
+    <div class="middle-title">
+        <a>Introducing New CPR manikins and AED-Trainer
+            Depending on your situation, Aid harbor can suggest best options.</a>
+    </div>
     <div class="product-List">
         <div class="product-Card" th:each="product : ${product}">
-            <div>
+            <div class="product-middle">
                 <a th:href="@{/product/detail/{id}(id=${product.id})}">
                 <img class="img" th:src="${product.titleImgUrl}">
             </a>
             </div>
             <div class="product-TextBox">
-                <a class="product-category" th:text="${product.productCategory.name}" th:href="@{/product/detail/{id}(id=${product.id})}"></a>
-                <a class="product-title" th:text="${product.title}" th:href="@{/product/detail/{id}(id=${product.id})}"></a>
-                <div class="product-subBox">
-                    <a class="product-sub" th:text="${product.subTitle}" th:href="@{/product/detail/{id}(id=${product.id})}"></a>
+                <div class="product-titleBox">
+                <a class="product-title" th:text="${product.subTitle}" th:href="@{/product/detail/{id}(id=${product.id})}"></a>
+                </div>
+                    <ul class="product-explanation">
+                    <li><a class="" th:text="${product.explanation}"></a></li>
+                    <li><a class="" th:text="${product.explanation2}"></a></li>
+                    <li><a class="" th:text="${product.explanation3}"></a></li>
+                </ul>
+            </div>
+            <div class="bottom-box">
+                <div class="bottom-moreBox">
+                    <a class="bottom-more-text">Read more</a>
+                    <div class="right-arrow"><svg xmlns='http://www.w3.org/2000/svg' width='20px' height='20px' viewBox='0 0 24 24'><title>arrow_right_line</title><g id="arrow_right_line" fill='none' fill-rule='nonzero'><path d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01-.184-.092Z'/><path fill='#9B9B9BFF' d='m14.707 5.636 5.657 5.657a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 0 1-1.414-1.414l3.95-3.95H4a1 1 0 1 1 0-2h13.243l-3.95-3.95a1 1 0 1 1 1.414-1.414Z'/></g></svg></div>
                 </div>
             </div>
         </div>

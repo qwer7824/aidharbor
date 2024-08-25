@@ -25,9 +25,21 @@ public class Product {
 
     private String subTitle;
 
+    private String explanation;
+
+    private String explanation2;
+
+    private String explanation3;
+
     private String UsTitle;
 
     private String UsSubTitle;
+
+    private String UsExplanation;
+
+    private String UsExplanation2;
+
+    private String UsExplanation3;
 
     private String titleImgUrl;
 
