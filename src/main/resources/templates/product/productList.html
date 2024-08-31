@@ -59,9 +59,9 @@
                 <a class="product-title" th:text="${product.subTitle}" th:href="@{/product/detail/{id}(id=${product.id})}"></a>
                 </div>
                     <ul class="product-explanation">
-                    <li><a class="" th:text="${product.explanation}"></a></li>
-                    <li><a class="" th:text="${product.explanation2}"></a></li>
-                    <li><a class="" th:text="${product.explanation3}"></a></li>
+                    <li class="explanation-li"><a class="" th:text="${product.explanation}"></a></li>
+                    <li class="explanation-li" th:if="${product.explanation2}"><a class="" th:text="${product.explanation2}"></a></li>
+                    <li class="explanation-li"th:if="${product.explanation3}"><a class="" th:text="${product.explanation3}"></a></li>
                 </ul>
             </div>
             <div class="bottom-box">

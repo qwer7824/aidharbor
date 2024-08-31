@@ -1,4 +1,11 @@
- .Product-box {
+.Category-List{
+    overflow: scroll;
+}
+.Category-List::-webkit-scrollbar{
+    display:none;
+}
+
+.Product-box {
         padding: 60px 0px 100px 0px;
     }
 
