@@ -10,10 +10,13 @@ import com.aidharbor.Service.BannerService;
 import com.aidharbor.Service.CategoryService;
 import com.aidharbor.Service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,6 +27,7 @@ public class MainController {
     private final BannerService bannerService;
     private final AboutService aboutService;
     private final ProductService productService;
+
 
     @GetMapping("/")
     public String Page(Model model) {
@@ -40,4 +44,18 @@ public class MainController {
 
         return "home";
     }
+    @GetMapping("/categories")
+    @ResponseBody
+    public List<List<ProductCategoryDto>> getCategories() {
+        List<ProductCategoryDto> categories = categoryService.findAll();
+        List<List<ProductCategoryDto>> childrenCategories = new ArrayList<>();
+
+        for (ProductCategoryDto category : categories) {
+            childrenCategories.add(category.getChildren());
+        }
+
+        return childrenCategories;
+    }
+
+
 }
