@@ -53,6 +53,12 @@ public class Product {
         this.UsTitle = productDTO.getUsTitle();
         this.subTitle = productDTO.getSubTitle();
         this.UsSubTitle = productDTO.getUsSubTitle();
+        this.explanation = productDTO.getExplanation();
+        this.explanation2 = productDTO.getExplanation2();
+        this.explanation3 = productDTO.getExplanation3();
+        this.UsExplanation = productDTO.getUsExplanation();
+        this.UsExplanation2 = productDTO.getUsExplanation2();
+        this.UsExplanation3 = productDTO.getUsExplanation3();
         this.titleImgUrl = productDTO.getTitleImgUrl();
         this.content = productDTO.getContent();
     }
@@ -63,6 +69,12 @@ public class Product {
         this.UsTitle = productDTO.getUsTitle();
         this.subTitle = productDTO.getSubTitle();
         this.UsSubTitle = productDTO.getUsSubTitle();
+        this.explanation = productDTO.getExplanation();
+        this.explanation2 = productDTO.getExplanation2();
+        this.explanation3 = productDTO.getExplanation3();
+        this.UsExplanation = productDTO.getUsExplanation();
+        this.UsExplanation2 = productDTO.getUsExplanation2();
+        this.UsExplanation3 = productDTO.getUsExplanation3();
         this.content = productDTO.getContent();
     }
 }

@@ -30,21 +30,21 @@
     </div>
 
 
-    <div class="lb-wrap">
+    <div class="lb-wrap" th:each="productCategory : ${categories}">
         <div class="lb-text">
-            <a>Aid Harbor has been dedicated a variety of CPR products to help you
+            <a th:each="child : ${productCategory.children}" th:if="${categoryId == child.id}" th:text="${child.categoryImgTitle}">Aid Harbor has been dedicated a variety of CPR products to help you
                 perform accurate and quick  CPR in emergency situations.</a>
         </div>
 
         <div class="lb-image">
-            <img style="width: 100%" src="https://s3-alpha-sig.figma.com/img/4b78/03db/1fe48d9007bfa89ffb818ec0d45820b3?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JGt7NE1M8Kp0BSROen~IxJfBCW0nK4OwC3IrbwAq47ovsdn6UXHAkOOnS5EUxxUTOW7m7k5gOe0tUtsWReAqpJQqxfLSRTsB3S1NvrHt-4c1g-FrCCjzx8~Ay0sk5fv4QfhJgc4~FnALfY5KKjXn2Gg~UYZwz17Y2QO-dJwuLePKoJXqTGx9WBRoOgfm7RxwtwO7BzgMRHLlqYVxDfqjNivG77dXOzvgR6YywPK~8Dq~Atci5jtkuMv3umBoA1CiiGwKFHSNgDZt-BxrQ-PhUaIK4rpq7rTXAnhYZLCp3QHPhjO-dLntoI-xV4w3dlU7gSkMX9ISlZ7Zmmm9VZKI3g__"/>
+            <img style="width: 100%" th:each="child : ${productCategory.children}" th:if="${categoryId == child.id}" th:src="${child.categoryMainImg}"/>
         </div>
         <div class="lb-overlay"></div> <!-- 오버레이 추가 -->
 
 
     </div>
-    <div class="middle-title">
-        <a>Introducing New CPR manikins and AED-Trainer
+    <div class="middle-title" th:each="productCategory : ${categories}">
+        <a th:each="child : ${productCategory.children}" th:if="${categoryId == child.id}" th:text="${child.categoryMiddleTitle}">Introducing New CPR manikins and AED-Trainer
             Depending on your situation, Aid harbor can suggest best options.</a>
     </div>
     <div class="product-List">
@@ -60,8 +60,8 @@
                 </div>
                     <ul class="product-explanation">
                     <li class="explanation-li"><a class="" th:text="${product.explanation}"></a></li>
-                    <li class="explanation-li" th:if="${product.explanation2}"><a class="" th:text="${product.explanation2}"></a></li>
-                    <li class="explanation-li"th:if="${product.explanation3}"><a class="" th:text="${product.explanation3}"></a></li>
+                    <li class="explanation-li" th:unless="${product.explanation2 == null or product.explanation2.trim() == ''}"><a class="" th:text="${product.explanation2}"></a></li>
+                    <li class="explanation-li" th:unless="${product.explanation3 == null or product.explanation3.trim() == ''}"><a class="" th:text="${product.explanation3}"></a></li>
                 </ul>
             </div>
             <div class="bottom-box">

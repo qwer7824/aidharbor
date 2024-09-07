@@ -24,9 +24,16 @@ public class ProductCategoryCreateRequest {
 
     private String categoryImg;
 
+
     private Integer parentId;
 
     private String categorySubTitle;
+
+    private String categoryMainImg;
+
+    private String categoryImgTitle;
+
+    private String categoryMiddleTitle;
 
     private String categoryUsSubTitle;
 

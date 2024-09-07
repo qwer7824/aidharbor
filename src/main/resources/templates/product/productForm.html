@@ -155,6 +155,25 @@
         </div>
         <p th:if="${#fields.hasErrors('usSubTitle')}" th:errors="*{usSubTitle}" class="fieldError">Incorrect data</p>
 
+        <div class="input-group mb-3">
+            <span class="input-group-text">상품소개 1</span>
+            <input type="text" th:field="*{explanation}" class="form-control" placeholder="상품소개를 입력해주세요">
+            <span class="input-group-text">US 상품소개 1</span>
+            <input type="text" th:field="*{usExplanation}"  class="form-control" placeholder="상품소개를 입력해주세요">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">상품소개 2</span>
+            <input type="text" th:field="*{explanation2}" class="form-control" placeholder="상품소개를 입력해주세요">
+            <span class="input-group-text">US 상품소개 2</span>
+            <input type="text" th:field="*{usExplanation2}"  class="form-control" placeholder="상품소개를 입력해주세요">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">상품소개 3</span>
+            <input type="text" th:field="*{explanation3}" class="form-control" placeholder="상품소개를 입력해주세요">
+            <span class="input-group-text">US 상품소개 3</span>
+            <input type="text" th:field="*{usExplanation3}"  class="form-control" placeholder="상품소개를 입력해주세요">
+        </div>
+
 
         <div class="d-flex flex-column align-items-center mb-3">
             <input type="hidden" th:field="*{titleImgUrl}" class="form-control" placeholder="이미지">

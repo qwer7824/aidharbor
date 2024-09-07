@@ -60,8 +60,9 @@ public class CategoryService {
 
 
     @Transactional
-    public void create(ProductCategoryCreateRequest req, MultipartFile categoryImg) throws IOException {
+    public void create(ProductCategoryCreateRequest req, MultipartFile categoryImg,MultipartFile categoryMainImg) throws IOException {
         String storedFileName = s3Uploader.upload(categoryImg, "images");
+        String storedFileName2 = s3Uploader.upload(categoryMainImg, "images2");
 
         ProductCategory parent = Optional.ofNullable(req.getParentId())
                 .map(id -> categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new))
@@ -73,6 +74,9 @@ public class CategoryService {
                 .categorySubTitle(req.getCategorySubTitle())
                 .categoryUsSubTitle(req.getCategoryUsSubTitle())
                 .categoryImg(storedFileName)
+                .categoryMainImg(storedFileName2)
+                .categoryMiddleTitle(req.getCategoryMiddleTitle())
+                .categoryImgTitle(req.getCategoryImgTitle())
                 .build();
 
         categoryRepository.save(productCategory);
@@ -86,15 +90,34 @@ public class CategoryService {
     }
 
     @Transactional
-    public void categoryUpdate(ProductCategoryCreateRequest req,MultipartFile categoryImg) throws IOException {
+    public void categoryUpdate(ProductCategoryCreateRequest req,MultipartFile categoryImg,MultipartFile categoryImg2) throws IOException {
     ProductCategory productCategory = categoryRepository.findById(req.getId()).orElseThrow();
 
 
-        if (!categoryImg.isEmpty()) {
+     if (!categoryImg.isEmpty() && !categoryImg2.isEmpty()) {
+         // 첫 번째 이미지 처리
+         String url = imgService.imgSubString(req.getCategoryImg());
+         s3Uploader.deleteImgFile(url);
+         String storedFileName = s3Uploader.upload(categoryImg, "images");
+         productCategory.updateImgUrl(req, storedFileName);
+
+         // 두 번째 이미지 처리
+         String url2 = imgService.imgSubString(req.getCategoryImgTitle());
+         s3Uploader.deleteImgFile(url2);
+         String storedFileName2 = s3Uploader.upload(categoryImg2, "images");
+         productCategory.updateImgUrl2(req, storedFileName2);
+
+     }else if (!categoryImg.isEmpty()) {
             String url = imgService.imgSubString(req.getCategoryImg());
             s3Uploader.deleteImgFile(url);
             String storedFileName = s3Uploader.upload(categoryImg, "images");
             productCategory.updateImgUrl(req,storedFileName);
+        }else if(!categoryImg2.isEmpty()){
+            String url2 = imgService.imgSubString(req.getCategoryImgTitle());
+            s3Uploader.deleteImgFile(url2);
+            String storedFileName2 = s3Uploader.upload(categoryImg2, "images");
+            productCategory.updateImgUrl2(req,storedFileName2);
+            s3Uploader.deleteImgFile(url2);
         } else {
             productCategory.CategoryUpdate(req);
         }

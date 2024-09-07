@@ -157,12 +157,12 @@ public class AdminController {
 
     // 카테고리 추가
     @PostMapping(value = "/admin/category/categoryAdd")
-    public String categoryAdd(@Valid ProductCategoryCreateRequest categoryDTO, BindingResult bindingResult, @RequestPart(name = "Img") MultipartFile categoryImg, Model model) throws IOException {
+    public String categoryAdd(@Valid ProductCategoryCreateRequest categoryDTO, BindingResult bindingResult, @RequestPart(name = "Img") MultipartFile categoryImg, @RequestPart(name = "Img2") MultipartFile categoryMainImg, Model model) throws IOException {
         if (bindingResult.hasErrors()) {
             return "admin/categoryForm";
         }
         try {
-            categoryService.create(categoryDTO,categoryImg);
+            categoryService.create(categoryDTO,categoryImg,categoryMainImg);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "카테고리 추가 중 에러가 발생하였습니다.");
         }
@@ -192,12 +192,12 @@ public class AdminController {
 
     // 카테고리 업데이트
     @PostMapping(value = "/admin/category/{categoryId}")
-    public String categoryUpdate(@Valid ProductCategoryCreateRequest req,BindingResult bindingResult,@RequestPart(name = "Img") MultipartFile categoryImg, Model model) {
+    public String categoryUpdate(@Valid ProductCategoryCreateRequest req,BindingResult bindingResult,@RequestPart(name = "Img") MultipartFile categoryImg,@RequestPart(name = "Img2") MultipartFile categoryImg2, Model model) {
         if (bindingResult.hasErrors()) {
             return "admin/categoryForm";
         }
         try {
-            categoryService.categoryUpdate(req,categoryImg);
+            categoryService.categoryUpdate(req,categoryImg,categoryImg2);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "카테고리 수정 중 에러가 발생하였습니다.");
         }

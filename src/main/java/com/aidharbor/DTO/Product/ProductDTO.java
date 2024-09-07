@@ -43,6 +43,12 @@ public class ProductDTO {
 
     private String explanation3;
 
+    private String UsExplanation;
+
+    private String UsExplanation2;
+
+    private String UsExplanation3;
+
     private static ModelMapper modelMapper = new ModelMapper();
 
     // Entity -> DTO

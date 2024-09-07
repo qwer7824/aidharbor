@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -40,6 +41,12 @@ public class ProductService {
                 .subTitle(productDTO.getSubTitle())
                 .content(content)
                 .titleImgUrl(storedFileName)
+                .explanation(productDTO.getExplanation())
+                .explanation2(productDTO.getExplanation2())
+                .explanation3(productDTO.getExplanation3())
+                .UsExplanation(productDTO.getUsExplanation())
+                .UsExplanation2(productDTO.getUsExplanation2())
+                .UsExplanation3(productDTO.getUsExplanation3())
                 .productCategory(productCategory)
                 .build();
 
