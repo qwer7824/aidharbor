@@ -40,9 +40,8 @@
             <img style="width: 100%" th:each="child : ${productCategory.children}" th:if="${categoryId == child.id}" th:src="${child.categoryMainImg}"/>
         </div>
         <div class="lb-overlay"></div> <!-- 오버레이 추가 -->
-
-
     </div>
+
     <div class="middle-title" th:each="productCategory : ${categories}">
         <a th:each="child : ${productCategory.children}" th:if="${categoryId == child.id}" th:text="${child.categoryMiddleTitle}">Introducing New CPR manikins and AED-Trainer
             Depending on your situation, Aid harbor can suggest best options.</a>

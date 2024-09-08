@@ -12,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -38,4 +40,18 @@ public class USMainController {
         model.addAttribute("mainBannerDTO", mainBannerDTOs);
         return "US/home";
     }
+
+    @GetMapping("/US/categories")
+    @ResponseBody
+    public List<List<ProductCategoryDto>> getCategories() {
+        List<ProductCategoryDto> categories = categoryService.findAll();
+        List<List<ProductCategoryDto>> childrenCategories = new ArrayList<>();
+
+        for (ProductCategoryDto category : categories) {
+            childrenCategories.add(category.getChildren());
+        }
+
+        return childrenCategories;
+    }
+
 }
