@@ -283,6 +283,12 @@ body{
     display:none;
 }
 
+#productBox-mobile{
+    display: none;
+}
+#productNameBox-mobile{
+    display: none;
+}
 
 
 @media screen and (max-width: 425px) {
@@ -309,6 +315,16 @@ body{
     }
     CalendarEventsBox{
         padding: 50px;
+    }
+
+    #productNameBox-mobile{
+        display: flex;
+    }
+    #productBox-mobile{
+        display: flex;
+    }
+    #productBox-pc{
+        display: none;
     }
 }
 @media screen and (max-width: 1024px) {
